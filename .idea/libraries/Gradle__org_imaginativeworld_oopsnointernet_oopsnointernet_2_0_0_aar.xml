@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: org.imaginativeworld.oopsnointernet:oopsnointernet:2.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c9a7540a5e085967b8540bdbc64e2e5e/transformed/oopsnointernet-2.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c9a7540a5e085967b8540bdbc64e2e5e/transformed/oopsnointernet-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c9a7540a5e085967b8540bdbc64e2e5e/transformed/oopsnointernet-2.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.imaginativeworld.oopsnointernet/oopsnointernet/2.0.0/3e6a241e1d6a43f6f151dc757cdd5c71653520d8/oopsnointernet-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.imaginativeworld.oopsnointernet/oopsnointernet/2.0.0/cb252cd4c562370416ee7dacec9e1d4450e86502/oopsnointernet-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

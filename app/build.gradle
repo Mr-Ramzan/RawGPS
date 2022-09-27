@@ -1,0 +1,164 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    //id 'com.google.gms.google-services'
+   // id 'com.google.firebase.crashlytics'
+    id 'com.mapbox.maps.token'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
+
+android {
+    compileSdk 32
+    defaultConfig {
+        applicationId "com.otl.gps.navigation.map.route"
+        minSdk 23
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+
+        debug {
+            storeFile file('C:\\AndroidProjects\\OtlGps\\rawgps.jks')
+            storePassword 'rawgps1234'
+            keyPassword 'rawgps1234'
+            keyAlias 'rawgps'
+        }
+
+        release {
+            storeFile file('C:\\AndroidProjects\\OtlGps\\rawgps.jks')
+            storePassword 'rawgps1234'
+            keyPassword 'rawgps1234'
+            keyAlias 'rawgps'
+        }
+
+    }
+    buildTypes {
+
+        release {
+            resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
+            resValue 'string', 'gps_inter_id', '"ca-app-pub-8804904864147916/6388970608"'
+            resValue 'string', 'gps_appopen_id', '"ca-app-pub-8804904864147916/6197398911"'
+            resValue 'string', 'gps_banner_id', '"ca-app-pub-8804904864147916/8719620470"'
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+
+
+        debug {
+            resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
+            resValue 'string', 'gps_inter_id', '"ca-app-pub-3940256099942544/1033173712"'
+            resValue 'string', 'gps_appopen_id', '"ca-app-pub-3940256099942544/3419835294"'
+            resValue 'string', 'gps_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
+            ext.enableCrashlytics = false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.debug
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //event bus
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    //Segmented Buttons
+    implementation 'com.github.addisonelliott:SegmentedButton:3.1.9'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.1'
+    //GLIDE LIB
+    implementation('com.github.bumptech.glide:glide:4.13.2') {
+        exclude group: "com.android.support"
+    }
+    //Ads Integration
+    implementation 'com.google.firebase:firebase-ads:21.2.0'
+    implementation 'com.google.android.gms:play-services-ads:21.2.0'
+    //required for open app ads
+    def lifecycle_version = '2.4.0'
+    def lifecycle_version_ = '2.5.1'
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version_"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version_"
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version_"
+    // dexter Permissions Lib
+    implementation 'com.karumi:dexter:6.2.3'
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    //For PageIndecator
+    implementation "com.tbuonomo:dotsindicator:4.3"
+    //InApp Updates
+    implementation 'com.github.prongbang:inapp-update:1.0.1'
+    //Speedometer
+    implementation 'com.github.ibrahimsn98:speedometer:1.0.1'
+    //Speedometer faces
+    implementation 'com.github.anastr:speedviewlib:1.6.0'
+    //Shape Of View
+    implementation 'io.github.florent37:shapeofview:1.4.7'
+    // For apps targeting Android S+, add the following
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    //lottie animations sdk
+    implementation 'com.airbnb.android:lottie:5.1.1'
+    //billing library
+    implementation 'com.github.moisoni97:google-inapp-billing:1.0.8'
+    //Spinkit loading animations
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    // Material Components for Android. Replace the version with the latest version of Material Components library.
+    implementation 'com.google.android.material:material:1.6.1'
+    //no internet popup
+    implementation 'org.imaginativeworld.oopsnointernet:oopsnointernet:2.0.0'
+    // google maps related
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:maps-ktx:3.3.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+
+    // Firebase analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.1'
+    // Declare the dependencies for the Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.13'
+
+
+
+}
+
+secrets {
+
+    // To add your Maps API key to this project:
+    // 1. Open the root project's local.properties file
+    // 2. Add this line, where YOUR_API_KEY is your API key:
+    //        MAPS_API_KEY=YOUR_API_KEY
+    defaultPropertiesFileName 'local.defaults.properties'
+
+
+}
