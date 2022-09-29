@@ -143,7 +143,7 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         super.onStart(owner)
         // super<DefaultLifecycleObserver>.onCreate(owner)
         // Show the ad (if available) when the app moves to foreground.
-        if (appContainer.appOpenAdManager)
+        if (appContainer.appOpenAdManager.isAdAvailable)
         {
 
             appOpenAdManager!!.showAdIfAvailable(currentActivity!!)

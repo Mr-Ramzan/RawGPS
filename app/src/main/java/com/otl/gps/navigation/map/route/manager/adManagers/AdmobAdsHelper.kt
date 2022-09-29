@@ -372,10 +372,10 @@ class AdmobAdsHelper (mContext: Context) {
     }
 
 
-    fun loadBanner(context: Context, size: AdSize, loadCallback: AdLoadedCallback?)
+    fun loadBanner(context: Activity, size: AdSize, loadCallback: AdLoadedCallback?)
     {
 
-        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!!) {
+        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             return
         }
 
@@ -441,10 +441,10 @@ class AdmobAdsHelper (mContext: Context) {
     /**
      * loading big Banner Ads
      */
-    fun loadBigBanner(context: Context, size: AdSize, loadCallback:  AdLoadedCallback?)
+    fun loadBigBanner(context: Activity, size: AdSize, loadCallback:  AdLoadedCallback?)
     {
 
-        if (prefs?.areAdsRemoved()!!) {
+        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             return
         }
 

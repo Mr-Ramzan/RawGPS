@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import application.RawGpsApp
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -15,7 +16,6 @@ import java.util.*
 class AppOpenAdHelper {
     private var appOpenAd: AppOpenAd? = null
     private var isLoadingAd = false
-    private lateinit var adsUtill:MyAdsUtill
     var isShowingAd = false
 
     /**
@@ -28,23 +28,16 @@ class AppOpenAdHelper {
      *
      * @param context the context of the activity that loads the ad
      */
-    fun loadAd(context: Context?) {
-        if(!::adsUtill.isInitialized){
-            adsUtill = MyAdsUtill(context as AppCompatActivity)
-        }
+    fun loadAd(context: Activity?) {
 
-        if(prefs?.areAdsRemoved()!!)
+        if((context?.application as RawGpsApp).appContainer.prefs.areAdsRemoved())
         {
-
             return
-
-
         }
         // Do not load ad if there is an unused ad or one is already loading.
         if (isLoadingAd || isAdAvailable) {
             return
         }
-        if (context == null) { return }
         isLoadingAd = true
         val request = AdRequest.Builder().build()
         AppOpenAd.load(
@@ -114,18 +107,16 @@ class AppOpenAdHelper {
      */
     fun showAdIfAvailable(
         activity: Activity,
-        onShowAdCompleteListener: GpsTrackerApp.OnShowAdCompleteListener =
-            object : GpsTrackerApp.OnShowAdCompleteListener {
+        onShowAdCompleteListener: RawGpsApp.OnShowAdCompleteListener =
+            object : RawGpsApp.OnShowAdCompleteListener {
                 override fun onShowAdComplete() {
                     // Empty because the user will go back to the activity that shows the ad.
                 }
             }
     ) {
-        if(!::adsUtill.isInitialized){
-            adsUtill = MyAdsUtill(activity)
-        }
 
-        if(prefs?.areAdsRemoved()!!){
+
+        if((activity.application as RawGpsApp).appContainer.prefs.areAdsRemoved()){
             onShowAdCompleteListener.onShowAdComplete()
             return
         }
