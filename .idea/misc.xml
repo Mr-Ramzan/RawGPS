@@ -5,7 +5,7 @@
       <map>
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/content_main.xml" value="0.25" />
-        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_home.xml" value="0.264" />
       </map>
     </option>
   </component>
@@ -14,5 +14,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

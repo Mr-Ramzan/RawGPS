@@ -23,14 +23,14 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file('C:\\AndroidProjects\\OtlGps\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('C:\\AndroidProjects\\OtlGps\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'

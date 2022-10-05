@@ -7,22 +7,30 @@
     tools:context=".view.fragment.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:maxWidth="500dp"
+        android:padding="8dp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tittle"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_max="500dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/route_finder_button"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/satellite_view"
             app:layout_constraintEnd_toStartOf="@+id/my_location"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,26 +40,33 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/navigation_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="@string/navigation"
+                    android:textColor="@color/black_text_color" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/my_location"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/traffic_view"
             app:layout_constraintEnd_toStartOf="@+id/explore_places"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/route_finder_button"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/route_finder_button"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,26 +76,32 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/myloc_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="@string/my_location"
+                    android:textColor="@color/black_text_color" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/explore_places"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/nearby_places"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/my_location"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/route_finder_button"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,21 +111,27 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/satellite_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="Satellite Map"
+                    android:textColor="@color/black_text_color" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/satellite_view"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/speedo_meter"
             app:layout_constraintEnd_toStartOf="@+id/traffic_view"
             app:layout_constraintHorizontal_bias="0.5"
@@ -119,26 +146,30 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/travel_tool_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="Travel Tools" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/traffic_view"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toTopOf="@+id/weather"
             app:layout_constraintEnd_toStartOf="@+id/nearby_places"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/satellite_view"
-            app:layout_constraintTop_toBottomOf="@+id/my_location">
+            app:layout_constraintTop_toTopOf="@+id/satellite_view"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,26 +179,30 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/traffic_map_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="Traffic Updates" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/nearby_places"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toTopOf="@+id/compass"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/speedmeter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/traffic_view"
-            app:layout_constraintTop_toBottomOf="@+id/explore_places">
+            app:layout_constraintTop_toTopOf="@+id/satellite_view"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,22 +212,27 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/explore_place_icons" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="Explore Places" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/speedo_meter"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toTopOf="@+id/world_clock"
+            android:id="@+id/compass"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/weather"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -206,12 +246,14 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/home_compass_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="TextView" />
             </LinearLayout>
@@ -219,13 +261,16 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/weather"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toTopOf="@+id/saved_locations"
-            app:layout_constraintEnd_toStartOf="@+id/compass"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/speedmeter"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/speedo_meter"
-            app:layout_constraintTop_toBottomOf="@+id/traffic_view">
+            app:layout_constraintStart_toEndOf="@+id/compass"
+            app:layout_constraintTop_toTopOf="@+id/compass"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -235,26 +280,31 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/currency_converter_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="TextView" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/compass"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toTopOf="@+id/more_apps"
+            android:id="@+id/speedmeter"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/weather"
-            app:layout_constraintTop_toBottomOf="@+id/nearby_places">
+            app:layout_constraintTop_toTopOf="@+id/compass"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -264,104 +314,132 @@
                 <ImageView
 
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:layout_height="70dp"
+                    android:padding="8dp"
+                    android:src="@drawable/speedmeter_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="TextView" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/world_clock"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/saved_locations"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/speedo_meter">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/world_clock"-->
+        <!--            android:layout_width="110dp"-->
+        <!--            android:layout_height="130dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/saved_locations"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/compass">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
 
-                <ImageView
+        <!--                <ImageView-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="110dp"-->
+        <!--                    android:src="@drawable/ic_menu_camera" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="TextView" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="TextView" />-->
+        <!--            </LinearLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/saved_locations"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/more_apps"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/world_clock"
-            app:layout_constraintTop_toBottomOf="@+id/weather">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/saved_locations"-->
+        <!--            android:layout_width="110dp"-->
+        <!--            android:layout_height="130dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/more_apps"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/world_clock"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/weather">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
 
-                <ImageView
+        <!--                <ImageView-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="110dp"-->
+        <!--                    android:src="@drawable/ic_menu_camera" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="TextView" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="TextView" />-->
+        <!--            </LinearLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/more_apps"
-            android:layout_width="100dp"
-            android:layout_height="130dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/saved_locations"
-            app:layout_constraintTop_toBottomOf="@+id/compass">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/more_apps"-->
+        <!--            android:layout_width="110dp"-->
+        <!--            android:layout_height="130dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.5"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/saved_locations"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/speedmeter">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
 
-                <ImageView
+        <!--                <ImageView-->
 
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_menu_camera" />
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="110dp"-->
+        <!--                    android:src="@drawable/ic_menu_camera" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="TextView" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="TextView" />-->
+        <!--            </LinearLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="44dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#00000000"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/hamburger_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/tittle_home"
+        android:textColor="#353535"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
