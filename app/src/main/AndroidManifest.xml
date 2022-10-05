@@ -4,6 +4,7 @@
     package="com.otl.gps.navigation.map.route">
 
     <application
+        android:name="application.RawGpsApp"
         android:allowBackup="true"
         android:largeHeap="true"
         android:name="application.RawGpsApp"
@@ -15,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RawGPS"
         tools:targetApi="31">
-
+        <!-- Admob Meta tags -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/gps_app_id" />
         <activity
             android:name=".view.activity.main.MainController"
             android:exported="false"
