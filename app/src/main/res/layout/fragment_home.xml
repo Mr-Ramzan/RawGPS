@@ -6,14 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.home.HomeFragment">
 
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        android:maxWidth="500dp"
+        android:maxWidth="650dp"
         android:padding="8dp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tittle"
@@ -22,15 +28,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/route_finder_button"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/satellite_view"
-            app:layout_constraintEnd_toStartOf="@+id/my_location"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,15 +62,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/my_location"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/traffic_view"
-            app:layout_constraintEnd_toStartOf="@+id/explore_places"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/route_finder_button"
-            app:layout_constraintTop_toTopOf="@+id/route_finder_button"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,15 +95,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/explore_places"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/nearby_places"
+            app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/my_location"
-            app:layout_constraintTop_toTopOf="@+id/route_finder_button"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,15 +128,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/satellite_view"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/speedo_meter"
-            app:layout_constraintEnd_toStartOf="@+id/traffic_view"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/route_finder_button">
+            app:layout_constraintTop_toTopOf="@+id/guideline7">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,15 +159,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/traffic_view"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/weather"
-            app:layout_constraintEnd_toStartOf="@+id/nearby_places"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/satellite_view"
-            app:layout_constraintTop_toTopOf="@+id/satellite_view"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/guideline7">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,15 +190,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/nearby_places"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/speedmeter"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/traffic_view"
-            app:layout_constraintTop_toTopOf="@+id/satellite_view"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline7">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -227,16 +221,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/compass"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/weather"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/satellite_view">
+            app:layout_constraintTop_toTopOf="@+id/guideline9">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -261,16 +252,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/weather"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/speedmeter"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/compass"
-            app:layout_constraintTop_toTopOf="@+id/compass"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/guideline9">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -295,16 +283,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/speedmeter"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/weather"
-            app:layout_constraintTop_toTopOf="@+id/compass"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline9">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -326,6 +311,41 @@
                     android:text="TextView" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.66" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
 
         <!--        <androidx.cardview.widget.CardView-->
         <!--            android:id="@+id/world_clock"-->
@@ -427,13 +447,14 @@
         android:scaleType="centerInside"
         android:src="@drawable/hamburger_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/inter_bold"
+        android:fontFamily="@font/poppins"
         android:text="@string/tittle_home"
         android:textColor="#353535"
         android:textSize="30sp"
@@ -441,5 +462,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

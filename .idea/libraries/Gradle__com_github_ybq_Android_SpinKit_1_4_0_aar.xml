@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.ybq:Android-SpinKit:1.4.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/307948be05f896f870548a1fe89c91f3/transformed/Android-SpinKit-1.4.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/307948be05f896f870548a1fe89c91f3/transformed/Android-SpinKit-1.4.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/307948be05f896f870548a1fe89c91f3/transformed/Android-SpinKit-1.4.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8eb5d94572a7eda641482565d1d53a5f/transformed/Android-SpinKit-1.4.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8eb5d94572a7eda641482565d1d53a5f/transformed/Android-SpinKit-1.4.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8eb5d94572a7eda641482565d1d53a5f/transformed/Android-SpinKit-1.4.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ybq/Android-SpinKit/1.4.0/65342739d3408aec3f1249f21cffa52400ac3508/Android-SpinKit-1.4.0-javadoc.jar!/" />

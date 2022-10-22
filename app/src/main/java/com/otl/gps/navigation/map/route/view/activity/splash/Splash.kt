@@ -13,10 +13,12 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import application.RawGpsApp
+import com.bumptech.glide.Glide
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySplashBinding
 import com.otl.gps.navigation.map.route.view.activity.main.MainController
 import com.otl.gps.navigation.map.route.view.activity.onboarding.OnboardingSplash
-import java.lang.Exception
+import kotlin.Exception
 
 class Splash : AppCompatActivity() {
 
@@ -30,13 +32,13 @@ class Splash : AppCompatActivity() {
     private lateinit var windowInsetsController: WindowInsetsControllerCompat
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         hideSystemBars()
         (application as RawGpsApp).appContainer.prefs.setAppLaunchCount((application as RawGpsApp).appContainer.prefs.getAppLaunchCount() + 1)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupBg()
         if ((application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             (application as RawGpsApp).appContainer.prefs.disableAppOpenAds()
             goToHome()
@@ -45,9 +47,20 @@ class Splash : AppCompatActivity() {
         }
     }
 
+    private fun setupBg() {
+
+        try {
+            Glide.with(this).load(R.drawable.splash_bg).into(binding.bg)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
     private fun hideSystemBars() {
 
-        windowInsetsController = WindowCompat.getInsetsController(window,window.decorView) ?: return
+        windowInsetsController =
+            WindowCompat.getInsetsController(window, window.decorView) ?: return
         // Configure the behavior of the hidden system bars
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -79,8 +92,6 @@ class Splash : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
-
 
 
     /**

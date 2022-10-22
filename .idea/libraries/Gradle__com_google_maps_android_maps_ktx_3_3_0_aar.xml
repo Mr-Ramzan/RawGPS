@@ -1,9 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.maps.android:maps-ktx:3.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4b519c2a2c016e3bbb13426c62b5b1d2/transformed/maps-ktx-3.3.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b519c2a2c016e3bbb13426c62b5b1d2/transformed/maps-ktx-3.3.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b519c2a2c016e3bbb13426c62b5b1d2/transformed/maps-ktx-3.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9fbae4c8839f32b668d29a1b33c670cb/transformed/maps-ktx-3.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9fbae4c8839f32b668d29a1b33c670cb/transformed/maps-ktx-3.3.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.maps.android/maps-ktx/3.3.0/ba0b4cb05302de5140fdfba6819f7dbf8074982c/maps-ktx-3.3.0-javadoc.jar!/" />
