@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.florent37:shapeofview:1.4.7@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c8c2a61d29b0a2d4cf27027def935a7b/transformed/shapeofview-1.4.7/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b39e68235a34bd51d5cb7554a62114af/transformed/shapeofview-1.4.7/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c8c2a61d29b0a2d4cf27027def935a7b/transformed/shapeofview-1.4.7/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c8c2a61d29b0a2d4cf27027def935a7b/transformed/shapeofview-1.4.7/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c8c2a61d29b0a2d4cf27027def935a7b/transformed/shapeofview-1.4.7/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b39e68235a34bd51d5cb7554a62114af/transformed/shapeofview-1.4.7/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b39e68235a34bd51d5cb7554a62114af/transformed/shapeofview-1.4.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b39e68235a34bd51d5cb7554a62114af/transformed/shapeofview-1.4.7/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

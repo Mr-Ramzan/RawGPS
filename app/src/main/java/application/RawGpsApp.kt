@@ -11,9 +11,13 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
+import com.mapbox.android.core.location.LocationEngineProvider
+import com.mapbox.search.MapboxSearchSdk
+import com.mapbox.search.SearchSdkSettings
 import com.otl.gps.navigation.map.route.di.AppDIs
 import com.otl.gps.navigation.map.route.manager.SharedPreferencesManager
 import com.otl.gps.navigation.map.route.manager.adManagers.AppOpenAdHelper
+import com.otl.gps.navigation.map.route.utilities.Constants
 
 
 class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
@@ -32,28 +36,28 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         instance = this
         setupAdsSdks()
-       // initializeSearchSDK()
+        initializeSearchSDK()
 
     }
 
-//
-//    public fun initializeSearchSDK(){
-//
-//        MapboxSearchSdk.initialize(
-//            application = this,
-//            accessToken = Constants.MAP_BOX_ACCESS_TOKEN,
-//            locationEngine = LocationEngineProvider.getBestLocationEngine(this),
-//            searchSdkSettings = SearchSdkSettings(maxHistoryRecordsAmount = 5),
-////            offlineSearchEngineSettings = OfflineSearchEngineSettings(tileStore = TileStore.create()),
-//        )
-//    }
+
+    public fun initializeSearchSDK(){
+
+        MapboxSearchSdk.initialize(
+            application = this,
+            accessToken = Constants.MAP_BOX_ACCESS_TOKEN,
+            locationEngine = LocationEngineProvider.getBestLocationEngine(this),
+            searchSdkSettings = SearchSdkSettings(maxHistoryRecordsAmount = 5),
+//            offlineSearchEngineSettings = OfflineSearchEngineSettings(tileStore = TileStore.create()),
+        )
+    }
 
 
     private fun setupAdsSdks() {
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder().setTestDeviceIds(
                 listOf(
-                    "1A189487CA5BFC5DEA57A50AB2FABE4D",
+                    "E291B7660C265B0D0C5D40391432AD50",
                     "FC3CBBF0547BF29D2D2ACC7FCC4D994A",
                     "D7EF04558C5B8D0CF1FB26F41EC46227",
                     "5905EC31C4E2C9A46477531EE9F8F145",

@@ -14,4 +14,31 @@
     <string name="navigation">Navigation</string>
     <string name="my_location">My Location</string>
     <string name="tittle_home">GPS Navigation</string>
+    <string name="cancel_subscription">Cancel Subscription</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="rate_application">Rate Us</string>
+    <string name="more_apps">More Apps</string>
+    <string name="share_application">Share This App</string>
+    <string name="exit_app">Exit</string>
+    <string name="are_you_sure_to_exit">Are you sure you want to exit this application?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="permissionDeniedHeader">Required Permissions</string>
+    <string name="storage_concent_desc">Storage permissions are necessery for saving and retriving the maps data.</string>
+    <string name="loading_map_data">loading...</string>
+    <string name="routes_fragment">Navigation Fragment</string>
+    <string name="select">Select</string>
+    <string name="search">Search</string>
+    <string name="search_here">Search here</string>
+    <string name="select_on_map">Select Location On Map</string>
+    <string name="my_location_hint">Current Location</string>
+    <string name="start">Start</string>
+    <string name="show_route">Show Route</string>
+    <string name="destination_hint">Select Destination Location</string>
+    <string name="travel_tool">Travel Tools</string>
+
+    <string name="_32_c">32°C</string>
+    <string name="nairobi_city">Nirobi</string>
+    <string name="compas_fragment">Compass Fragment</string>
+
 </resources>

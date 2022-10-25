@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.26@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/fe8f622a4b7ad38cc3cc7ed236648437/transformed/mapbox-search-android-ui-1.0.0-beta.26/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fe8f622a4b7ad38cc3cc7ed236648437/transformed/mapbox-search-android-ui-1.0.0-beta.26/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fe8f622a4b7ad38cc3cc7ed236648437/transformed/mapbox-search-android-ui-1.0.0-beta.26/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.search/mapbox-search-android-ui/1.0.0-beta.26/89aa9b0601bfd66144c5f247ba08d86a08310955/mapbox-search-android-ui-1.0.0-beta.26-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.search/mapbox-search-android-ui/1.0.0-beta.26/784a25d59efe63d7ba8857b22b764e03d5b9ba98/mapbox-search-android-ui-1.0.0-beta.26-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

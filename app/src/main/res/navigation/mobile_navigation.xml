@@ -11,5 +11,62 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/navigation_routes_frag"
+        android:name="com.otl.gps.navigation.map.route.view.fragment.maps.NavigationFragmentGoogle"
+        android:label="@string/routes_fragment"
+        tools:layout="@layout/fragment_route_finder_google"
+        />
+
+    <fragment
+        android:id="@+id/navigation_my_loc_frag"
+        android:name="com.otl.gps.navigation.map.route.view.fragment.maps.GoogleMapsMyLocFragment"
+        android:label="@string/routes_fragment"
+        tools:layout="@layout/activity_my_location_google" />
+
+    <fragment
+        android:id="@+id/navigation_compass"
+        android:name="com.otl.gps.navigation.map.route.view.fragment.compass.CompassFragment"
+        android:label="@string/compas_fragment"
+        tools:layout="@layout/fragment_compass" />
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_clock"-->
+<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.WorldClockFragment"-->
+<!--        android:label="@string/turn_by_turn_fragment"-->
+<!--        tools:layout="@layout/fragment_world_clock" />-->
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_weather"-->
+<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.WeatherFragment"-->
+<!--        android:label="@string/turn_by_turn_fragment"-->
+<!--        tools:layout="@layout/fragment_weather" />-->
+
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_places"-->
+<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.PlacesFragment"-->
+<!--        android:label="@string/turn_by_turn_fragment"-->
+<!--        tools:layout="@layout/places_fragment" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_places_list"-->
+<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.PlacesListFragment"-->
+<!--        android:label="@string/turn_by_turn_fragment"-->
+<!--        tools:layout="@layout/fragment_places_list" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_explore_places"-->
+<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.ExplorePLacesFragment"-->
+<!--        android:label="@string/explore_new_places"-->
+<!--        tools:layout="@layout/places_fragment" />-->
+
+    <fragment
+        android:id="@+id/navigation_travel_tool"
+        android:name="com.otl.gps.navigation.map.route.view.fragment.travelTools.TravelToolsFragment"
+        android:label="@string/travel_tool"
+        tools:layout="@layout/travel_tools" />
 
 </navigation>

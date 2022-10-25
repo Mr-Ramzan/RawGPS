@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: io.realm.kotlin:cinterop-android-debug:1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/77a4f7144eddb8f46e436feba62dccb1/transformed/cinterop-debug/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/77a4f7144eddb8f46e436feba62dccb1/transformed/cinterop-debug/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm.kotlin/cinterop-android-debug/1.0.2/6c570155b34f96e747c2641b5b886cc9f6ca8df4/cinterop-android-debug-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm.kotlin/cinterop-android-debug/1.0.2/5a1e758aacac2777e687d264d436fcd4cccb5bc/cinterop-android-debug-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

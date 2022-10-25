@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mapbox.plugin:maps-lifecycle:10.6.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f389a043d53df00253900df6eb39f151/transformed/maps-lifecycle-10.6.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f389a043d53df00253900df6eb39f151/transformed/maps-lifecycle-10.6.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-lifecycle/10.6.0/7c58cc1f58054cf07eacdf5f4be99411be349ca0/maps-lifecycle-10.6.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.plugin/maps-lifecycle/10.6.0/63df72122cdc8f020e89cd3693f9099d532cff5e/maps-lifecycle-10.6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

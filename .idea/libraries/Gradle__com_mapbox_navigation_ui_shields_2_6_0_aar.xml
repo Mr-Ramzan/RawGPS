@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mapbox.navigation:ui-shields:2.6.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/added44e780f3586462c1db4d5f00d40/transformed/ui-shields-2.6.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/added44e780f3586462c1db4d5f00d40/transformed/ui-shields-2.6.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.navigation/ui-shields/2.6.0/965a53fdfc1bee13bb17f281bed57c240a9d510f/ui-shields-2.6.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.navigation/ui-shields/2.6.0/ed0a08bd0ab6bfbb9f4811222da3dc929d2c34e6/ui-shields-2.6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

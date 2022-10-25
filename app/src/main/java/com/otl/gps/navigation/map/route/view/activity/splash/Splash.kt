@@ -34,11 +34,11 @@ class Splash : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSystemBars()
-        (application as RawGpsApp).appContainer.prefs.setAppLaunchCount((application as RawGpsApp).appContainer.prefs.getAppLaunchCount() + 1)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
+      binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupBg()
+        hideSystemBars()
+        (application as RawGpsApp).appContainer.prefs.setAppLaunchCount((application as RawGpsApp).appContainer.prefs.getAppLaunchCount() + 1)
         if ((application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             (application as RawGpsApp).appContainer.prefs.disableAppOpenAds()
             goToHome()
@@ -51,6 +51,7 @@ class Splash : AppCompatActivity() {
 
         try {
             Glide.with(this).load(R.drawable.splash_bg).into(binding.bg)
+            Glide.with(this).load(R.drawable.splash_gif).into(binding.gifView)
         } catch (e: Exception) {
             e.printStackTrace()
         }

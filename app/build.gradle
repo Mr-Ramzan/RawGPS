@@ -7,6 +7,9 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'com.mapbox.maps.token'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'realm-android'
+
 }
 
 android {
@@ -67,16 +70,40 @@ android {
         }
 
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
     }
+
     buildFeatures {
         viewBinding true
     }
+    ndkVersion '21.3.6528147'
+    compileOptions {
+//        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    lintOptions {
+        disable 'ParcelCreator'
+        abortOnError true
+    }
+
+
+
+
+
 }
 
 dependencies {
@@ -102,6 +129,8 @@ dependencies {
     implementation('com.github.bumptech.glide:glide:4.13.2') {
         exclude group: "com.android.support"
     }
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+
     //Ads Integration
     implementation 'com.google.firebase:firebase-ads:21.2.0'
     implementation 'com.google.android.gms:play-services-ads:21.2.0'
@@ -144,12 +173,27 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.5'
 
     // Firebase analytics
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.1'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     // Declare the dependencies for the Crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.13'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
 
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
+    implementation 'com.mapbox.navigation:android:2.6.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
+    implementation 'com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.26'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.squareup.okhttp3:mockwebserver:4.9.2'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    //Realm DB
+    implementation 'io.realm.kotlin:library-base:1.0.2'
 
+    // volley
+    implementation 'com.android.volley:volley:1.2.1'
 }
 
 secrets {
