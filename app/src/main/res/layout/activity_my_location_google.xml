@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,8 +10,8 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,11 +21,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layer_relocate_container"
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
         app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layers_selection_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+            android:background="@drawable/round_white_buttton"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/angle_iv"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:padding="4dp"
+                android:src="@drawable/layers_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,67 +66,34 @@
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="6dp"
             android:background="@drawable/round_white_buttton"
             android:elevation="6dp"
             android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.78">
+            app:layout_constraintTop_toBottomOf="@+id/layers_selection_button">
 
             <ImageView
                 android:id="@+id/recenter_button_iv"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:src="@drawable/gps_recenter_button"
+                android:src="@drawable/recenter_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toggle_layer_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/round_white_buttton"
-        android:elevation="6dp"
-        android:gravity="center"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/layer_relocate_container"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/layer_toggle_iv"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@drawable/streets"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
@@ -216,4 +216,107 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_arrow"
         app:tint="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/place_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/flat_grey_normal_2"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="340dp"
+            android:layout_height="220dp"
+            android:backgroundTint="@color/white"
+            android:visibility="visible"
+            app:cardCornerRadius="15dp"
+
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <EditText
+                    android:id="@+id/place_name_input"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/input_border"
+                    android:ems="10"
+                    android:hint="Place Name Here"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/place_name_tittle" />
+
+
+                <TextView
+                    android:id="@+id/place_name_tittle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Pin Location Name"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/saved_name_button"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_background"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/place_name_input"
+                    app:layout_constraintStart_toStartOf="@+id/place_name_input"
+                    app:layout_constraintTop_toBottomOf="@+id/place_name_input"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/save"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/close_add_name_layout"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="6dp"
+                    android:scaleType="centerInside"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/admob_close_button_black_circle_white_cross" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

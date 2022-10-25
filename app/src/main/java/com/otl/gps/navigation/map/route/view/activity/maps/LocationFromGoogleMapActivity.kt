@@ -265,8 +265,6 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         val fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
         val toLocation = intent.getBooleanExtra("isToLocationClick", false)
         val isSelectOnMapClick = intent.getBooleanExtra("isSelectOnMapClick", false)
-        val isFindAddressClick = intent.getBooleanExtra("isFindAddressClick", false)
-        Log.d(TAG, isFindAddressClick.toString())
 
         binding.SelectLocationButton
             .setOnClickListener {
@@ -292,15 +290,6 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
                     }
 
 
-                    if (isFindAddressClick) {
-                        val intent = Intent()
-                        intent.putExtra("address", address)
-                        intent.putExtra("latitude", latitude)
-                        intent.putExtra("longitude", longitude)
-                        intent.putExtra("isFindAddressClick", true)
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-                    }
 
                     if (isSelectOnMapClick) {
                         val intent = Intent()

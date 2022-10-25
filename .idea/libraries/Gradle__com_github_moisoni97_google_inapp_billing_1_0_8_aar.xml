@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c74c8da6dc15df49c61057d554e6eb20/transformed/google-inapp-billing-1.0.8/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c74c8da6dc15df49c61057d554e6eb20/transformed/google-inapp-billing-1.0.8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c74c8da6dc15df49c61057d554e6eb20/transformed/google-inapp-billing-1.0.8/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

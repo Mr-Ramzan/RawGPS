@@ -148,7 +148,7 @@
                     android:layout_height="0dp"
                     android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/satellite_icon"
+                    android:src="@drawable/ic_satellite_btn"
                     app:layout_constraintBottom_toTopOf="@+id/textView4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -510,6 +510,7 @@
         app:layout_constraintGuide_percent="0.58" />
 
     <FrameLayout
+        android:id="@+id/ads_parent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/bg"

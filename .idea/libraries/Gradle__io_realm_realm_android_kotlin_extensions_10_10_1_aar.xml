@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c6ffdc2b61592d2d5196359341f2a3e/transformed/realm-android-kotlin-extensions-10.10.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8c6ffdc2b61592d2d5196359341f2a3e/transformed/realm-android-kotlin-extensions-10.10.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c6ffdc2b61592d2d5196359341f2a3e/transformed/realm-android-kotlin-extensions-10.10.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm/realm-android-kotlin-extensions/10.10.1/92ef4073d9da5e6f07a0ee807b7146ced7f0d7e1/realm-android-kotlin-extensions-10.10.1-javadoc.jar!/" />

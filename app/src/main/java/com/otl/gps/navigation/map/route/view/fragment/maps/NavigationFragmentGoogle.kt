@@ -9,28 +9,25 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.graphics.Point
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
-import com.bumptech.glide.Glide
-import com.google.android.datatransport.runtime.logging.Logging
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.SphericalUtil
@@ -40,13 +37,11 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.otl.gps.navigation.map.route.databinding.FragmentRouteFinderGoogleBinding
+import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
 import com.otl.gps.navigation.map.route.view.activity.maps.PickLocationActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 
 
@@ -104,10 +99,12 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         DialogUtils.showLoadingDialog(requireActivity())
         loadMap()
+        loadBanner()
         initObjects()
         getLocationAndPermission()
         clickEvent()
         loadInter()
+
 
 
     }
@@ -166,8 +163,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
 
-
-
     private fun initObjects() {
         locationManager =
             requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -188,14 +183,26 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     private fun getLocationFromPref() {
 
         addrSrcLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.ADDRESS_FROM_LOCATION, "")
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.ADDRESS_FROM_LOCATION,
+                ""
+            )
                 .toString()
         latSrcLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.LATITUDE_FROM_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LATITUDE_FROM_LOCATION,
+                ""
+            ).toString()
         longSrcLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LONGITUDE_FROM_LOCATION,
+                ""
+            ).toString()
         hintFromLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString("hintFromLocation", "My Location").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                "hintFromLocation",
+                "My Location"
+            ).toString()
         binding.myLocationText.hint = hintFromLocation
         binding.myLocationText.setText(addrSrcLocation)
 
@@ -217,16 +224,28 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     private fun getCurntAddrFromPrefs() {
 
         addrSrcLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.ADDRESS_FROM_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.ADDRESS_FROM_LOCATION,
+                ""
+            ).toString()
 
         addrDestLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.ADDRESS_TO_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.ADDRESS_TO_LOCATION,
+                ""
+            ).toString()
 
         hintFromLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString("hintFromLocation", "My Location").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                "hintFromLocation",
+                "My Location"
+            ).toString()
 
         hintToLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString("hintToLocation", "Choose Destination").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                "hintToLocation",
+                "Choose Destination"
+            ).toString()
 
         binding.myLocationText.hint = hintFromLocation
         binding.destinationText.hint = hintToLocation
@@ -237,19 +256,31 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
     private fun getDstAddrFromPrefs() {
         addrDestLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.ADDRESS_TO_LOCATION, "")
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.ADDRESS_TO_LOCATION,
+                ""
+            )
                 .toString()
 
         latDestLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.LATITUDE_TO_LOCATION, "")
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LATITUDE_TO_LOCATION,
+                ""
+            )
                 .toString()
 
         longDestLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString(Constants.LONGITUDE_TO_LOCATION, "")
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LONGITUDE_TO_LOCATION,
+                ""
+            )
                 .toString()
 
         hintToLocation =
-            (requireActivity().application as RawGpsApp).appContainer.prefs .getString("hintToLocation", "Choose Destination").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                "hintToLocation",
+                "Choose Destination"
+            ).toString()
         binding.destinationText.hint = hintToLocation
 
         binding.destinationText.setText(addrDestLocation)
@@ -316,6 +347,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
     private fun updateMarkers() {
+        val builder: LatLngBounds.Builder = LatLngBounds.Builder()
+
         try {
             if (sourceMarker != null) {
                 sourceMarker?.remove()
@@ -337,19 +370,14 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             try {
 //                sourceMarker = map.addMarker(
 //                    MarkerOptions()
-//                        .position(
-//                            LatLng(
-//                                locationByNetwork?.latitude!!,
-//                                locationByNetwork?.longitude!!
-//                            )
-//                        )
+//                        .position(  LatLng(   locationByNetwork?.latitude!!, locationByNetwork?.longitude!!  )  )
 //                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
 //                        .title(addrSrcLocation)
 //                        .infoWindowAnchor(0.5f, 0.5f)
 //                        .anchor(0.9f, 0.1f)
 //                        .draggable(false)
 //                )
-
+//==============================================================================================================================
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -357,7 +385,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         if (!latDestLocation.isNullOrEmpty() && !longDestLocation.isNullOrEmpty()) {
             try {
-
                 destMarker = map.addMarker(
                     MarkerOptions()
                         .position(LatLng(latDestLocation.toDouble(), longDestLocation.toDouble()))
@@ -366,17 +393,36 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
                         .infoWindowAnchor(0.5f, 0.5f)
                         .draggable(false)
                 )
-
-                drawCurveOnMap(map, LatLng(latDestLocation.toDouble(), longDestLocation.toDouble()), LatLng(locationByNetwork?.latitude!!, locationByNetwork?.longitude!!))
-
-                isRouteDraw=true
+//                drawCurveOnMap(
+//                    map,
+//                    LatLng(latDestLocation.toDouble(), longDestLocation.toDouble()),
+//                    LatLng(locationByNetwork?.latitude!!, locationByNetwork?.longitude!!)
+//                )
+                isRouteDraw = true
                 binding.startNavigationButton.visibility = View.VISIBLE
                 setNavClickListener()
+
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        recenterCamera()
+        if (!latDestLocation.isEmpty() && !longDestLocation.isEmpty()) {
+
+            builder.include(LatLng(locationByNetwork!!.latitude,locationByNetwork!!.longitude))
+            builder.include(LatLng(latDestLocation.toDouble(),longDestLocation.toDouble()))
+            val bounds = builder.build()
+            val width = resources.displayMetrics.widthPixels
+            val height = resources.displayMetrics.heightPixels
+            val padding = (width * 0.20).toInt() // offset from edges of the map 10% of screen
+            val cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height/2, padding)
+            map.animateCamera(cu)
+
+        } else {
+
+            recenterCamera()
+
+        }
     }
 
 
@@ -450,7 +496,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         temp.clear() //clear the temp list
     }
-
 
 
     private fun getKms(distance: Double): Double {
@@ -586,9 +631,18 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
-                (requireActivity().application as RawGpsApp).appContainer.prefs .setString(Constants.ADDRESS_TO_LOCATION, "")
-                (requireActivity().application as RawGpsApp).appContainer.prefs .setString(Constants.LATITUDE_TO_LOCATION, "")
-                (requireActivity().application as RawGpsApp).appContainer.prefs .setString(Constants.LONGITUDE_TO_LOCATION, "")
+                (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.ADDRESS_TO_LOCATION,
+                    ""
+                )
+                (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LATITUDE_TO_LOCATION,
+                    ""
+                )
+                (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LONGITUDE_TO_LOCATION,
+                    ""
+                )
                 if (isRouteDraw) {
                     isRouteDraw = false
                 }
@@ -647,15 +701,15 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 //        Toast.makeText(context,"miles"+road.mDuration,Toast.LENGTH_SHORT).show()
 //        Toast.makeText(context,"miles"+ addressFromMyLocation,Toast.LENGTH_SHORT).show()
 //        binding.myLocationText.text = addressFromLocationSharedPref
-        (requireActivity().application as RawGpsApp).appContainer.prefs .setString(
+        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
             Constants.ADDRESS_FROM_LOCATION,
             addressFromMyLocation
         )
-        (requireActivity().application as RawGpsApp).appContainer.prefs .setString(
+        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
             Constants.LATITUDE_FROM_LOCATION,
             latSrcLocation
         )
-        (requireActivity().application as RawGpsApp).appContainer.prefs .setString(
+        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
             Constants.LONGITUDE_FROM_LOCATION,
             longSrcLocation
         )
@@ -664,8 +718,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
     var canShowNativeAd = false
     var adsReloadTry = 0
-
-
 
 
     override fun onDestroy() {
@@ -727,41 +779,67 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             binding.recenterLocationButton.setOnClickListener {
                 recenterCamera()
             }
-            binding.toggleTrafficButton.setOnClickListener {
-                if(!map.isTrafficEnabled){
-                    Glide.with(requireActivity()).load(R.drawable.traffic_active).into(binding.trafficIv)
-                    map.isTrafficEnabled = true
-                }else{
-                    map.isTrafficEnabled = false
-                    Glide.with(requireActivity()).load(R.drawable.traffic_inactive).into(binding.trafficIv)
-                }
-            }
-            binding.toggleLayerButton.setOnClickListener {
-                if(map.mapType==GoogleMap.MAP_TYPE_SATELLITE){
-                    Glide.with(requireActivity()).load(R.drawable.streets).into(binding.layerToggleIv)
 
-                    map.mapType = GoogleMap.MAP_TYPE_NORMAL
-                }else{
-                    Glide.with(requireActivity()).load(R.drawable.settalite).into(binding.layerToggleIv)
-                    map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                }
-            }
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
 //        googleMap.setOnCameraIdleListener {
 //            // Cleaning all the markers.
 //            if (googleMap != null) {
 //                googleMap.clear()
 //            }
 //        }
-
+        setUpLayersControl()
         DialogUtils.dismissLoading()
+    }
+
+    private var initialTilt = 25f
+    private fun toggle2D3D() {
+        try {
+            if (latSrcLocation.isNullOrEmpty() || longSrcLocation.isNullOrEmpty()) {
+                return
+            }
+            val cameraPos: CameraPosition = CameraPosition.Builder()
+                .target(LatLng(latSrcLocation.toDouble(), longSrcLocation.toDouble()))
+                .zoom(15.5f)
+                .bearing(0f)
+                .tilt(
+                    if (initialTilt == 25f) {
+                        initialTilt = 60f
+                        60f
+                    } else {
+                        initialTilt = 25f
+                        25f
+                    }
+                )
+                .build()
+
+            checkReadyThen {
+                changeCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
+                    object : GoogleMap.CancelableCallback {
+                        override fun onFinish() {
+                        }
+
+                        override fun onCancel() {
+                        }
+                    })
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
 
     }
+    private fun setUpLayersControl() {
+        binding.layersSelectionButton.setOnClickListener {
+            LayersDialog.showMapsLayersDialog(requireActivity(),map){
+                toggle2D3D()
+            }
+        }
+    }
+
 
     /**
      * Enables the My Location layer if the fine location permission has been granted.
@@ -808,6 +886,20 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         }
     }
 
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
+
+
+
     // [START_EXCLUDE silent]
     /**
      * When the map is not ready the CameraUpdateFactory cannot be used. This should be used to wrap
@@ -817,7 +909,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
      */
     private fun checkReadyThen(stuffToDo: () -> Unit) {
         if (!::map.isInitialized) {
-           // Toast.makeText(requireContext(), R.string.map_not_ready, Toast.LENGTH_SHORT).show()
+            // Toast.makeText(requireContext(), R.string.map_not_ready, Toast.LENGTH_SHORT).show()
         } else {
             stuffToDo()
         }

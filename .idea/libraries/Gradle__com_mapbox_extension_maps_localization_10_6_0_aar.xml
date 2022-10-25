@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef6faf7c6ddd13d241a0a81b6ff52860/transformed/maps-localization-10.6.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ef6faf7c6ddd13d241a0a81b6ff52860/transformed/maps-localization-10.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef6faf7c6ddd13d241a0a81b6ff52860/transformed/maps-localization-10.6.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.extension/maps-localization/10.6.0/b86b91442bbd29ec0011ac6714a907ddf4925698/maps-localization-10.6.0-javadoc.jar!/" />

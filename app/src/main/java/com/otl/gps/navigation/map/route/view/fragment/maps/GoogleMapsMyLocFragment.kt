@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import com.otl.gps.navigation.map.route.R
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,12 +16,15 @@ import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
+import application.RawGpsApp.Companion.realmDB
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
@@ -34,9 +38,12 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.otl.gps.navigation.map.route.databinding.ActivityMyLocationGoogleBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
+import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
-import com.otl.gps.navigation.map.route.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
@@ -114,13 +121,17 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
                         // check for permanent denial of any permission
                         if (!report.areAllPermissionsGranted()) {
-                            DialogUtils.dismissLoading()
-                            Toast.makeText(
-                                requireContext(),
-                                "Permissions Are Necessery!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            checkPermissionBeforeLocation()
+                            try {
+                                DialogUtils.dismissLoading()
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Permissions Are Necessery!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                checkPermissionBeforeLocation()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                         }
                     }
 
@@ -153,21 +164,24 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
     private var longitudeMyLocation: String? = null
     private var addressFromMyLocation: String? = null
     private fun checkMyLocation() {
-        ( requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.ADDRESS_FROM_LOCATION,
-            addressFromMyLocation
-        )
+        try {
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.ADDRESS_FROM_LOCATION,
+                addressFromMyLocation
+            )
 
-        ( requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.LATITUDE_FROM_LOCATION,
-            latitudeMyLocation
-        )
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.LATITUDE_FROM_LOCATION,
+                latitudeMyLocation
+            )
 
-        ( requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.LONGITUDE_FROM_LOCATION,
-            longitudeMyLocation
-        )
-
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.LONGITUDE_FROM_LOCATION,
+                longitudeMyLocation
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
@@ -267,21 +281,22 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 latitudeMyLocation = locationByNetwork!!.latitude.toString()
                 longitudeMyLocation = locationByNetwork!!.longitude.toString()
 
-                GeoCoderAddress(requireActivity()).getCompleteAddress(
-                    locationByNetwork!!.latitude,
-                    locationByNetwork!!.longitude, binding.tvAddress
-                ) {
-                    addressFromMyLocation = it
+                CoroutineScope(Dispatchers.Default).launch {
+                    GeoCoderAddress(requireActivity()).getCompleteAddress(
+                        locationByNetwork!!.latitude,
+                        locationByNetwork!!.longitude, binding.tvAddress
+                    ) {
+                        addressFromMyLocation = it
+                    }
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        locationManager.removeUpdates(networkLocationListener)
+
+                        checkMyLocation()
+                        zoomCamera()
+                        recenterCamera()
+                    }
                 }
-
-                locationManager.removeUpdates(networkLocationListener)
-
-                checkMyLocation()
-                zoomCamera()
-
-
-                recenterCamera()
-
             }
 
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -322,12 +337,21 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
     private fun getAddressFromPref() {
         addressFromLocationSharedPref =
-            ( requireActivity().application as RawGpsApp).appContainer.prefs.getString(Constants.ADDRESS_FROM_LOCATION, "")
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.ADDRESS_FROM_LOCATION,
+                ""
+            )
                 .toString()
         latitudeFromLocation =
-            ( requireActivity().application as RawGpsApp).appContainer.prefs.getString(Constants.LATITUDE_FROM_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LATITUDE_FROM_LOCATION,
+                ""
+            ).toString()
         longitudeFromLocation =
-            ( requireActivity().application as RawGpsApp).appContainer.prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
+            (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
+                Constants.LONGITUDE_FROM_LOCATION,
+                ""
+            ).toString()
         binding.tvAddress.setText(addressFromLocationSharedPref)
         binding.tvLatLng.setText("$latitudeFromLocation,$longitudeFromLocation")
         if (locationByNetwork == null && longitudeFromLocation.isNotEmpty() && latitudeFromLocation.isNotEmpty()) {
@@ -349,6 +373,69 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             }
         }
 
+        binding.savePlaceButton.setOnClickListener {
+            try {
+                if (!latitudeMyLocation.isNullOrEmpty() && !longitudeMyLocation.isNullOrEmpty() && !addressFromMyLocation.isNullOrEmpty()) {
+
+                    if (binding.placeNameLayout.visibility != VISIBLE) {
+                        binding.placeNameLayout.visibility = VISIBLE
+
+                        binding.savedNameButton.setOnClickListener {
+                            if (!binding.placeNameInput.text.toString().isNullOrEmpty()) {
+                                var savedPlace = SavedPlace(
+                                    binding.placeNameInput.text.toString(),
+                                    addressFromMyLocation!!, latitudeMyLocation!!,
+                                    longitudeMyLocation!!, ""
+                                )
+                                realmDB?.checkIfExist(binding.placeNameInput.text.toString()) {
+                                    if (it) {
+                                        showOverWriteConfirmation(binding.placeNameInput.text.toString())
+                                        {
+                                            if (it) {
+
+                                                realmDB?.updateSavedItem(savedPlace)
+                                                binding.placeNameInput.setText("")
+                                                binding.placeNameLayout.visibility = GONE
+                                                Toast.makeText(requireContext(), "Place Saved!", Toast.LENGTH_SHORT).show()
+                                            } else {
+                                                binding.placeNameInput.setText("")
+                                                binding.placeNameInput.requestFocus()
+                                            }
+
+                                        }
+                                    } else {
+
+                                        realmDB?.updateSavedItem(savedPlace)
+                                        Toast.makeText(requireContext(), "Place Saved!", Toast.LENGTH_SHORT).show()
+                                        binding.placeNameInput.setText("")
+                                        binding.placeNameLayout.visibility = GONE
+
+
+                                    }
+                                }
+
+
+                            } else {
+                                Toast.makeText(requireContext(), "Please enter a valid place name!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        binding.closeAddNameLayout.setOnClickListener {
+                            binding.placeNameInput.setText("")
+                            binding.placeNameLayout.visibility = GONE
+                        }
+
+                    } else {
+                        binding.placeNameLayout.visibility = GONE
+                    }
+
+
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
 
         binding.backButton.setOnClickListener {
             requireActivity().onBackPressed()
@@ -356,28 +443,59 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
     }
 
 
-    private fun zoomCamera() {
-
-        if (locationByNetwork?.latitude != null && locationByNetwork?.longitude != null) {
-
-            if (::map.isInitialized) {
-
-                map.moveCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        LatLng(
-                            latitudeMyLocation!!.toDouble(),
-                            longitudeMyLocation!!.toDouble()
-                        ), 10f
-                    )
-                )
-
-            } else {
-
-                Handler(Looper.getMainLooper()).postDelayed({ zoomCamera() }, 1000)
-
-            }
-            DialogUtils.dismissLoading()
+    public fun showOverWriteConfirmation(name: String, overwrite: (yes: Boolean) -> Unit) {
+        var alertDialogBuilder = AlertDialog.Builder(requireContext());
+        alertDialogBuilder.setMessage("Pace with name \"$name\" already exists. Do you want to overwrite it?")
+        alertDialogBuilder.setPositiveButton(
+            "yes"
+        ) { dialog, which ->
+            overwrite(true)
+            dialog.dismiss()
         }
+
+        alertDialogBuilder.setNegativeButton("change name")
+        { dialog, which ->
+            overwrite(false)
+            dialog.dismiss()
+
+        }
+
+        var alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+
+    private fun zoomCamera() {
+        try {
+
+            if (locationByNetwork?.latitude != null && locationByNetwork?.longitude != null) {
+
+                if (::map.isInitialized) {
+
+                    map.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                latitudeMyLocation!!.toDouble(),
+                                longitudeMyLocation!!.toDouble()
+                            ), 10f
+                        )
+                    )
+
+                } else {
+
+                    Handler(Looper.getMainLooper()).postDelayed({ zoomCamera() }, 1000)
+
+                }
+                try {
+                    DialogUtils.dismissLoading()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
 
@@ -437,7 +555,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
         }
 
     private fun loadBanner() {
-        ( requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
             requireActivity(),
             binding.adViewBanner,
             AdSize.LARGE_BANNER,
@@ -448,6 +566,44 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private var initialTilt = 25f
+    private fun toggle2D3D() {
+        try {
+            if (latitudeMyLocation == null || longitudeMyLocation == null) {
+                return
+            }
+            val cameraPos: CameraPosition = CameraPosition.Builder()
+                .target(LatLng(latitudeMyLocation!!.toDouble(), longitudeMyLocation!!.toDouble()))
+                .zoom(15.5f)
+                .bearing(0f)
+                .tilt(
+                    if (initialTilt == 25f) {
+                        initialTilt = 60f
+                        60f
+                    } else {
+                        initialTilt = 25f
+                        25f
+                    }
+                )
+                .build()
+
+            checkReadyThen {
+                changeCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
+                    object : GoogleMap.CancelableCallback {
+                        override fun onFinish() {
+                        }
+
+                        override fun onCancel() {
+                        }
+                    })
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
@@ -457,29 +613,13 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
             map.uiSettings.isMyLocationButtonEnabled = false
+
             if (mapStyle == "Satellite") {
                 map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-
             }
+
             if (mapStyle == "Traffic") {
                 map.isTrafficEnabled = true
-                ////////////////////////////////////////////////////////////////////////////////////
-                binding.toggleLayerButton.visibility =View.VISIBLE
-                binding.toggleLayerButton.setOnClickListener {
-                    if(map.mapType==GoogleMap.MAP_TYPE_SATELLITE){
-                        Glide.with(requireActivity()).load(R.drawable.streets).into(binding.layerToggleIv)
-                        map.mapType = GoogleMap.MAP_TYPE_NORMAL
-                    }else{
-                        Glide.with(requireActivity()).load(R.drawable.settalite).into(binding.layerToggleIv)
-                        map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                    }
-                }
-
-            ////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
             }
 
             binding.recenterLocationButton.setOnClickListener {
@@ -498,6 +638,17 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             }
         }
 
+        setUpLayersControl()
+
+    }
+
+
+    private fun setUpLayersControl() {
+        binding.layersSelectionButton.setOnClickListener {
+            LayersDialog.showMapsLayersDialog(requireActivity(),map){
+                toggle2D3D()
+            }
+        }
     }
 
 
@@ -529,23 +680,34 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
-        val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(latitudeMyLocation!!.toDouble(), longitudeMyLocation!!.toDouble()))
-            .zoom(15.5f)
-            .bearing(0f)
-            .tilt(25f)
-            .build()
-        checkReadyThen {
-            changeCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
-                object : GoogleMap.CancelableCallback {
-                    override fun onFinish() {
+        try {
+            if (latitudeMyLocation == null || longitudeMyLocation == null) {
+                return
+            }
+            val cameraPos: CameraPosition = CameraPosition.Builder()
+                .target(LatLng(latitudeMyLocation!!.toDouble(), longitudeMyLocation!!.toDouble()))
+                .zoom(15.5f)
+                .bearing(0f)
+                .tilt(25f)
+                .build()
 
-                    }
 
-                    override fun onCancel() {
 
-                    }
-                })
+
+            checkReadyThen {
+                changeCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
+                    object : GoogleMap.CancelableCallback {
+                        override fun onFinish() {
+
+                        }
+
+                        override fun onCancel() {
+
+                        }
+                    })
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

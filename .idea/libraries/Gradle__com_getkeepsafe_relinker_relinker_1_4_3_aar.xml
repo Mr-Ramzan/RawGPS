@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/efaa286b0d3f9d5fc989770f7649e300/transformed/relinker-1.4.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/efaa286b0d3f9d5fc989770f7649e300/transformed/relinker-1.4.3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/efaa286b0d3f9d5fc989770f7649e300/transformed/relinker-1.4.3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.getkeepsafe.relinker/relinker/1.4.3/b445eff96b37af2f0749df14771465baf1914ccc/relinker-1.4.3-javadoc.jar!/" />

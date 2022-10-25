@@ -40,5 +40,8 @@
     <string name="_32_c">32°C</string>
     <string name="nairobi_city">Nirobi</string>
     <string name="compas_fragment">Compass Fragment</string>
+    <string name="go">Done</string>
+    <string name="done">DONE</string>
+    <string name="save">SAVE</string>
 
 </resources>

@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/home_bg_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <fragment
+        android:id="@+id/google_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-      />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/ivBack"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/round_white_buttton"
         android:clickable="true"
         android:focusable="true"
@@ -35,212 +35,24 @@
         app:tint="@color/black"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-    <LinearLayout
-        android:id="@+id/llSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/input_bg"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivBack"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/search_icon" />
-
-        <EditText
-            android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/transparent"
-            android:fontFamily="@font/roboto"
-            android:hint="@string/search"
-
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/blue"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="@id/ivBack"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llSelect"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_below="@id/llSearch"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivBack"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/ivBack"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="0dp"
-            android:layout_height="58dp"
-            android:layout_margin="4dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/white"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <!--            <androidx.appcompat.widget.SearchView-->
-                <!--                android:id="@+id/simpleSearchView"-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="match_parent"-->
-                <!--                android:iconifiedByDefault="false"-->
-                <!--                android:queryHint="Search Here"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-
-                <EditText
-                    android:id="@+id/searchBox"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    android:hint="@string/search_here"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:imeOptions="actionDone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/search_button"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <ImageButton
-                    android:id="@+id/search_button"
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:background="@color/blue"
-                    android:gravity="center"
-                    android:src="@drawable/search_icon"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="0dp"
-            android:layout_height="58dp"
-            android:layout_margin="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/white"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-            <LinearLayout
-                android:id="@+id/llSelectOnMap"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:gravity="start">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="0dp"
-                    android:src="@drawable/map_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/select_on_map"
-                    android:textSize="14sp" />
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/my_location_parent"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_margin="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/white"
-            android:visibility="gone"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView3">
-
-            <LinearLayout
-                android:id="@+id/llMyLocation"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_weight="1"
-                android:background="?selectableItemBackground"
-                android:gravity="start">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="0dp"
-                    android:src="@drawable/my_location_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/my_location"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
+            android:layout_height="match_parent"
+            android:alpha=".4"
+            android:background="@color/black" />
         <!--        style="@style/SimpleUiTheme"-->
 
         <com.mapbox.search.ui.view.SearchResultsView
@@ -248,38 +60,271 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingTop="22dp"
             android:paddingBottom="22dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/close_results_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/my_location_parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/close_results_btn"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background"
+            android:drawablePadding="2dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:text="Close"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/admob_close_button_white_circle_black_cross"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <FrameLayout
-        android:id="@+id/ads_parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/llSelect"
-        app:layout_constraintStart_toStartOf="@+id/llSelect"
-        app:layout_constraintTop_toBottomOf="@+id/llSelect"
-        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1.0" />
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/input_bg"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintTop_toTopOf="@+id/ivBack">
+
+        <!--            <androidx.appcompat.widget.SearchView-->
+        <!--                android:id="@+id/simpleSearchView"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:iconifiedByDefault="false"-->
+        <!--                android:queryHint="Search Here"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:hint="@string/search_here"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/search_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:src="@drawable/search_icon"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layer_relocate_container"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recenter_location_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_white_buttton"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggle_layer_button"
+            app:layout_constraintVertical_bias="0.78">
+
+            <ImageView
+                android:id="@+id/recenter_button_iv"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/gps_recenter_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toggle_layer_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/round_white_buttton"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/layer_toggle_iv"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/settalite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/ads_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toStartOf="@+id/SelectLocationButton"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/black_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvLatLng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text=""
+                android:textColor="@color/black_text_color"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/SelectLocationButton"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@string/go"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/ads_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

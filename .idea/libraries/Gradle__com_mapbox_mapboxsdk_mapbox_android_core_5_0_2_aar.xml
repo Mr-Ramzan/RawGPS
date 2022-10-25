@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/daa0b576fd3aee05bc613be83f16b5b4/transformed/mapbox-android-core-5.0.2/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/daa0b576fd3aee05bc613be83f16b5b4/transformed/mapbox-android-core-5.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/daa0b576fd3aee05bc613be83f16b5b4/transformed/mapbox-android-core-5.0.2/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.mapboxsdk/mapbox-android-core/5.0.2/f155be89088bb559d03720cc5502d5ea1508978b/mapbox-android-core-5.0.2-javadoc.jar!/" />

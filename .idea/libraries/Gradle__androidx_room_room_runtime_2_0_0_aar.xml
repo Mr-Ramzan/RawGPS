@@ -6,6 +6,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8d3c97054fa762640277310d00cdaa93/transformed/room-runtime-2.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8d3c97054fa762640277310d00cdaa93/transformed/room-runtime-2.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8d3c97054fa762640277310d00cdaa93/transformed/room-runtime-2.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
