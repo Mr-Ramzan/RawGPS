@@ -12,7 +12,7 @@ import com.otl.gps.navigation.map.route.databinding.LayersDialogBinding
 object LayersDialog {
 
     lateinit var  loadingDialog: Dialog
-    fun showMapsLayersDialog(activity: Activity?, map: GoogleMap,togglAngle:()->Unit) {
+    fun showMapsLayersDialog(activity: Activity?, map: GoogleMap,togglAngle:()->Unit,togglTraffic: (traffic:Boolean) -> Unit) {
 
         if(::loadingDialog.isInitialized && loadingDialog.isShowing){
              return
@@ -26,6 +26,7 @@ object LayersDialog {
 
         loadingDialogBinding.trafficToggleButton.setOnClickListener {
             map.isTrafficEnabled = !map.isTrafficEnabled
+            togglTraffic( map.isTrafficEnabled)
             dismissLoading()
         }
         loadingDialogBinding.angleButton.setOnClickListener {

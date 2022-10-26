@@ -396,7 +396,11 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                                                 realmDB?.updateSavedItem(savedPlace)
                                                 binding.placeNameInput.setText("")
                                                 binding.placeNameLayout.visibility = GONE
-                                                Toast.makeText(requireContext(), "Place Saved!", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Place Saved!",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             } else {
                                                 binding.placeNameInput.setText("")
                                                 binding.placeNameInput.requestFocus()
@@ -406,7 +410,11 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                                     } else {
 
                                         realmDB?.updateSavedItem(savedPlace)
-                                        Toast.makeText(requireContext(), "Place Saved!", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Place Saved!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         binding.placeNameInput.setText("")
                                         binding.placeNameLayout.visibility = GONE
 
@@ -416,7 +424,11 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
 
                             } else {
-                                Toast.makeText(requireContext(), "Please enter a valid place name!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Please enter a valid place name!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
 
@@ -531,8 +543,6 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
     var adsReloadTry = 0
 
 
-
-
     //get ad size
     private val adSize: AdSize
         get() {
@@ -645,9 +655,16 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
     private fun setUpLayersControl() {
         binding.layersSelectionButton.setOnClickListener {
-            LayersDialog.showMapsLayersDialog(requireActivity(),map){
+            LayersDialog.showMapsLayersDialog(requireActivity(), map, {
                 toggle2D3D()
-            }
+            }, {
+                if (it)
+                {
+                    binding.trafficIndecator.visibility = View.VISIBLE
+                } else {
+                    binding.trafficIndecator.visibility = View.GONE
+                }
+            })
         }
     }
 

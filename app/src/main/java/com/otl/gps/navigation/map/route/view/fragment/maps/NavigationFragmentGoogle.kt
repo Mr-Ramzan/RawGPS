@@ -834,9 +834,9 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
     private fun setUpLayersControl() {
         binding.layersSelectionButton.setOnClickListener {
-            LayersDialog.showMapsLayersDialog(requireActivity(),map){
+            LayersDialog.showMapsLayersDialog(requireActivity(),map,{
                 toggle2D3D()
-            }
+            },{ })
         }
     }
 
