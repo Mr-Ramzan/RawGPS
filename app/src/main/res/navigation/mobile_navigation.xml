@@ -45,11 +45,11 @@
 <!--        tools:layout="@layout/fragment_weather" />-->
 
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_places"-->
-<!--        android:name="com.abl.gpstracker.navigation.maps.routefinder.app.view.fragments.PlacesFragment"-->
-<!--        android:label="@string/turn_by_turn_fragment"-->
-<!--        tools:layout="@layout/places_fragment" />-->
+    <fragment
+        android:id="@+id/navigation_places"
+        android:name="com.otl.gps.navigation.map.route.view.fragment.places.PlacesSerchFragment"
+        android:label="@string/places_search_fragment"
+        tools:layout="@layout/fragment_places" />
 
 <!--    <fragment-->
 <!--        android:id="@+id/navigation_places_list"-->

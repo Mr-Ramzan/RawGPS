@@ -829,9 +829,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-
     }
+
     private fun setUpLayersControl() {
         binding.layersSelectionButton.setOnClickListener {
             LayersDialog.showMapsLayersDialog(requireActivity(),map,{

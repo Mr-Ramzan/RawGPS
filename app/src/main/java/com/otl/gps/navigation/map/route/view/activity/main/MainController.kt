@@ -205,6 +205,7 @@ class MainController : AppCompatActivity() {
 //                hideShowCancelSubButton()
 //            }
 
+
             NAVIGATE_LOCATION -> {
                 navigateLocation()
 
@@ -215,7 +216,7 @@ class MainController : AppCompatActivity() {
                 navigateSatellite()
             }
             NAVIGATE_EXPLORE_PLACES -> {
-//                    navigateExplorePlaces()
+                    navigateExplorePlaces()
 
             }
 
@@ -234,12 +235,13 @@ class MainController : AppCompatActivity() {
             }
             NAVIGATE_PLACES -> {
 
-//                navigatePlaces(eve.arg1)
+                navigatePlaces(eve.arg1)
               showComingSoon()
 
             }
+
             NAVIGATE_PLACES_LIST -> {
-//                navigatePlacesList()
+                navigatePlacesList()
             }
 
             NAVIGATE_COMPASS -> {
@@ -364,7 +366,7 @@ class MainController : AppCompatActivity() {
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
             val bundle = bundleOf("poi" to poi, "title" to "")
-            //navController.navigate(R.id.navigation_places, bundle, navBuilder.build())
+            navController.navigate(R.id.navigation_places, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -377,7 +379,7 @@ class MainController : AppCompatActivity() {
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
             val bundle = bundleOf("title" to "")
-           // navController.navigate(R.id.navigation_explore_places, bundle, navBuilder.build())
+            navController.navigate(R.id.navigation_places, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -435,7 +437,7 @@ class MainController : AppCompatActivity() {
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
             val bundle = bundleOf("style" to "Background", "title" to "")
-            //navController.navigate(R.id.navigation_places_list, bundle, navBuilder.build())
+//            navController.navigate(R.id.navigation_places_list, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -487,7 +489,6 @@ class MainController : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
 
     /**
      * More Apps navigate to Developer page On Playstore

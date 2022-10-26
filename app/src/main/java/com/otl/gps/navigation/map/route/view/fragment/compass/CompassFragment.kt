@@ -13,7 +13,9 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.FragmentCompassBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 
@@ -40,6 +42,18 @@ class CompassFragment : Fragment(), SensorEventListener {
         return binding!!.root
     }
 
+
+    private fun setupBg() {
+
+        try {
+            Glide.with(this).load(R.drawable.home_bg).into(binding!!.bgImage)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        adsUtill = MyAdsUtill(requireActivity())
@@ -47,6 +61,7 @@ class CompassFragment : Fragment(), SensorEventListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBg()
         loadBanner()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
         setListeners()

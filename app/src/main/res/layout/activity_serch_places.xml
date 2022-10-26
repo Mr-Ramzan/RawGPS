@@ -104,7 +104,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -114,16 +113,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivBack"
         app:layout_constraintTop_toTopOf="@+id/ivBack">
-
-        <!--            <androidx.appcompat.widget.SearchView-->
-        <!--                android:id="@+id/simpleSearchView"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:iconifiedByDefault="false"-->
-        <!--                android:queryHint="Search Here"-->
-        <!--                app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                app:layout_constraintStart_toStartOf="parent"-->
-        <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
 
         <EditText

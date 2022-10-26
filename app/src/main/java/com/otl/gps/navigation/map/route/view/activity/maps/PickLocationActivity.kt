@@ -65,8 +65,8 @@ GoogleMap.OnMyLocationClickListener {
     private var isMapLoaded = false
     private var marker: Marker? = null
     private lateinit var networkLocationListener: LocationListener
-    private var latitude: String? = null
-    private var longitude: String? = null
+    private var latitude: String = ""
+    private var longitude: String = ""
     private lateinit var geoCoderAddress: GeoCoderAddress
     private lateinit var map: GoogleMap
     private var mapStyle: String = "default"

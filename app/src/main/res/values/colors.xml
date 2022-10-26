@@ -19,6 +19,7 @@
     <color name="cloud_sunny_wind">#6efae6</color>
     <color name="cloud_sunny_wind1">#70f3e9</color>
     <color name="cloud_sunny_wind2">#72efed</color>
+    <color name="dialog_bg">#44000000</color>
 
     <color name="green">#28E0AE</color>
     <color name="green1">#13C696</color>

@@ -312,20 +312,6 @@
         app:tint="@color/black_text_color" />
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/layout_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/adsParent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <include
-            android:id="@+id/includeBottomSheet"
-            layout="@layout/bottomsheet_routefinder" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/start_navigation_button"
         android:layout_width="@dimen/_110sdp"

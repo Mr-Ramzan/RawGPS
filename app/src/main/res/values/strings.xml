@@ -43,5 +43,6 @@
     <string name="go">Done</string>
     <string name="done">DONE</string>
     <string name="save">SAVE</string>
+    <string name="places_search_fragment">Places Fragment</string>
 
 </resources>

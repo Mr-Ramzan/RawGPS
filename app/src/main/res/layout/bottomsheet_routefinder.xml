@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="0dp"
+    app:behavior_peekHeight="@dimen/_90sdp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
 
@@ -25,37 +25,27 @@
             android:layout_marginTop="10dp"
             android:background="@color/browser_actions_bg_grey" />
 
+        <TextView
+            android:id="@+id/tvLengthDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp">
 
-            <TextView
-                android:id="@+id/tvLengthDuration"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/blue"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/blue" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRouteSteps"
+            android:id="@+id/places_rv"
+            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

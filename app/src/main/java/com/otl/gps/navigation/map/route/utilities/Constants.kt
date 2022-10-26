@@ -1,5 +1,6 @@
 package com.otl.gps.navigation.map.route.utilities
 
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.model.PlacesItem
 
 object Constants {
@@ -108,47 +109,34 @@ object Constants {
         if(!Constants::nearbyPlaces.isInitialized)
         {
             nearbyPlaces = ArrayList()
-
         }else{
             nearbyPlaces.clear()
         }
 
-//        nearbyPlaces.add(PlacesItem(1 , R.drawable.train_stations,R.drawable.bus_train_marker ,"Train Station","Station") , )
-//        nearbyPlaces.add(PlacesItem(2 , R.drawable.airplanes,R.drawable.airports_marker ,"Airport" ,"Airport"))
-//        nearbyPlaces.add(PlacesItem(3 , R.drawable.bus,R.drawable.bus_train_marker ,"Bus Station" ,"Bus station"))
-//        nearbyPlaces.add(PlacesItem(4 , R.drawable.bank,R.drawable.historic_buildings_marker ,"Bank" ,"Bank"))
-//        nearbyPlaces.add(PlacesItem(5 , R.drawable.atm,R.drawable.historic_buildings_marker ,"ATM" ,"ATM"))
-////      nearbyPlaces.add(PlacesItem(6 , R.drawable.airplanes,"Real Estate Agency" ,""))
-//        nearbyPlaces.add(PlacesItem(7 , R.drawable.temple,R.drawable.prayer_places ,"Temple" ,"Church"))
-//        nearbyPlaces.add(PlacesItem(8 , R.drawable.mosque,R.drawable.prayer_places ,"Mosque" ,"Mosque"))
-//        nearbyPlaces.add(PlacesItem(9 , R.drawable.doctor,R.drawable.general_marker ,"Doctor" ,"Doctors"))
-//        nearbyPlaces.add(PlacesItem(10, R.drawable.vet,R.drawable.general_marker ,"Veterinary Care","Veterinary surgery"))
-//        nearbyPlaces.add(PlacesItem(11, R.drawable.dentist,R.drawable.general_marker ,"Dentist","Dentist"))
-//        nearbyPlaces.add(PlacesItem(12, R.drawable.pharmecy,R.drawable.shops_marker ,"Pharmacy","Pharmacy"))
-//        nearbyPlaces.add(PlacesItem(13, R.drawable.fire_station,R.drawable.general_buildings_marker ,"Fire Station","Fire station"))
-//        nearbyPlaces.add(PlacesItem(14, R.drawable.fuel,R.drawable.general_marker ,"Gas Station","Fuel"))
-//        nearbyPlaces.add(PlacesItem(15, R.drawable.carwash,R.drawable.general_marker ,"Car Wash","Car wash"))
-//        nearbyPlaces.add(PlacesItem(16, R.drawable.mechanic,R.drawable.bus_train_marker ,"Car Repair","Car repair"))
-//        nearbyPlaces.add(PlacesItem(17, R.drawable.restaurant,R.drawable.bar_cafe_marker ,"Restaurant","Restaurant"))
-//        nearbyPlaces.add(PlacesItem(18, R.drawable.cafe,R.drawable.bar_cafe_marker ,"Cafe","Cafe"))
-//        nearbyPlaces.add(PlacesItem(19, R.drawable.shopping_mall,R.drawable.shops_marker ,"Shopping Mall","Mall"))
-//        nearbyPlaces.add(PlacesItem(20, R.drawable.superstore,R.drawable.shops_marker ,"Departmental Store","Supermarket"))
-//        nearbyPlaces.add(PlacesItem(21, R.drawable.jewlary_shop,R.drawable.shops_marker ,"Jewelry Store","Jewelry shop"))
-//        nearbyPlaces.add(PlacesItem(22, R.drawable.night_club,R.drawable.sports_clubs_marker ,"Night Club","Night club"))
-//        nearbyPlaces.add(PlacesItem(23, R.drawable.casino,R.drawable.historic_buildings_marker ,"Casino","Casino"))
-//        nearbyPlaces.add(PlacesItem(24, R.drawable.salon,R.drawable.general_marker ,"Beauty Salon",""))
-//        nearbyPlaces.add(PlacesItem(25, R.drawable.bar,R.drawable.bar_cafe_marker ,"Bar","Bar"))
-//        nearbyPlaces.add(PlacesItem(26, R.drawable.zoo,R.drawable.general_marker ,"Zoo","Zoo"))
-//        nearbyPlaces.add(PlacesItem(28, R.drawable.theater,R.drawable.general_buildings_marker ,"Movie Theater","Cinema"))
-//        nearbyPlaces.add(PlacesItem(29, R.drawable.school,R.drawable.general_buildings_marker ,"School","School"))
-//        nearbyPlaces.add(PlacesItem(31, R.drawable.bookshop,R.drawable.shops_marker ,"Book Store","Book shop"))
-//        nearbyPlaces.add(PlacesItem(32, R.drawable.library,R.drawable.general_buildings_marker ,"Library","Library"))
-//        nearbyPlaces.add(PlacesItem(33, R.drawable.stadium,R.drawable.sports_marker ,"Stadium","Stadium"))
-//        nearbyPlaces.add(PlacesItem(34, R.drawable.park,R.drawable.parks_nature_marker ,"Park","Park"))
-////            nearbyPlaces.add(PlacesItem(35, R.drawable.airplanes,"Aquarium",""))
-//        nearbyPlaces.add(PlacesItem(36, R.drawable.camping_site,R.drawable.parks_nature_marker ,"Campground","Camp site"))
-//        nearbyPlaces.add(PlacesItem(37, R.drawable.town_hall,R.drawable.historic_buildings_marker ,"City Hall","Town Hall"))
-//        nearbyPlaces.add(PlacesItem(38, R.drawable.museum,R.drawable.historic_buildings_marker ,"Museum","Museum"))
+        nearbyPlaces.add(PlacesItem(1 , R.drawable.train_atations,0 ,"Train Station","Station") , )
+        nearbyPlaces.add(PlacesItem(2 , R.drawable.airport,0,"Airport" ,"Airport"))
+        nearbyPlaces.add(PlacesItem(3 , R.drawable.bus_stations,0 ,"Bus Station" ,"Bus station"))
+        nearbyPlaces.add(PlacesItem(4 , R.drawable.banks,0 ,"Bank" ,"Bank"))
+        nearbyPlaces.add(PlacesItem(5 , R.drawable.atms,0 ,"ATM" ,"ATM"))
+//        nearbyPlaces.add(PlacesItem(7 , R.drawable.temple,0 ,"Temple" ,"Church"))
+        nearbyPlaces.add(PlacesItem(8 , R.drawable.mosques,0 ,"Mosque" ,"Mosque"))
+        nearbyPlaces.add(PlacesItem(9 , R.drawable.doctors,0 ,"Doctor" ,"Doctors"))
+        nearbyPlaces.add(PlacesItem(12, R.drawable.pharma,0 ,"Pharmacy","Pharmacy"))
+        nearbyPlaces.add(PlacesItem(13, R.drawable.firestation,0 ,"Fire Station","Fire station"))
+        nearbyPlaces.add(PlacesItem(14, R.drawable.fuel_stations,0 ,"Gas Station","Fuel"))
+        nearbyPlaces.add(PlacesItem(17, R.drawable.restaurant,0,"Restaurant","Restaurant"))
+        nearbyPlaces.add(PlacesItem(18, R.drawable.cafe,0 ,"Cafe","Cafe"))
+        nearbyPlaces.add(PlacesItem(19, R.drawable.shopping_mall,0 ,"Shopping Mall","Mall"))
+        nearbyPlaces.add(PlacesItem(22, R.drawable.clubs,0 ,"Night Club","Night club"))
+        nearbyPlaces.add(PlacesItem(24, R.drawable.salon,0,"Beauty Salon",""))
+        nearbyPlaces.add(PlacesItem(25, R.drawable.bar,0 ,"Bar","Bar"))
+        nearbyPlaces.add(PlacesItem(26, R.drawable.zoo,0 ,"Zoo","Zoo"))
+        nearbyPlaces.add(PlacesItem(28, R.drawable.movies,0 ,"Movie Theater","Cinema"))
+        nearbyPlaces.add(PlacesItem(29, R.drawable.school,0 ,"School","School"))
+        nearbyPlaces.add(PlacesItem(32, R.drawable.library,0 ,"Library","Library"))
+        nearbyPlaces.add(PlacesItem(33, R.drawable.stadium,0 ,"Stadium","Stadium"))
+        nearbyPlaces.add(PlacesItem(34, R.drawable.park,0 ,"Park","Park"))
+        nearbyPlaces.add(PlacesItem(38, R.drawable.museum,0,"Museum","Museum"))
         return nearbyPlaces
     }
 
