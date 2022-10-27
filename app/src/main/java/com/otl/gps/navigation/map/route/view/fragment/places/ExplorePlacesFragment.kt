@@ -1,4 +1,4 @@
-package com.otl.gps.navigation.map.route.view.fragment.travelTools
+package com.otl.gps.navigation.map.route.view.fragment.places
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import application.RawGpsApp
 
 import com.google.android.gms.ads.AdSize
 import com.otl.gps.navigation.map.route.R
+import com.otl.gps.navigation.map.route.databinding.ExplorePlacesBinding
 import com.otl.gps.navigation.map.route.databinding.TravelToolsBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
@@ -20,9 +21,9 @@ import com.otl.gps.navigation.map.route.utilities.Constants
 import org.greenrobot.eventbus.EventBus
 
 
-class TravelToolsFragment : Fragment() {
+class ExplorePlacesFragment : Fragment() {
 
-    private lateinit var binding: TravelToolsBinding
+    private lateinit var binding: ExplorePlacesBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class TravelToolsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = TravelToolsBinding.inflate(layoutInflater)
+        binding = ExplorePlacesBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -65,14 +66,14 @@ class TravelToolsFragment : Fragment() {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
 
-        binding.weather.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
+        binding.nearbyPlacesButton.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_PLACES_LIST))
         }
 
 
 
-        binding.qiblaCompass.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
+        binding.savedPlacesButton.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SAVED_PLACES))
         }
     }
 

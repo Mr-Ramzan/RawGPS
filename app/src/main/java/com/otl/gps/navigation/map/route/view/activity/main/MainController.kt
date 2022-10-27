@@ -20,12 +20,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -49,24 +47,21 @@ import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_MORE_APPS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CLOCK
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_DRIVING_MODE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SAVED_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAFFIC
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_WEATHER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAV_BACK
 import com.otl.gps.navigation.map.route.utilities.Constants.OPEN_DRAWER
-import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
 import com.otl.gps.navigation.map.route.utilities.Helper
 import com.otl.gps.navigation.map.route.utilities.PopupUtil
-import com.otl.gps.navigation.map.route.view.activity.weather.WeatherActivity
+import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.imaginativeworld.oopsnointernet.callbacks.ConnectionCallback
@@ -201,13 +196,9 @@ class MainController : AppCompatActivity() {
                 gotoPrivacyPolicy()
             }
 
-//            UPDATE_CANCEL_BUTTON -> {
-//                hideShowCancelSubButton()
-//            }
-
 
             NAVIGATE_LOCATION -> {
-                navigateLocation()
+                navigateMyLocation()
 
             }
 
@@ -216,7 +207,7 @@ class MainController : AppCompatActivity() {
                 navigateSatellite()
             }
             NAVIGATE_EXPLORE_PLACES -> {
-                    navigateExplorePlaces()
+                navigateExplorePlaces()
 
             }
 
@@ -227,42 +218,27 @@ class MainController : AppCompatActivity() {
             }
 
             NAVIGATE_TRAFFIC -> {
-
-//                showInterAds {
                 navigateTraffic()
-//                }
-
-            }
-            NAVIGATE_PLACES -> {
-
-                navigatePlaces(eve.arg1)
-              showComingSoon()
-
             }
 
             NAVIGATE_PLACES_LIST -> {
-                navigatePlacesList()
+                navigatePlaces()
             }
 
             NAVIGATE_COMPASS -> {
-//                showInterAds {
-                    navigateCompass()
-//                }
+                navigateCompass()
+
             }
 
             NAVIGATE_WEATHER -> {
-
-//                showInterAds {
-                    navigateWeather()
-//                }
+                navigateWeather()
+            }
+            Constants.NAVIGATE_QIBLA_COMPASS -> {
+                navigateQiblaCompass()
 
             }
-
-
-            NAVIGATE_CLOCK -> {
-                showInterAds {
-//                    navigateClock()
-                }
+            NAVIGATE_SAVED_PLACES -> {
+                navigateSavedPlaces()
             }
 
             NAV_BACK -> {
@@ -271,7 +247,6 @@ class MainController : AppCompatActivity() {
             }
             ACTION_REMMOVE_ADS -> {
 
-//                openPremiumPopup()
 
             }
 
@@ -288,6 +263,37 @@ class MainController : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+    private fun navigateSavedPlaces() {
+        try {
+            val navBuilder = NavOptions.Builder()
+            navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(
+                R.anim.slide_out_left)
+                .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(
+                    R.anim.slide_out_right)
+            val bundle = bundleOf("title" to "")
+            navController.navigate(R.id.navigation_saved_places, bundle, navBuilder.build())
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun navigateQiblaCompass() {
+        try {
+            val navBuilder = NavOptions.Builder()
+            navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(
+                R.anim.slide_out_left
+            )
+                .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(
+                    R.anim.slide_out_right
+                )
+            val bundle = bundleOf("style" to "")
+            navController.navigate(R.id.navigation_qibla_compass, bundle, navBuilder.build())
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
 
     private fun navigateRoute() {
 
@@ -306,17 +312,10 @@ class MainController : AppCompatActivity() {
 
     }
 
-    private fun navigateDrivingMode() {
-        try {
-
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
 
 
 
-    private fun navigateLocation() {
+    private fun navigateMyLocation() {
 
         try {
             val navBuilder = NavOptions.Builder()
@@ -359,14 +358,14 @@ class MainController : AppCompatActivity() {
         }
     }
 
-    private fun navigatePlaces(poi: String) {
+    private fun navigatePlaces() {
 
         try {
             val navBuilder = NavOptions.Builder()
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
-            val bundle = bundleOf("poi" to poi, "title" to "")
-            navController.navigate(R.id.navigation_places, bundle, navBuilder.build())
+            val bundle = bundleOf("poi" to "", "title" to "")
+            navController.navigate(R.id.navigation_places_list, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -379,7 +378,7 @@ class MainController : AppCompatActivity() {
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
             val bundle = bundleOf("title" to "")
-            navController.navigate(R.id.navigation_places, bundle, navBuilder.build())
+            navController.navigate(R.id.navigation_explore_places, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -412,7 +411,7 @@ class MainController : AppCompatActivity() {
 //            val bundle = bundleOf(
 //                "style" to "",
 //            )
-          //  navController.navigate(R.id.navigation_weather, bundle, navBuilder.build())
+            //  navController.navigate(R.id.navigation_weather, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -430,18 +429,6 @@ class MainController : AppCompatActivity() {
         }
     }
 
-    private fun navigatePlacesList() {
-
-        try {
-            val navBuilder = NavOptions.Builder()
-            navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
-                .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
-            val bundle = bundleOf("style" to "Background", "title" to "")
-//            navController.navigate(R.id.navigation_places_list, bundle, navBuilder.build())
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
 
     private fun navigateClock() {
         try {
@@ -450,13 +437,12 @@ class MainController : AppCompatActivity() {
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
             val bundle = bundleOf("style" to "Background", "title" to "")
-           // navController.navigate(R.id.navigation_clock, bundle, navBuilder.build())
+            // navController.navigate(R.id.navigation_clock, bundle, navBuilder.build())
 
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
     }
-
 
 
     /**
@@ -503,18 +489,12 @@ class MainController : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-//        if (navController.currentDestination?.id == R.id.navigation_places_list
-//            || navController.currentDestination?.id == R.id.navigation_travel_tool
-//        ) {
-//            navController.navigateUp()
-//
-//        }
-//        else  if (navController.currentDestination?.id != R.id.navigation_home_frag) {
-//
-//            showInterAds {
-//                navController.navigateUp()
-//            }
-//        }  else {
+     if (navController.currentDestination?.id != R.id.nav_home) {
+
+            showInterAds {
+                navController.navigateUp()
+            }
+        }  else {
         PopupUtil.showDeleteDialog(
             this,
             "Exit App",
@@ -525,8 +505,8 @@ class MainController : AppCompatActivity() {
                 super.onBackPressed()
             }
         }
-//        }
 
+    }
     }
 
     private fun showComingSoon(msg: String = "Coming Soon!") {

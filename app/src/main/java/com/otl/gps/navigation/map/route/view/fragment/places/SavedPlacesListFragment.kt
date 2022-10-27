@@ -3,74 +3,70 @@ package com.otl.gps.navigation.map.route.view.fragment.places
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.location.Location
-import android.location.LocationListener
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import application.RawGpsApp
-import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
-import com.abl.gpstracker.navigation.maps.routefinder.app.view.maps.PlacesViewModel
+import application.RawGpsApp.Companion.realmDB
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.*
+import com.google.gson.Gson
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import com.otl.gps.navigation.map.route.R
-import com.otl.gps.navigation.map.route.adapters.SearchPlacesAdapter
-import com.otl.gps.navigation.map.route.databinding.ActivitySerchPlacesBinding
-import com.otl.gps.navigation.map.route.databinding.FragmentPlacesBinding
+import com.otl.gps.navigation.map.route.adapters.SavedPlacesAdapter
+import com.otl.gps.navigation.map.route.databinding.FragmentSavedPlacesBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
-import com.otl.gps.navigation.map.route.interfaces.PlacesAdapterListener
 import com.otl.gps.navigation.map.route.model.NavEvent
+import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
-import com.otl.gps.navigation.map.route.utilities.Constants.preparePlacesList
-import com.otl.gps.navigation.map.route.utilities.DialogUtils
 import org.greenrobot.eventbus.EventBus
+import java.lang.Exception
 import java.text.DateFormat
 import java.util.*
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PlacesSerchFragment.newInstance] factory method to
+ * Use the [SavedPlacesListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+class SavedPlacesListFragment : Fragment() {
 
-class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
-    GoogleMap.OnMyLocationButtonClickListener,
-    GoogleMap.OnMyLocationClickListener {
+    private lateinit var binding: FragmentSavedPlacesBinding
+    var canShowNativeAd = false
+    var adsReloadTry = 0
 
-    private lateinit var binding: FragmentPlacesBinding
-    private lateinit var map: GoogleMap
-    private var mapStyle: String = "default"
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    private var isMapLoaded = false
-    private var latitude: String = ""
-    private var longitude: String = ""
-    private var TAG = "SelectLocationActivity"
+    //    private lateinit var adsUtill: MyAdsUtill
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        adsUtill = MyAdsUtill(requireActivity())
 
-
+    }
 
 
     override fun onCreateView(
@@ -80,21 +76,22 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
     ): View {
 
         // Inflate the layout for this fragment
-        binding = FragmentPlacesBinding.inflate(layoutInflater)
+        binding = FragmentSavedPlacesBinding.inflate(layoutInflater)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadMap()
+
+        //load Native Ads once
+//        loadNativeBanner()
         //Loading Banner Ads
-        //loadBanner()
-
-
+        loadBanner()
         loadInter()
         setListeners()
         setupRv()
+
 
         ////////////////////////////////////////////////////////////////////////////
         mRequestingLocationUpdates = false
@@ -132,44 +129,50 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
 
     private fun setListeners() {
 
-        binding.ivBack.setOnClickListener {
+        binding.homeBgView.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
-        binding.searchButton.setOnClickListener {
 
-            if (binding.searchBox.text.toString().isNotEmpty()) {
-
-                startMap( binding.searchBox.text.toString())
-
-            } else {
-                Toast.makeText(requireContext(), "No search terms found", Toast.LENGTH_SHORT).show()
-                binding.searchBox.requestFocus()
-
-            }
+        binding.backButton.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
 
     }
 
 
-    public fun setupRv(){
-        binding.bottomSheet.placesRv.apply {
-            layoutManager = GridLayoutManager(requireContext(), 5)
-            adapter = SearchPlacesAdapter(preparePlacesList(),requireContext(),object:
-                PlacesAdapterListener {
-                override fun clickItem(poiName: String) {
-                    startMap(poiName)
-                }
-            })
+    public fun setupRv() {
+        fetchSavedPlaces()
+        binding.placesButtonRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = SavedPlacesAdapter(savedPlaces, requireContext(), {
+                Constants.savedPlace = it
+                EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_PREVIEW_SAVED_PLACES))
+            },
+                { placesToDelete ->
+
+                    realmDB?.deletePlace(placesToDelete) {
+
+                        if (it) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Places deleted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            savedPlaces.remove(placesToDelete)
+                            adapter?.notifyDataSetChanged()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Places deletion failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                })
         }
     }
 
 
-
-    private fun loadMap() {
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
-    }
     override fun onDestroy() {
         super.onDestroy()
     }
@@ -186,8 +189,12 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             showInterAds {
                 startActivity(mapIntent)
             }
-        }else{
-           Toast.makeText(requireContext(),"Cannot Perform This Action In Your Region",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Cannot Perform This Action In Your Region",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
     }
@@ -199,8 +206,8 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
 
 
     private fun loadInter() {
-        if ((requireActivity().application as RawGpsApp).appContainer.myAdsUtill.mInterstitialAd == null) {
-            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.loadInterestitial(
+        if ((requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.mInterstitialAd == null) {
+            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.loadInterestitial(
                 requireActivity()
             ) {
                 canShowInter = it
@@ -212,7 +219,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showInterestitial(
+            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.showInterestitial(
                 requireActivity()
             ) {
                 shown(it)
@@ -222,120 +229,35 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         }
     }
 
+
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    //get ad size
+    private val adSize: AdSize
+        get() {
+            val display = requireActivity().windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        try {
-            map = googleMap ?: return
-            googleMap.setOnMyLocationClickListener(this)
-            enableMyLocation()
-            map.uiSettings.isCompassEnabled = false
-            map.uiSettings.isMyLocationButtonEnabled = false
-            if (mapStyle == "Satellite") {
-                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+            val density = outMetrics.density
+
+            var adWidthPixels = binding.adsParent.width.toFloat()
+            if (adWidthPixels == 0f) {
+                adWidthPixels = outMetrics.widthPixels.toFloat()
             }
 
-            if (mapStyle == "Traffic") {
-                map.isTrafficEnabled = true
-            }
-
-            binding.recenterLocationButton.setOnClickListener {
-                recenterCamera()
-            }
-            isMapLoaded = true
-            recenterCamera()
-        } catch (e: Exception) {
-            e.printStackTrace()
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+                requireContext(),
+                adWidth
+            )
         }
-        DialogUtils.dismissLoading()
-
-
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    fun recenterCamera() {
-        val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(mCurrentLocation?.latitude!!.toDouble(), mCurrentLocation?.longitude!!.toDouble()))
-            .zoom(15.5f)
-            .bearing(0f)
-            .tilt(25f)
-            .build()
-        checkReadyThen {
-            changeCamera(
-                CameraUpdateFactory.newCameraPosition(cameraPos),
-                object : GoogleMap.CancelableCallback {
-                    override fun onFinish() {
-
-
-                    }
-
-                    override fun onCancel() {
-
-                    }
-                })
-        }
-        DialogUtils.dismissLoading()
-
-    }
-
-
-    // [START_EXCLUDE silent]
-    /**
-     * When the map is not ready the CameraUpdateFactory cannot be used. This should be used to wrap
-     * all entry points that call methods on the Google Maps API.
-     *
-     * @param stuffToDo the code to be executed if the map is initialised
-     */
-    private fun checkReadyThen(stuffToDo: () -> Unit) {
-        if (!::map.isInitialized) {
-//            Toast.makeText(
-//                this@LocationFromGoogleMapActivity,
-//                R.string.map_not_ready,
-//                Toast.LENGTH_SHORT
-//            ).show()
-
-        } else {
-            stuffToDo()
-        }
-    }
-
-
-    /**
-     * Change the camera position by moving or animating the camera depending on the state of the
-     * animate toggle button.
-     */
-    private fun changeCamera(update: CameraUpdate, callback: GoogleMap.CancelableCallback? = null) {
-        // The duration must be strictly positive so we make it at least 1.
-        map.animateCamera(update, 1, callback)
-    }
-    /**
-     * Enables the My Location layer if the fine location permission has been granted.
-     */
-    @SuppressLint("MissingPermission")
-    private fun enableMyLocation() {
-
-        if (!::map.isInitialized) return
-        // [START maps_check_location_permission]
-        map.isMyLocationEnabled = true
-        // [END maps_check_location_permission]
-
-    }
-
-    override fun onMyLocationButtonClick(): Boolean {
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        return false
-    }
-
-    override fun onMyLocationClick(location: Location) {
-
-    }
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
             requireActivity(),
             binding.adsParent,
             AdSize.LARGE_BANNER,
@@ -347,8 +269,9 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         )
     }
 
-    private fun hideShowInappsButton(){
-        if ((requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+    private fun hideShowInappsButton() {
+        if ((requireActivity().application as RawGpsApp).appContainer!!. prefs!!.areAdsRemoved()!!) {
+            binding.placesButtonRv.visibility = View.GONE
             EventBus.getDefault().post(NavEvent(UPDATE_CANCEL_BUTTON))
 
         }
@@ -388,6 +311,15 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * Represents a geographical location.
      */
     private var mCurrentLocation: Location? = null
+
+    private val mLastUpdateTimeTextView: TextView? = null
+    private val mLatitudeTextView: TextView? = null
+    private val mLongitudeTextView: TextView? = null
+
+    // Labels.
+    private val mLatitudeLabel: String? = null
+    private val mLongitudeLabel: String? = null
+    private val mLastUpdateTimeLabel: String? = null
 
     /**
      * Tracks the status of the location updates request. Value changes when the user presses the
@@ -432,6 +364,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             if (savedInstanceState.keySet().contains(KEY_LAST_UPDATED_TIME_STRING)) {
                 mLastUpdateTime = savedInstanceState.getString(KEY_LAST_UPDATED_TIME_STRING)
             }
+            updateUI()
         }
     }
 
@@ -475,8 +408,6 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                 super.onLocationResult(locationResult)
                 mCurrentLocation = locationResult.lastLocation
                 mLastUpdateTime = DateFormat.getTimeInstance().format(Date())
-                recenterCamera()
-                stopLocationUpdates()
             }
         }
     }
@@ -492,14 +423,18 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         mLocationSettingsRequest = builder.build()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CHECK_SETTINGS -> when (resultCode) {
-                Activity.RESULT_OK -> Log.i(TAG, "User agreed to make required location settings changes.")
-                Activity.RESULT_CANCELED -> { Log.i(TAG, "User chose not to make required location settings changes.")
+                Activity.RESULT_OK -> Log.i(
+                    TAG,
+                    "User agreed to make required location settings changes."
+                )
+                Activity.RESULT_CANCELED -> {
+                    Log.i(TAG, "User chose not to make required location settings changes.")
                     mRequestingLocationUpdates = false
+                    updateUI()
                 }
             }
         }
@@ -509,8 +444,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * Handles the Start Updates button and requests start of location updates. Does nothing if
      * updates have already been requested.
      */
-    fun startUpdatesButtonHandler(view: View?)
-    {
+    fun startUpdatesButtonHandler(view: View?) {
         if (!mRequestingLocationUpdates!!) {
             mRequestingLocationUpdates = true
             startLocationUpdates()
@@ -532,7 +466,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * runtime permission has been granted.
      */
     @SuppressLint("MissingPermission")
-    private fun startLocationUpdates(){
+    private fun startLocationUpdates() {
         // Begin by checking if the device has the necessary location settings.
         mSettingsClient!!.checkLocationSettings(mLocationSettingsRequest!!)
             .addOnSuccessListener(requireActivity()) {
@@ -541,6 +475,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                     mLocationRequest!!,
                     mLocationCallback!!, Looper.myLooper()!!
                 )
+                updateUI()
             }
             .addOnFailureListener(requireActivity()) { e ->
                 val statusCode = (e as ApiException).statusCode
@@ -567,12 +502,17 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                         mRequestingLocationUpdates = false
                     }
                 }
+                updateUI()
             }
     }
 
-
-
-
+    /**
+     * Updates all UI fields.
+     */
+    private fun updateUI() {
+//        setButtonsEnabledState();
+//        updateLocationUI();
+    }
 
 
     /**
@@ -602,6 +542,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
 //        } else if (!checkPermissions()) {
 //            requestPermissions();
 //        }
+        updateUI()
     }
 
     override fun onPause() {
@@ -653,15 +594,32 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
     }
 
 
+    private lateinit var savedPlaces: ArrayList<SavedPlace>
+    private fun fetchSavedPlaces() {
+        savedPlaces = ArrayList<SavedPlace>()
+        try {
+            var results = RawGpsApp.realmDB?.getSavedPlaces()
+            if (!results.isNullOrEmpty()) {
+                savedPlaces.addAll(results!!)
+            } else {
+                Toast.makeText(requireContext(), "No saved places found!", Toast.LENGTH_SHORT)
+                    .show()
+            }
 
-
-
-    val locationForGfResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            // Handle the Intent
+        } catch (E: Exception) {
+            E.printStackTrace()
         }
+
     }
+
+
+    val locationForGfResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                // Handle the Intent
+            }
+        }
 
 
 }

@@ -1,110 +1,87 @@
-package com.otl.gps.navigation.map.route.view.fragment.places
+package com.otl.gps.navigation.map.route.view.fragment.travelTools
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.location.Location
-import android.location.LocationListener
-import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import application.RawGpsApp
-import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
-import com.abl.gpstracker.navigation.maps.routefinder.app.view.maps.PlacesViewModel
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import com.otl.gps.navigation.map.route.R
-import com.otl.gps.navigation.map.route.adapters.SearchPlacesAdapter
-import com.otl.gps.navigation.map.route.databinding.ActivitySerchPlacesBinding
-import com.otl.gps.navigation.map.route.databinding.FragmentPlacesBinding
+import com.otl.gps.navigation.map.route.databinding.FragmentQiblaCompassBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
-import com.otl.gps.navigation.map.route.interfaces.PlacesAdapterListener
-import com.otl.gps.navigation.map.route.model.NavEvent
-import com.otl.gps.navigation.map.route.utilities.Constants
-import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
-import com.otl.gps.navigation.map.route.utilities.Constants.preparePlacesList
-import com.otl.gps.navigation.map.route.utilities.DialogUtils
-import org.greenrobot.eventbus.EventBus
+import com.otl.gps.navigation.map.route.view.fragment.travelTools.qiblacompass.CompassQibla
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.util.*
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PlacesSerchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-
-class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
-    GoogleMap.OnMyLocationButtonClickListener,
-    GoogleMap.OnMyLocationClickListener {
-
-    private lateinit var binding: FragmentPlacesBinding
-    private lateinit var map: GoogleMap
-    private var mapStyle: String = "default"
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    private var isMapLoaded = false
-    private var latitude: String = ""
-    private var longitude: String = ""
-    private var TAG = "SelectLocationActivity"
+class QiblaCompassFragment : Fragment(){
 
 
 
+    /**
+     * Called when the activity is first created.
+     */
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    //private var adsUtill: MyAdsUtill? = null
+    private var currentDegree = 0f
+    private var sensorManager: SensorManager? = null
+    private lateinit var binding: FragmentQiblaCompassBinding
+    private var currentCompassDegree = 0f
+    private var currentNeedleDegree = 0f
 
-        // Inflate the layout for this fragment
-        binding = FragmentPlacesBinding.inflate(layoutInflater)
-        return binding.root
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
+    {
+        binding = FragmentQiblaCompassBinding.inflate(inflater, container, false)
+        return binding!!.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadMap()
-        //Loading Banner Ads
-        //loadBanner()
-
-
-        loadInter()
-        setListeners()
-        setupRv()
+        loadBanner()
+        sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
 
         ////////////////////////////////////////////////////////////////////////////
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""
-
         // Update values using data stored in the Bundle.
         updateValuesFromBundle(savedInstanceState)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         mSettingsClient = LocationServices.getSettingsClient(requireActivity())
-
         // Kick off the process of building the LocationCallback, LocationRequest, and
         // LocationSettingsRequest objects.
         createLocationCallback()
@@ -128,236 +105,106 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             }).check()
 
 
+        setListeners()
     }
 
-    private fun setListeners() {
-
-        binding.ivBack.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
-        }
-        binding.searchButton.setOnClickListener {
-
-            if (binding.searchBox.text.toString().isNotEmpty()) {
-
-                startMap( binding.searchBox.text.toString())
-
-            } else {
-                Toast.makeText(requireContext(), "No search terms found", Toast.LENGTH_SHORT).show()
-                binding.searchBox.requestFocus()
-
-            }
-        }
-
-    }
-
-
-    public fun setupRv(){
-        binding.bottomSheet.placesRv.apply {
-            layoutManager = GridLayoutManager(requireContext(), 5)
-            adapter = SearchPlacesAdapter(preparePlacesList(),requireContext(),object:
-                PlacesAdapterListener {
-                override fun clickItem(poiName: String) {
-                    startMap(poiName)
-                }
-            })
+    private fun setListeners(){
+        binding.backButton.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 
-
-
-    private fun loadMap() {
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment?
-        mapFragment?.getMapAsync(this)
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    private fun startMap(type: String) {
-
-        val gmmIntentUri =
-            Uri.parse("geo:" + mCurrentLocation?.latitude + "," + mCurrentLocation?.longitude + "?q=" + type)
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            showInterAds {
-                startActivity(mapIntent)
-            }
-        }else{
-           Toast.makeText(requireContext(),"Cannot Perform This Action In Your Region",Toast.LENGTH_SHORT).show()
-        }
+    override fun onResume() {
+        super.onResume()
+//      sensorManager!!.registerListener( this,sensorManager!!.getDefaultSensor(3),   SensorManager.SENSOR_DELAY_GAME  )
+        updateUI()
 
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    var canShowInter = false
-
-
-    private fun loadInter() {
-        if ((requireActivity().application as RawGpsApp).appContainer.myAdsUtill.mInterstitialAd == null) {
-            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.loadInterestitial(
-                requireActivity()
-            ) {
-                canShowInter = it
-            }
-        } else {
-            canShowInter = true
-        }
+    override fun onPause() {
+        super.onPause()
+        //sensorManager!!.unregisterListener(this)
+        stopLocationUpdates()
     }
 
-    private fun showInterAds(shown: (success: Boolean) -> Unit) {
-        if (canShowInter) {
-            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showInterestitial(
-                requireActivity()
-            ) {
-                shown(it)
-            }
-        } else {
-            shown(false)
-        }
-    }
+//    override fun onSensorChanged(event: SensorEvent) {
+//
+//        val degree = Math.round(event.values[0]).toFloat()
+//        binding!!.txtDegrees.text = "Rotation: " + java.lang.Float.toString(degree) + " degrees"
+//        val ra = RotateAnimation(
+//            currentDegree, -degree, Animation.RELATIVE_TO_SELF, 0.5f,
+//            Animation.RELATIVE_TO_SELF, 0.5f
+//        )
+//        ra.duration = 120
+//        ra.fillAfter = true
+//        binding!!.imgCompass.startAnimation(ra)
+//        currentDegree = -degree
+//
+//    }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+//    override fun onAccuracyChanged(p1: Sensor, p2: Int) {}
+//    private fun setListeners() {
+//        binding!!.backButton.setOnClickListener { requireActivity().onBackPressed() }
+//    }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        try {
-            map = googleMap ?: return
-            googleMap.setOnMyLocationClickListener(this)
-            enableMyLocation()
-            map.uiSettings.isCompassEnabled = false
-            map.uiSettings.isMyLocationButtonEnabled = false
-            if (mapStyle == "Satellite") {
-                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-            }
-
-            if (mapStyle == "Traffic") {
-                map.isTrafficEnabled = true
-            }
-
-            binding.recenterLocationButton.setOnClickListener {
-                recenterCamera()
-            }
-            isMapLoaded = true
-            recenterCamera()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        DialogUtils.dismissLoading()
-
-
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    fun recenterCamera() {
-        val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(mCurrentLocation?.latitude!!.toDouble(), mCurrentLocation?.longitude!!.toDouble()))
-            .zoom(15.5f)
-            .bearing(0f)
-            .tilt(25f)
-            .build()
-        checkReadyThen {
-            changeCamera(
-                CameraUpdateFactory.newCameraPosition(cameraPos),
-                object : GoogleMap.CancelableCallback {
-                    override fun onFinish() {
-
-
-                    }
-
-                    override fun onCancel() {
-
-                    }
-                })
-        }
-        DialogUtils.dismissLoading()
-
-    }
-
-
-    // [START_EXCLUDE silent]
-    /**
-     * When the map is not ready the CameraUpdateFactory cannot be used. This should be used to wrap
-     * all entry points that call methods on the Google Maps API.
-     *
-     * @param stuffToDo the code to be executed if the map is initialised
-     */
-    private fun checkReadyThen(stuffToDo: () -> Unit) {
-        if (!::map.isInitialized) {
-//            Toast.makeText(
-//                this@LocationFromGoogleMapActivity,
-//                R.string.map_not_ready,
-//                Toast.LENGTH_SHORT
-//            ).show()
-
-        } else {
-            stuffToDo()
-        }
-    }
-
-
-    /**
-     * Change the camera position by moving or animating the camera depending on the state of the
-     * animate toggle button.
-     */
-    private fun changeCamera(update: CameraUpdate, callback: GoogleMap.CancelableCallback? = null) {
-        // The duration must be strictly positive so we make it at least 1.
-        map.animateCamera(update, 1, callback)
-    }
-    /**
-     * Enables the My Location layer if the fine location permission has been granted.
-     */
-    @SuppressLint("MissingPermission")
-    private fun enableMyLocation() {
-
-        if (!::map.isInitialized) return
-        // [START maps_check_location_permission]
-        map.isMyLocationEnabled = true
-        // [END maps_check_location_permission]
-
-    }
-
-    override fun onMyLocationButtonClick(): Boolean {
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        return false
-    }
-
-    override fun onMyLocationClick(location: Location) {
-
-    }
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
             requireActivity(),
-            binding.adsParent,
-            AdSize.LARGE_BANNER,
+            binding!!.adsContainer,
+            AdSize.MEDIUM_RECTANGLE,
             object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {
 
+                override fun addLoaded(success: Boolean?) {}
+
+            })
+    }
+
+    private fun setUpQiblaComapassBuilder(){
+        try {
+            CompassQibla.Builder(requireActivity() as AppCompatActivity, mCurrentLocation!!)
+                .onGetLocationAddress { address ->
+                    binding.tvLocation.text = buildString {
+                        append(address.locality)
+                        append(", ")
+                        append(address.subAdminArea)
+                    }
                 }
-            }
-        )
+                .onDirectionChangeListener { qiblaDirection ->
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val rotateCompass = RotateAnimation(
+                            currentCompassDegree,
+                            qiblaDirection.compassAngle,
+                            Animation.RELATIVE_TO_SELF,
+                            0.5f,
+                            Animation.RELATIVE_TO_SELF,
+                            0.5f
+                        ).apply {
+                            duration = 1000
+                        }
+                        currentCompassDegree = qiblaDirection.compassAngle
+                        binding.imgCompass.startAnimation(rotateCompass)
+                    }
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val rotateNeedle = RotateAnimation(
+                            currentNeedleDegree,
+                            qiblaDirection.needleAngle,
+                            Animation.RELATIVE_TO_SELF,
+                            0.5f,
+                            Animation.RELATIVE_TO_SELF,
+                            0.5f
+                        ).apply {
+                            duration = 1000
+                        }
+                        currentNeedleDegree = qiblaDirection.needleAngle
+                        binding.qiblaPointer.startAnimation(rotateNeedle)
+                    }
+                }
+                .build()
+        }catch (e:Exception){e.printStackTrace()}
     }
-
-    private fun hideShowInappsButton(){
-        if ((requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
-            EventBus.getDefault().post(NavEvent(UPDATE_CANCEL_BUTTON))
-
-        }
-    }
-
-
-///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-///=============================================================================================
-///+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//==============================================================================================
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Provides access to the Fused Location Provider API.
      */
@@ -389,6 +236,8 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      */
     private var mCurrentLocation: Location? = null
 
+
+
     /**
      * Tracks the status of the location updates request. Value changes when the user presses the
      * Start Updates and Stop Updates buttons.
@@ -399,6 +248,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * Time when the location was updated represented as a String.
      */
     private var mLastUpdateTime: String? = null
+    //============================================================================================//
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -412,6 +262,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      */
     private fun updateValuesFromBundle(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
+
             // Update the value of mRequestingLocationUpdates from the Bundle, and make sure that
             // the Start Updates and Stop Updates buttons are correctly enabled or disabled.
             if (savedInstanceState.keySet().contains(KEY_REQUESTING_LOCATION_UPDATES)) {
@@ -432,6 +283,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             if (savedInstanceState.keySet().contains(KEY_LAST_UPDATED_TIME_STRING)) {
                 mLastUpdateTime = savedInstanceState.getString(KEY_LAST_UPDATED_TIME_STRING)
             }
+            updateUI()
         }
     }
 
@@ -463,7 +315,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         // application will never receive updates faster than this value.
         mLocationRequest!!.fastestInterval =
             FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest!!.priority = Priority.PRIORITY_HIGH_ACCURACY
     }
 
     /**
@@ -475,8 +327,11 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                 super.onLocationResult(locationResult)
                 mCurrentLocation = locationResult.lastLocation
                 mLastUpdateTime = DateFormat.getTimeInstance().format(Date())
-                recenterCamera()
+
+
+                setUpQiblaComapassBuilder()
                 stopLocationUpdates()
+
             }
         }
     }
@@ -492,14 +347,17 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         mLocationSettingsRequest = builder.build()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CHECK_SETTINGS -> when (resultCode) {
-                Activity.RESULT_OK -> Log.i(TAG, "User agreed to make required location settings changes.")
-                Activity.RESULT_CANCELED -> { Log.i(TAG, "User chose not to make required location settings changes.")
+                Activity.RESULT_OK -> Log.i(
+                    TAG, "User agreed to make required location settings changes."
+                )
+                Activity.RESULT_CANCELED -> {
+                    Log.i(TAG, "User chose not to make required location settings changes.")
                     mRequestingLocationUpdates = false
+                    updateUI()
                 }
             }
         }
@@ -509,10 +367,10 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * Handles the Start Updates button and requests start of location updates. Does nothing if
      * updates have already been requested.
      */
-    fun startUpdatesButtonHandler(view: View?)
-    {
+    fun startUpdatesButtonHandler(view: View?) {
         if (!mRequestingLocationUpdates!!) {
             mRequestingLocationUpdates = true
+            setButtonsEnabledState()
             startLocationUpdates()
         }
     }
@@ -532,7 +390,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
      * runtime permission has been granted.
      */
     @SuppressLint("MissingPermission")
-    private fun startLocationUpdates(){
+    private fun startLocationUpdates() {
         // Begin by checking if the device has the necessary location settings.
         mSettingsClient!!.checkLocationSettings(mLocationSettingsRequest!!)
             .addOnSuccessListener(requireActivity()) {
@@ -541,6 +399,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                     mLocationRequest!!,
                     mLocationCallback!!, Looper.myLooper()!!
                 )
+                updateUI()
             }
             .addOnFailureListener(requireActivity()) { e ->
                 val statusCode = (e as ApiException).statusCode
@@ -563,15 +422,31 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
                         val errorMessage = "Location settings are inadequate, and cannot be " +
                                 "fixed here. Fix in Settings."
                         Log.e(TAG, errorMessage)
-                        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_LONG).show()
                         mRequestingLocationUpdates = false
                     }
                 }
+                updateUI()
             }
     }
 
+    /**
+     * Updates all UI fields.
+     */
+    private fun updateUI() {
+//        setButtonsEnabledState();
+//        updateLocationUI();
+    }
 
+    /**
+     * Disables both buttons when functionality is disabled due to insuffucient location settings.
+     * Otherwise ensures that only one button is enabled at any time. The Start Updates button is
+     * enabled if the user is not requesting location updates. The Stop Updates button is enabled
+     * if the user is requesting location updates.
+     */
+    private fun setButtonsEnabledState() {
 
+    }
 
 
 
@@ -590,26 +465,11 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         mFusedLocationClient!!.removeLocationUpdates(mLocationCallback!!)
             .addOnCompleteListener(requireActivity()) {
                 mRequestingLocationUpdates = false
+                setButtonsEnabledState()
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Within {@code onPause()}, we remove location updates. Here, we resume receiving
-        // location updates if the user has requested them.
-//        if (mRequestingLocationUpdates && checkPermissions()) {
-//            startLocationUpdates();
-//        } else if (!checkPermissions()) {
-//            requestPermissions();
-//        }
-    }
 
-    override fun onPause() {
-        super.onPause()
-
-        // Remove location updates to save battery.
-        stopLocationUpdates()
-    }
 
     /**
      * Stores activity data in the Bundle.
@@ -653,15 +513,18 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
     }
 
 
-
-
-
-    val locationForGfResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            // Handle the Intent
+    val locationForGfResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                // Handle the Intent
+            }
         }
-    }
+
+
+
+
+
 
 
 }

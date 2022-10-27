@@ -44,5 +44,10 @@
     <string name="done">DONE</string>
     <string name="save">SAVE</string>
     <string name="places_search_fragment">Places Fragment</string>
+    <string name="explore_places">Explore Places</string>
+    <string name="places_list">saved_places</string>
+    <string name="saved_places_fragment">Saved Places Fragment</string>
+    <string name="saved_places">Saved Places</string>
+    <string name="qibla_compass">Qibla Compass</string>
 
 </resources>

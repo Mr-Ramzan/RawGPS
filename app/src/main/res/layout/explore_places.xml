@@ -15,6 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
@@ -38,7 +40,7 @@
                 app:layout_constraintGuide_percent="0.5" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/weather"
+                android:id="@+id/nearby_places_button"
                 android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_75sdp"
                 android:layout_marginTop="6dp"
@@ -62,7 +64,7 @@
                         android:layout_height="0dp"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/weather_icon"
+                        android:src="@drawable/nearby_places"
                         app:layout_constraintBottom_toTopOf="@+id/textView8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -74,17 +76,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        android:text="Weather"
+                        android:text="Nearby Places"
                         android:textColor="@color/black_text_color"
-
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/qibla_compass"
+                android:id="@+id/saved_places_button"
                 android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_75sdp"
                 android:layout_marginStart="16dp"
@@ -92,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline10"
-                app:layout_constraintTop_toTopOf="@+id/weather">
+                app:layout_constraintTop_toTopOf="@+id/nearby_places_button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -105,7 +108,7 @@
                         android:layout_height="0dp"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/qibla_compass_icon"
+                        android:src="@drawable/saved_places"
                         app:layout_constraintBottom_toTopOf="@+id/textView10"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:gravity="center"
-                        android:text="Qibla Compass"
+                        android:text="Saved Places"
                         android:textColor="@color/black_text_color"
 
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/inter_bold"
-        android:text="@string/travel_tool"
+        android:text="@string/explore_places"
         android:textColor="@color/black_text_color"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -158,6 +161,8 @@
         app:tint="@color/black_text_color" />
 
 
+
+
     <TextView
         android:id="@+id/policy_button"
         android:layout_width="wrap_content"
@@ -173,10 +178,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <FrameLayout
         android:id="@+id/ads_parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/policy_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/home_bg_view">

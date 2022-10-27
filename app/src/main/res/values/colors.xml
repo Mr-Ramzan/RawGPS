@@ -7,12 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="black_text_color">#353535</color>
-
+    <color name="black_text_color">#585555</color>
     <color name="blue">#2685EB</color>
     <color name="black_overlay">#66000000</color>
     <color name="transparent">#00000000</color>
-
 
     //cloud clear and detailed view colors
     <color name="cloud_sunny_wind_accent">#96f5f5</color>

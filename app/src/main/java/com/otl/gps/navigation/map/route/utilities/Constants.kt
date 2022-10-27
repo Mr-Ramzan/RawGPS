@@ -2,6 +2,7 @@ package com.otl.gps.navigation.map.route.utilities
 
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.model.PlacesItem
+import com.otl.gps.navigation.map.route.model.SavedPlace
 
 object Constants {
 
@@ -19,6 +20,7 @@ object Constants {
      var MAP_BOX_ACCESS_TOKEN = "sk.eyJ1IjoiamF3YWRhbWphZCIsImEiOiJjbDVzMDN5c2cwN3FvM2Zxd3I2NHMyaDR6In0.QSbUNh97LzqUmx00LcvJpQ"
 
     /////////////////////////////////////////////////////////////
+    lateinit var savedPlace: SavedPlace
 
 
     /*==========================================================
@@ -37,14 +39,15 @@ object Constants {
     const val NAVIGATE_LOCATION = "location_frag"
     const val NAVIGATE_SATELLITE = "satellite_frag"
     const val NAVIGATE_TRAFFIC = "traffic_frag"
-    const val NAVIGATE_DRIVING_MODE  = "driving_mode"
     const val NAVIGATE_COMPASS = "compass"
     const val NAVIGATE_WEATHER = "weather"
+    const val NAVIGATE_QIBLA_COMPASS = "qibla_compass"
     const val NAVIGATE_TRAVEL_TOOLS = "travel_tools"
     const val NAVIGATE_EXPLORE_PLACES = "explore_places"
+    const val NAVIGATE_PREVIEW_SAVED_PLACES = "preview_saved_PLACES_fragment"
     const val NAVIGATE_CURRENCY_CONVERTER = "currency_converter"
+    const val NAVIGATE_SAVED_PLACES = "Saved_Places_list"
     const val NAVIGATE_PLACES_LIST = "nearby_list"
-    const val NAVIGATE_PLACES = "nearby"
     const val NAVIGATE_CLOCK = "world_clock"
     const val ACTION_SHARE = "share"
     const val ACTION_CANCEL_SUB = "cancel_sub"
@@ -118,7 +121,6 @@ object Constants {
         nearbyPlaces.add(PlacesItem(3 , R.drawable.bus_stations,0 ,"Bus Station" ,"Bus station"))
         nearbyPlaces.add(PlacesItem(4 , R.drawable.banks,0 ,"Bank" ,"Bank"))
         nearbyPlaces.add(PlacesItem(5 , R.drawable.atms,0 ,"ATM" ,"ATM"))
-//        nearbyPlaces.add(PlacesItem(7 , R.drawable.temple,0 ,"Temple" ,"Church"))
         nearbyPlaces.add(PlacesItem(8 , R.drawable.mosques,0 ,"Mosque" ,"Mosque"))
         nearbyPlaces.add(PlacesItem(9 , R.drawable.doctors,0 ,"Doctor" ,"Doctors"))
         nearbyPlaces.add(PlacesItem(12, R.drawable.pharma,0 ,"Pharmacy","Pharmacy"))
