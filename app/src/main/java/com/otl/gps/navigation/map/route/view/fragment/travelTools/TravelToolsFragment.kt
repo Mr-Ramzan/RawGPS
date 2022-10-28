@@ -70,7 +70,6 @@ class TravelToolsFragment : Fragment() {
         }
 
 
-
         binding.qiblaCompass.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
         }

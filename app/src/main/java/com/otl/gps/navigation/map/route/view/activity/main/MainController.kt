@@ -47,7 +47,9 @@ import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_MORE_APPS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMING_SOON
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CONVERTER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
@@ -61,6 +63,8 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAV_BACK
 import com.otl.gps.navigation.map.route.utilities.Constants.OPEN_DRAWER
 import com.otl.gps.navigation.map.route.utilities.Helper
 import com.otl.gps.navigation.map.route.utilities.PopupUtil
+import com.otl.gps.navigation.map.route.view.activity.spedometer.SpeedoMeterActivity
+import com.otl.gps.navigation.map.route.view.fragment.dialogs.ExitDialogFragment
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -233,21 +237,26 @@ class MainController : AppCompatActivity() {
             NAVIGATE_WEATHER -> {
                 navigateWeather()
             }
+            NAVIGATE_COMING_SOON -> {
+                showComingSoon()
+            }
             Constants.NAVIGATE_QIBLA_COMPASS -> {
                 navigateQiblaCompass()
-
             }
             NAVIGATE_SAVED_PLACES -> {
                 navigateSavedPlaces()
+            }
+            NAVIGATE_CURRENCY_CONVERTER -> {
+                navigateSpeedoMeter()
             }
 
             NAV_BACK -> {
                 onBackPressed()
 
             }
+
+
             ACTION_REMMOVE_ADS -> {
-
-
             }
 
             ACTION_MORE_APPS -> {
@@ -274,6 +283,15 @@ class MainController : AppCompatActivity() {
                     R.anim.slide_out_right)
             val bundle = bundleOf("title" to "")
             navController.navigate(R.id.navigation_saved_places, bundle, navBuilder.build())
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun navigateSpeedoMeter() {
+        try {
+                startActivity(Intent(this, SpeedoMeterActivity::class.java))
+
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
         }
@@ -495,6 +513,20 @@ class MainController : AppCompatActivity() {
                 navController.navigateUp()
             }
         }  else {
+
+         try {
+
+             val addPhotoBottomDialogFragment: ExitDialogFragment =
+                 ExitDialogFragment.newInstance()
+             addPhotoBottomDialogFragment.show(
+                 supportFragmentManager, "exit dialog!"
+             )
+         } catch (e: java.lang.Exception) {
+             e.printStackTrace()
+         }
+
+
+
         PopupUtil.showDeleteDialog(
             this,
             "Exit App",
@@ -512,7 +544,6 @@ class MainController : AppCompatActivity() {
     private fun showComingSoon(msg: String = "Coming Soon!") {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
-
 
     /**
      * Open Policy URL

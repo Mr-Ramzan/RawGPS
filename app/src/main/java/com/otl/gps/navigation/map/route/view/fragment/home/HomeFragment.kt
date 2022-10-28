@@ -17,12 +17,14 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMING_SOON
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CONVERTER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SPEEDOMETER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAFFIC
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.OPEN_DRAWER
@@ -108,12 +110,12 @@ class HomeFragment : Fragment() {
 
 
         binding.currencyConverterButton.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(NAVIGATE_CURRENCY_CONVERTER))
+            EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
         }
 
 
         binding.speedometerButton.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
+            EventBus.getDefault().post(NavEvent(NAVIGATE_SPEEDOMETER))
         }
 
 

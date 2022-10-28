@@ -208,6 +208,8 @@
                     android:gravity="center"
                     android:text="Travel Tools"
                     android:textColor="@color/black_text_color"
+                    android:fontFamily="@font/poppins"
+
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -253,6 +255,8 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="Traffic Updates"
+                    android:fontFamily="@font/poppins"
+
                     android:textColor="@color/black_text_color"
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -299,6 +303,8 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="Explore Places"
+                    android:fontFamily="@font/poppins"
+
                     android:textColor="@color/black_text_color"
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -346,7 +352,7 @@
                     android:gravity="center"
                     android:text="Compass"
                     android:textColor="@color/black_text_color"
-
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -378,7 +384,7 @@
                     android:layout_height="0dp"
                     android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/currency_converter_icon"
+                    android:src="@drawable/currency_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -386,13 +392,14 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="3dp"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="Currency Calculator"
                     android:textColor="@color/black_text_color"
-
+                    app:layout_constrainedWidth="true"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -436,8 +443,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="Speedometer"
                     android:textColor="@color/black_text_color"
+                    android:fontFamily="@font/poppins"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

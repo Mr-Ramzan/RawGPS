@@ -16,6 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ExitBottomSheetDialogBinding
+import com.otl.gps.navigation.map.route.model.NavEvent
+import com.otl.gps.navigation.map.route.utilities.Constants
+import org.greenrobot.eventbus.EventBus
 
 class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private lateinit var binding: ExitBottomSheetDialogBinding
@@ -61,8 +64,8 @@ class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        binding.btnCamera.setOnClickListener(this)
-        binding.btnGallery.setOnClickListener(this)
+        binding.btnYes.setOnClickListener(this)
+        binding.btnNo.setOnClickListener(this)
         isCancelable = true
         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -99,9 +102,17 @@ class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         val id = v.id
-        if (id == R.id.btnCamera) {
-        } else if (id == R.id.btnGallery) {
-        } else if (id == R.id.close) {
+        if (id == R.id.btn_yes) {
+            EventBus.getDefault().post(NavEvent(Constants.BACK_AND_EXIT))
+
+        } else if (id == R.id.btn_no) {
+            this.dialog?.dismiss()
+
+            }
+        else
+            if (id == R.id.close)
+            {
+                this.dialog?.dismiss()
         }
     }
 

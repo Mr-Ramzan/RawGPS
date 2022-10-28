@@ -56,6 +56,7 @@
     <color name="home_rainy">#f2f2f2</color>
     <color name="home_rainy1">#dbdadb</color>
     <color name="home_rainy2">#cccaca</color>
+    <color name="bluealpha">#802685EB</color>
 
 
 </resources>

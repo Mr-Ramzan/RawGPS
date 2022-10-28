@@ -22,10 +22,6 @@ object DialogUtils {
         loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         loadingDialog.setCancelable(false)
         ////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
         loadingDialog.setContentView(loadingDialogBinding.root)
         loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loadingDialog.show()
