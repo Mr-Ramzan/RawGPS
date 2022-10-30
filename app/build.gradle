@@ -12,6 +12,8 @@ plugins {
 
 }
 
+android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
+
 android {
     compileSdk 32
     defaultConfig {
@@ -20,20 +22,28 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "x86", "armeabi-v7a"
+        }
+        ndk {
+            debugSymbolLevel 'SYMBOL_TABLE'
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
+
     }
 
     signingConfigs {
 
         debug {
-            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
+            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
+            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
@@ -47,6 +57,7 @@ android {
             resValue 'string', 'gps_inter_id', '"ca-app-pub-8804904864147916/6388970608"'
             resValue 'string', 'gps_appopen_id', '"ca-app-pub-8804904864147916/6197398911"'
             resValue 'string', 'gps_banner_id', '"ca-app-pub-8804904864147916/8719620470"'
+            resValue 'string', 'gps_square_banner_id', '"ca-app-pub-8804904864147916/6568637221"'
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.release
@@ -61,6 +72,7 @@ android {
             resValue 'string', 'gps_inter_id', '"ca-app-pub-3940256099942544/1033173712"'
             resValue 'string', 'gps_appopen_id', '"ca-app-pub-3940256099942544/3419835294"'
             resValue 'string', 'gps_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
+            resValue 'string', 'gps_square_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
             ext.enableCrashlytics = false
             minifyEnabled true
             shrinkResources true
@@ -194,6 +206,11 @@ dependencies {
 
     // volley
     implementation 'com.android.volley:volley:1.2.1'
+
+    implementation 'com.google.ads.mediation:facebook:6.11.0.1'
+//    implementation 'com.unity3d.ads:unity-ads:4.4.1'
+//    implementation 'com.google.ads.mediation:unity:4.4.1.0'
+    implementation 'com.google.ads.mediation:applovin:11.5.3.1'
 }
 
 secrets {

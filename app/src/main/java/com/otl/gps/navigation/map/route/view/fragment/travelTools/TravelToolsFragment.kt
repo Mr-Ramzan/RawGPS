@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
+import com.bumptech.glide.Glide
 
 import com.google.android.gms.ads.AdSize
 import com.otl.gps.navigation.map.route.R
@@ -42,6 +43,7 @@ class TravelToolsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBg()
         initListeners()
         loadBanner()
         loadInter()
@@ -58,7 +60,15 @@ class TravelToolsFragment : Fragment() {
                 }
             })
     }
+    private fun setupBg() {
 
+        try {
+            Glide.with(this).load(R.drawable.home_bg).into(binding.homeBg)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
     private fun initListeners() {
 
         binding.backButton.setOnClickListener {

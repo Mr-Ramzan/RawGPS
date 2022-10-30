@@ -47,6 +47,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_MORE_APPS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
+import com.otl.gps.navigation.map.route.utilities.Constants.BACK_AND_EXIT
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMING_SOON
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CONVERTER
@@ -86,7 +87,7 @@ class MainController : AppCompatActivity() {
         setContentView(binding.root)
         EventBus.getDefault().register(this)
         val drawerLayout: DrawerLayout = binding.drawerLayout
-
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,GravityCompat.START);
         setupNoInternetPopup()
 
         loadInter()
@@ -200,6 +201,10 @@ class MainController : AppCompatActivity() {
                 gotoPrivacyPolicy()
             }
 
+
+            BACK_AND_EXIT -> {
+               super.onBackPressed()
+            }
 
             NAVIGATE_LOCATION -> {
                 navigateMyLocation()
@@ -527,16 +532,16 @@ class MainController : AppCompatActivity() {
 
 
 
-        PopupUtil.showDeleteDialog(
-            this,
-            "Exit App",
-            "Are you sure you want to exit?"
-        )
-        {
-            if (it) {
-                super.onBackPressed()
-            }
-        }
+//        PopupUtil.showDeleteDialog(
+//            this,
+//            "Exit App",
+//            "Are you sure you want to exit?"
+//        )
+//        {
+//            if (it) {
+//                super.onBackPressed()
+//            }
+//        }
 
     }
     }

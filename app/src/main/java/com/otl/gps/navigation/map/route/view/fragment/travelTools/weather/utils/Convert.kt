@@ -16,7 +16,7 @@ class Convert {
 
         val date: Date = inFormat.parse(input)
 
-        val outFormat = SimpleDateFormat("EEE")
+        val outFormat = SimpleDateFormat("EEEE")
 
         val day: String = outFormat.format(date)
 

@@ -136,6 +136,9 @@ class SavedPlacesListFragment : Fragment() {
         binding.backButton.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
+        binding.addPlaceButton.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_LOCATION))
+        }
 
     }
 

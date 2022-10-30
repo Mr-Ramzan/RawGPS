@@ -49,6 +49,8 @@ import kotlinx.coroutines.launch
 class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
+
+
     private lateinit var binding: ActivityMyLocationGoogleBinding
     lateinit var locationManager: LocationManager
     private var locationByNetwork: Location? = null
@@ -90,6 +92,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             loadBanner()
         } else {
             binding.layoutBottom.visibility = View.GONE
+            binding.group2.visibility = View.GONE
             loadBanner()
         }
         //========================================================================================//
@@ -183,6 +186,8 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             e.printStackTrace()
         }
     }
+
+
 
 
     //check location service is on or off
@@ -353,7 +358,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 ""
             ).toString()
         binding.tvAddress.setText(addressFromLocationSharedPref)
-        binding.tvLatLng.setText("$latitudeFromLocation,$longitudeFromLocation")
+//        binding.tvLatLng.setText("$latitudeFromLocation,$longitudeFromLocation")
         if (locationByNetwork == null && longitudeFromLocation.isNotEmpty() && latitudeFromLocation.isNotEmpty()) {
             locationByNetwork = Location("");//provider name is unnecessary
             locationByNetwork?.latitude = latitudeFromLocation.toDouble();//your coords of course
@@ -707,19 +712,12 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 .bearing(0f)
                 .tilt(25f)
                 .build()
-
-
-
-
             checkReadyThen {
                 changeCamera(CameraUpdateFactory.newCameraPosition(cameraPos),
                     object : GoogleMap.CancelableCallback {
                         override fun onFinish() {
-
                         }
-
                         override fun onCancel() {
-
                         }
                     })
             }
@@ -743,8 +741,6 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             stuffToDo()
         }
     }
-
-
     /**
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RawGPS</string>
+    <string name="app_name">GPS Maps Navigation &amp; Traffic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

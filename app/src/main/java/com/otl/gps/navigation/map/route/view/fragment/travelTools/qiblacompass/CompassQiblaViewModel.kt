@@ -31,7 +31,6 @@ class CompassQiblaViewModel : ViewModel() {
     fun getLocationAddress(context: Context, location: Location){
         try {
             Geocoder(context, Locale.getDefault()).apply {
-                if (Build.VERSION.SDK_INT >= 33) {
 
 
                     getFromLocation(location.latitude, location.longitude, 1)?.first() .let { address ->
@@ -39,7 +38,7 @@ class CompassQiblaViewModel : ViewModel() {
                             }
                         }
 
-                }
+
 
         } catch (e: Exception) {
             e.printStackTrace()

@@ -915,6 +915,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
 
+
     /**
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.
@@ -923,6 +924,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         // The duration must be strictly positive so we make it at least 1.
         map.animateCamera(update, 1000, callback)
     }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

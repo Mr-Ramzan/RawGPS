@@ -52,15 +52,15 @@ class ForecastAdapter(var mList: List<forecastModel>,
 //        holder.card_background.setBackgroundColor(
 //            IconManager().getColor(Convert().convertDate(data.dayOfTheWeek))
 //        )
-
-        holder.cardView.outlineAmbientShadowColor = IconManager()
-            .getColor(
-                Convert()
-                .convertDate(data.dayOfTheWeek))
-        holder.cardView.outlineSpotShadowColor = IconManager()
-            .getColor(
-                Convert()
-                .convertDate(data.dayOfTheWeek))
+//
+//        holder.cardView.outlineAmbientShadowColor = IconManager()
+//            .getColor(
+//                Convert()
+//                .convertDate(data.dayOfTheWeek))
+//        holder.cardView.outlineSpotShadowColor = IconManager()
+//            .getColor(
+//                Convert()
+//                .convertDate(data.dayOfTheWeek))
         
     }
 
@@ -76,7 +76,6 @@ class ForecastAdapter(var mList: List<forecastModel>,
 //        val card_background: RelativeLayout = itemView.findViewById(R.id.viewBG)
         val min_temp: TextView = itemView.findViewById(R.id.min_temp)
         val max_temp: TextView = itemView.findViewById(R.id.max_temp)
-        val cardView: CardView = itemView.findViewById(R.id.cardView)
     }
 
 

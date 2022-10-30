@@ -51,7 +51,7 @@ class Splash : AppCompatActivity() {
 
         try {
             Glide.with(this).load(R.drawable.splash_bg).into(binding.bg)
-            Glide.with(this).load(R.drawable.splash_gif).into(binding.gifView)
+//            Glide.with(this).load(R.drawable.splash_gif).into(binding.gifView)
         } catch (e: Exception) {
             e.printStackTrace()
         }

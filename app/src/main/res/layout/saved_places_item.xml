@@ -9,7 +9,7 @@
     android:layout_alignParentEnd="true"
     android:layout_gravity="center"
     android:layout_margin="10dp"
-    app:cardCornerRadius="15dp"
+    app:cardCornerRadius="8dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80ffffff"
+        android:background="@drawable/sv_place_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/saved_places" />
+            app:srcCompat="@drawable/pointer_sv_places" />
 
         <TextView
             android:id="@+id/place_name_text"
@@ -45,8 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/inter_bold"
-            android:textColor="@color/black"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/flat_red_1"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView14"
@@ -62,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/roboto"
             android:maxLines="1"
-            android:textColor="@color/black"
+            android:textColor="@color/blue"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="@+id/place_name_text"
             app:layout_constraintTop_toBottomOf="@+id/place_name_text" />
@@ -118,7 +118,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/admob_close_button_black_circle_white_cross" />
+            app:srcCompat="@drawable/delete_saved_place"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,27 +9,26 @@
         android:id="@+id/home_bg_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/activity_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/inter_bold"
         android:text="@string/saved_places"
         android:textColor="@color/black_text_color"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back_button" />
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -60,9 +60,9 @@
         android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black"
+        app:srcCompat="@drawable/ic_back_arrow"
 
-        app:srcCompat="@drawable/ic_back_arrow" />
+        app:tint="@color/blue" />
 
 
     <FrameLayout
@@ -76,5 +76,27 @@
         app:layout_constraintStart_toStartOf="parent">
 
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_title"
+        app:layout_constraintStart_toEndOf="@+id/activity_title"
+        app:layout_constraintTop_toTopOf="@+id/activity_title"
+        app:srcCompat="@drawable/fav_hrt_ic" />
+
+    <ImageButton
+        android:id="@+id/add_place_button"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/transparent"
+        android:elevation="@dimen/_4sdp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back_button"
+        app:srcCompat="@drawable/add_place_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

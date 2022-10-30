@@ -12,10 +12,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import application.RawGpsApp
+import com.google.android.gms.ads.AdSize
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ExitBottomSheetDialogBinding
+import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants
 import org.greenrobot.eventbus.EventBus
@@ -79,16 +82,26 @@ class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
         },500)
 
 //        Handler(Looper.getMainLooper()).postDelayed({
-           shownativeBanner()
+        loadBanner()
 //        },700)
     }
 
 
-    private fun shownativeBanner(){
-        try {
-
-        }catch (e:Exception){e.printStackTrace()}
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.bannerAd,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
     }
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

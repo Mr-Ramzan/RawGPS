@@ -100,7 +100,7 @@ class CompassFragment : Fragment(), SensorEventListener {
     }
 
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
             requireActivity(),
             binding!!.adsContainer,
             AdSize.MEDIUM_RECTANGLE,

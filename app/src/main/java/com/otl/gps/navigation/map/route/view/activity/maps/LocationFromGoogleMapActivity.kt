@@ -406,7 +406,6 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
                         MarkerOptions()
                             .position(LatLng(latitude!!.toDouble(), longitude!!.toDouble()))
                             .title("")
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.mapbox_marker_icon_default_blue))
                             .anchor(0f, 0f)
                             .infoWindowAnchor(0.5f, 0.5f)
                             .draggable(false)

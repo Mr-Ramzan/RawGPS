@@ -307,7 +307,67 @@ class AdmobAdsHelper (mContext: Context) {
             }
         }
     }
+    fun AddSquareBannerToLayout(context: Activity, layout: FrameLayout, size: AdSize, loadCallback: AdLoadedCallback?)
+    {
 
+        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!!) {
+            return
+        }
+        if (!isSDKInitialized) {
+            log("SDK Not Initialized.")
+        }
+        else
+        {
+            try {
+                var bannerInstace = AdView(context)
+                bannerInstace?.setAdSize(size)
+                bannerInstace!!.adUnitId = context.getString(R.string.gps_square_banner_id)
+                layout.addView(bannerInstace)
+                if (consentForAds) {
+                    bannerAdRequest = AdRequest.Builder().build()
+                    log("Requesting Personlized Banner Ads")
+                } else {
+                    if (adRequestBundleForConsent == null) {
+                        adRequestBundleForConsent = Bundle()
+                        val sharedPref = context.getPreferences(0)
+                        consentForAds = sharedPref.getBoolean("ConsentValue", true)
+                        adRequestBundleForConsent.putString("npa", "1")
+                    }
+                    bannerAdRequest = AdRequest.Builder()
+                        .addNetworkExtrasBundle(
+                            AdMobAdapter::class.java, adRequestBundleForConsent
+                        ).build()
+                    log("Requesting Non Personlized Banner Ads")
+                }
+                bannerInstace.loadAd(bannerAdRequest!!)
+                log("Requesting Banner Ad")
+                bannerInstace.adListener = object : AdListener() {
+                    override fun onAdLoaded() {
+                        loadCallback?.addLoaded(true)
+                        log("Banner Ad Loaded, Adding to Layout")
+                    }
+
+                    override fun onAdFailedToLoad(p0: LoadAdError) {
+                        Log.e("Failed loading banner","=========>${p0.message}")
+                        p0
+                        layout.removeView(bannerInstace)
+                        loadCallback?.addLoaded(false)
+                    }
+
+                    override fun onAdOpened() {
+
+                        //Logging.logImpressionForAds(context)
+                    }
+                    override fun onAdClosed() {}
+                }
+            }
+            catch (var3: Exception)
+            {
+                log("Unable to AdBannerToLayout with Error:$var3")
+            }
+
+        }
+    }
 
     fun AddBannerToLayout(context: Activity, layout: FrameLayout, size: AdSize, loadCallback: AdLoadedCallback?)
     {

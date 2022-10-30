@@ -14,12 +14,12 @@
         android:scaleType="fitXY" />
 
 
-
     <ImageView
         android:id="@+id/gifView"
         android:layout_width="@dimen/_230sdp"
         android:layout_height="@dimen/_270sdp"
         android:scaleType="centerInside"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

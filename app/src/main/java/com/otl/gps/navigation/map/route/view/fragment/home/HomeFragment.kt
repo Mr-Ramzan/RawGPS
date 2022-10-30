@@ -120,14 +120,14 @@ class HomeFragment : Fragment() {
 
 
         binding.menuButton.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(OPEN_DRAWER))
+//            EventBus.getDefault().post(NavEvent(OPEN_DRAWER))
         }
 
 
     }
 
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
             requireActivity(),
             binding.adsParent,
             AdSize.MEDIUM_RECTANGLE,

@@ -129,7 +129,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         val currentTime = SimpleDateFormat("HH : mm", Locale.getDefault()).format(Date())
         val simpleDateFormat = SimpleDateFormat("EEEE , dd MMMM yyyy ", Locale.getDefault())
         val date = Date()
-        binding.time.text = simpleDateFormat.format(date)
+        binding.time.text = simpleDateFormat.format(date).replace(",","\n")
     }
 
     private fun setCurrentWeather() {
@@ -179,7 +179,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
                     .into(binding.weatherBackgroundImage)
             }
 
-            _binding!!.temperature.text = currWViewModel.temperature
+            _binding!!.temperature.text = currWViewModel.temperature+"℃"
             _binding!!.feelLikeValue.text = currWViewModel.temperature
 
             _binding!!.waterDrop.text = currWViewModel.water_drop

@@ -24,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -34,6 +35,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.FragmentQiblaCompassBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.qiblacompass.CompassQibla
@@ -69,10 +71,19 @@ class QiblaCompassFragment : Fragment(){
         super.onCreate(savedInstanceState)
 
     }
+    private fun setupBg() {
 
+        try {
+            Glide.with(this).load(R.drawable.home_bg).into(binding!!.bgImage)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadBanner()
+        setupBg()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
 
         ////////////////////////////////////////////////////////////////////////////
@@ -148,7 +159,7 @@ class QiblaCompassFragment : Fragment(){
 //    }
 
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddSquareBannerToLayout(
             requireActivity(),
             binding!!.adsContainer,
             AdSize.MEDIUM_RECTANGLE,
@@ -170,7 +181,6 @@ class QiblaCompassFragment : Fragment(){
                     }
                 }
                 .onDirectionChangeListener { qiblaDirection ->
-                    CoroutineScope(Dispatchers.Main).launch {
                         val rotateCompass = RotateAnimation(
                             currentCompassDegree,
                             qiblaDirection.compassAngle,
@@ -183,9 +193,8 @@ class QiblaCompassFragment : Fragment(){
                         }
                         currentCompassDegree = qiblaDirection.compassAngle
                         binding.imgCompass.startAnimation(rotateCompass)
-                    }
 
-                    CoroutineScope(Dispatchers.Main).launch {
+
                         val rotateNeedle = RotateAnimation(
                             currentNeedleDegree,
                             qiblaDirection.needleAngle,
@@ -198,7 +207,7 @@ class QiblaCompassFragment : Fragment(){
                         }
                         currentNeedleDegree = qiblaDirection.needleAngle
                         binding.qiblaPointer.startAnimation(rotateNeedle)
-                    }
+
                 }
                 .build()
         }catch (e:Exception){e.printStackTrace()}

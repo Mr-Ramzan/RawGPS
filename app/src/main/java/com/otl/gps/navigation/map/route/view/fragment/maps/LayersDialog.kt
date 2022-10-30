@@ -21,7 +21,7 @@ object LayersDialog {
         ////////////////////////////////////////////////////////////////////////////////////////////
         loadingDialog = Dialog(activity)
         loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        loadingDialog.setCancelable(false)
+        loadingDialog.setCancelable(true)
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         loadingDialogBinding.trafficToggleButton.setOnClickListener {
