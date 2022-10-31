@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/076f356cf1c1959b99a72a2d4596fa96/transformed/audience-network-sdk-6.11.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/076f356cf1c1959b99a72a2d4596fa96/transformed/audience-network-sdk-6.11.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/076f356cf1c1959b99a72a2d4596fa96/transformed/audience-network-sdk-6.11.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

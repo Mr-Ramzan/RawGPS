@@ -54,9 +54,11 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CO
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREVIEW_SAVED_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SAVED_PLACES
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SPEEDOMETER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAFFIC
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_WEATHER
@@ -66,6 +68,7 @@ import com.otl.gps.navigation.map.route.utilities.Helper
 import com.otl.gps.navigation.map.route.utilities.PopupUtil
 import com.otl.gps.navigation.map.route.view.activity.spedometer.SpeedoMeterActivity
 import com.otl.gps.navigation.map.route.view.fragment.dialogs.ExitDialogFragment
+import com.otl.gps.navigation.map.route.view.fragment.places.PreviewSavedPlacesActivity
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -190,7 +193,7 @@ class MainController : AppCompatActivity() {
         when (eve.event) {
 
             OPEN_DRAWER -> {
-                toggleDrawer()
+//                toggleDrawer()
             }
 
             NAVIGATE_ROUTE -> {
@@ -215,11 +218,18 @@ class MainController : AppCompatActivity() {
             NAVIGATE_SATELLITE -> {
                 navigateSatellite()
             }
+
+
             NAVIGATE_EXPLORE_PLACES -> {
                 navigateExplorePlaces()
 
             }
 
+            NAVIGATE_PREVIEW_SAVED_PLACES -> {
+                showInterAds {
+                    previewSavedPlaces()
+                }
+            }
             NAVIGATE_TRAVEL_TOOLS -> {
 
                 navigateTravelTools()
@@ -251,7 +261,7 @@ class MainController : AppCompatActivity() {
             NAVIGATE_SAVED_PLACES -> {
                 navigateSavedPlaces()
             }
-            NAVIGATE_CURRENCY_CONVERTER -> {
+            NAVIGATE_SPEEDOMETER -> {
                 navigateSpeedoMeter()
             }
 
@@ -277,7 +287,22 @@ class MainController : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private fun previewSavedPlaces() {
+        try {
+//            val navBuilder = NavOptions.Builder()
+//            navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
+//                .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right)
+//            val bundle = bundleOf("title" to "")
+//            navController.navigate(R.id.navigation_saved_places, bundle, navBuilder.build())
 
+            var previewPlaceIntent =
+                Intent(this, PreviewSavedPlacesActivity::class.java)
+            startActivity(previewPlaceIntent)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+
+    }
 
     private fun navigateSavedPlaces() {
         try {
@@ -472,11 +497,13 @@ class MainController : AppCompatActivity() {
      * toggle Drawer
      */
     private fun toggleDrawer() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
+
+//        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+//            binding.drawerLayout.closeDrawer(GravityCompat.START)
+//        } else {
+//            binding.drawerLayout.openDrawer(GravityCompat.START)
+//        }
+
     }
 
     /**
@@ -553,7 +580,7 @@ class MainController : AppCompatActivity() {
     /**
      * Open Policy URL
      */
-    private fun gotoPrivacyPolicy(url: String = "https://www.google.com") {
+    private fun gotoPrivacyPolicy(url: String = "https://theomegatechlab.blogspot.com/p/privacy-policy_27.html"){
         try {
             if (url.startsWith("http") || url.startsWith("https")) {
                 Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {

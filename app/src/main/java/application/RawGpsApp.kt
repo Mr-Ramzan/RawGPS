@@ -57,12 +57,14 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
     public fun initializeSearchSDK(){
 
         MapboxSearchSdk.initialize(
-            application = this,
+            application = this@RawGpsApp,
             accessToken = Constants.MAP_BOX_ACCESS_TOKEN,
-            locationEngine = LocationEngineProvider.getBestLocationEngine(this),
+            locationEngine = LocationEngineProvider.getBestLocationEngine(appContext.applicationContext),
             searchSdkSettings = SearchSdkSettings(maxHistoryRecordsAmount = 5),
 //            offlineSearchEngineSettings = OfflineSearchEngineSettings(tileStore = TileStore.create()),
         )
+
+
     }
 
 

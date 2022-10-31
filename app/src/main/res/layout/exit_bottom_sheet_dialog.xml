@@ -15,50 +15,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imagePicker"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="15dp"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="30dp">
+        android:paddingTop="@dimen/_8sdp">
+
+        <TextView
+            android:id="@+id/disc_text"
+            android:layout_width="0dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/are_you_sure_to_exit"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="@+id/btn_no"
+            app:layout_constraintStart_toStartOf="@+id/btn_yes"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_yes"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/button_background_hollow"
+            android:gravity="center"
+            android:text="@string/yes"
             android:textAlignment="center"
             android:textColor="@color/blue"
             android:textSize="14sp"
-            android:gravity="center"
             android:textStyle="bold"
-            android:text="@string/yes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_no"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/disc_text" />
 
         <TextView
             android:id="@+id/btn_no"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
+            android:layout_marginTop="24dp"
             android:background="@drawable/button_background"
+            android:gravity="center"
+            android:text="No"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:text="No"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btn_yes"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/disc_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

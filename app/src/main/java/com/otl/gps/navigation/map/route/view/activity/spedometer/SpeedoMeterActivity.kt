@@ -20,8 +20,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import androidx.fragment.app.FragmentPagerAdapter
 import application.RawGpsApp
-
 import com.google.android.gms.ads.AdSize
+
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
@@ -41,9 +41,9 @@ import java.util.*
 
 class SpeedoMeterActivity : AppCompatActivity() {
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     //
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Provides access to the Fused Location Provider API.
      */
@@ -91,13 +91,15 @@ class SpeedoMeterActivity : AppCompatActivity() {
     private var mLastUpdateTime: String? = null
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     lateinit var binding: ActivitySpeedometerBinding
     var listeners: ArrayList<locationCallback?> = ArrayList()
     var fragsList: ArrayList<Fragment?> = ArrayList()
     var tittle: ArrayList<String?> = ArrayList()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
     private fun  loadBanner(){
         (application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
             this,
@@ -105,7 +107,9 @@ class SpeedoMeterActivity : AppCompatActivity() {
             AdSize.MEDIUM_RECTANGLE,
             object : AdLoadedCallback {
                 override fun addLoaded(success: Boolean?) {
+
                     Log.d("Add Load Callback","is ad loaded========>"+success)
+
                 }
             })
     }
@@ -121,7 +125,10 @@ class SpeedoMeterActivity : AppCompatActivity() {
         binding.dotsIndicator.attachTo(binding.viewPager);
         setListeners()
         loadInter()
-        ////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""
 
@@ -135,6 +142,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
         createLocationCallback()
         createLocationRequest()
         buildLocationSettingsRequest()
+
         /////////////////////////////////////////////////////////////////////////////////
         Dexter.withContext(this)
             .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -296,6 +304,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
             }
             updateUI()
         }
+
     }
 
     /**
@@ -313,6 +322,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
      * These settings are appropriate for mapping applications that show real-time location
      * updates.
      */
+
     private fun createLocationRequest() {
         mLocationRequest = LocationRequest.create()
 
@@ -455,6 +465,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
      * if the user is requesting location updates.
      */
     private fun setButtonsEnabledState() {
+
         if (mRequestingLocationUpdates!!) {
             mStartUpdatesButton!!.isEnabled = false
             mStopUpdatesButton!!.isEnabled = true
@@ -468,14 +479,17 @@ class SpeedoMeterActivity : AppCompatActivity() {
      * Sets the value of the UI fields for the location latitude, longitude and last update time.
      */
     private fun updateLocationUI() {
+
         try {
+
             if (binding.viewPager.currentItem == 0) {
                 listeners[0]?.locationCallback(mCurrentLocation!!)
             }
+
             if (binding.viewPager.currentItem == 1) {
                 listeners[1]?.locationCallback(mCurrentLocation!!)
-
             }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -20,7 +20,7 @@
     <string name="more_apps">More Apps</string>
     <string name="share_application">Share This App</string>
     <string name="exit_app">Exit</string>
-    <string name="are_you_sure_to_exit">Are you sure you want to exit this application?</string>
+    <string name="are_you_sure_to_exit">Are you sure you want to exit this app?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="permissionDeniedHeader">Required Permissions</string>

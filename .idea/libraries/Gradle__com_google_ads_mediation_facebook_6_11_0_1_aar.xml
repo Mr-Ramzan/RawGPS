@@ -6,6 +6,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/fb2070fef98f52065134f527adbb4508/transformed/facebook-6.11.0.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fb2070fef98f52065134f527adbb4508/transformed/facebook-6.11.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fb2070fef98f52065134f527adbb4508/transformed/facebook-6.11.0.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

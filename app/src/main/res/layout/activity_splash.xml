@@ -14,12 +14,16 @@
         android:scaleType="fitXY" />
 
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/gifView"
         android:layout_width="@dimen/_230sdp"
         android:layout_height="@dimen/_270sdp"
-        android:scaleType="centerInside"
-        android:visibility="gone"
+        app:lottie_rawRes="@raw/splash_lottie_json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed=".7"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,4 +38,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.62" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

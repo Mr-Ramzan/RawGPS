@@ -429,13 +429,14 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:padding="8dp"
+                    android:padding="14dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/speedmeter_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -501,14 +502,40 @@
         android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/tittle_home"
         android:textColor="#353535"
-        android:textSize="30sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_button" />
+
+    <ImageButton
+        android:id="@+id/share_app_ib"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/share_black"
+        app:layout_constraintEnd_toStartOf="@+id/info_button"
+        app:layout_constraintTop_toTopOf="@+id/menu_button"
+        app:tint="@color/black" />
+
+    <ImageButton
+        android:id="@+id/info_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/transparent"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/info_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/menu_button"
+        app:tint="@color/black" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"

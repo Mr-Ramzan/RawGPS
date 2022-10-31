@@ -92,7 +92,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             loadBanner()
         } else {
             binding.layoutBottom.visibility = View.GONE
-            binding.group2.visibility = View.GONE
+            binding.sourceContainer.visibility = View.GONE
             loadBanner()
         }
         //========================================================================================//

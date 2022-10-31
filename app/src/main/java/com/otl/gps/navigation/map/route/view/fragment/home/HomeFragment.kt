@@ -17,6 +17,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
+import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMING_SOON
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CONVERTER
@@ -34,6 +35,7 @@ class HomeFragment : Fragment() {
 
 
     private var _binding: FragmentHomeBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -76,7 +78,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     private fun setListeners() {
 
         binding.routeFinderButton.setOnClickListener {
@@ -96,12 +97,12 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.nearbyPlaces .setOnClickListener {
+        binding.nearbyPlaces.setOnClickListener {
             EventBus.getDefault().post(NavEvent(NAVIGATE_EXPLORE_PLACES))
         }
 
 
-        binding.travelToolsButton .setOnClickListener {
+        binding.travelToolsButton.setOnClickListener {
             EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
         }
         binding.compass.setOnClickListener {
@@ -111,6 +112,12 @@ class HomeFragment : Fragment() {
 
         binding.currencyConverterButton.setOnClickListener {
             EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
+        }
+        binding.infoButton.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(ACTION_POLICY))
+        }
+        binding.shareAppIb.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(ACTION_SHARE))
         }
 
 

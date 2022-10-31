@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-anydpi/info_icon.xml" value="0.1425" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_background_drawable.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_background_hollow.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_transparent_background.xml" value="0.1" />
@@ -12,6 +13,7 @@
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable/button_background_round_a_little.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable/input_border.xml" value="0.152" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/activity_location_from_google_map.xml" value="0.25" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/activity_my_location_google.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/activity_serch_places.xml" value="0.264" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/activity_speedometer.xml" value="0.1453125" />
@@ -19,6 +21,7 @@
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/bottomsheet_routefinder.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/content_main.xml" value="0.25" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/dialog_exit.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/exit_bottom_sheet_dialog.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/explore_places.xml" value="0.264" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_analog.xml" value="0.25" />
@@ -26,7 +29,7 @@
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_compass.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_digital.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_dulex_speed.xml" value="0.1453125" />
-        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_home.xml" value="0.23311897106109325" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_home.xml" value="0.4" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_linear_speed.xml" value="0.1453125" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_places.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/fragment_pointer.xml" value="0.25" />

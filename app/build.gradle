@@ -36,14 +36,14 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
@@ -66,7 +66,6 @@ android {
         }
 
 
-
         debug {
             resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
             resValue 'string', 'gps_inter_id', '"ca-app-pub-3940256099942544/1033173712"'
@@ -80,7 +79,6 @@ android {
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,9 +111,6 @@ android {
     }
 
 
-
-
-
 }
 
 dependencies {
@@ -144,8 +139,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     //Ads Integration
-    implementation 'com.google.firebase:firebase-ads:21.2.0'
-    implementation 'com.google.android.gms:play-services-ads:21.2.0'
+    implementation 'com.google.firebase:firebase-ads:21.3.0'
     //required for open app ads
     def lifecycle_version = '2.4.0'
     def lifecycle_version_ = '2.5.1'
@@ -210,6 +204,8 @@ dependencies {
     implementation 'com.google.ads.mediation:facebook:6.11.0.1'
 //    implementation 'com.unity3d.ads:unity-ads:4.4.1'
 //    implementation 'com.google.ads.mediation:unity:4.4.1.0'
+
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
     implementation 'com.google.ads.mediation:applovin:11.5.3.1'
 }
 

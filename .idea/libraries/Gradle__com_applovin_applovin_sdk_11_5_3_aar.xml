@@ -6,6 +6,8 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4dcb65b84616f9b6df5e4335ec9a243d/transformed/applovin-sdk-11.5.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.applovin/applovin-sdk/11.5.3/5e5a3ceb4bdc8f76e2819460d7420130f20af8dd/applovin-sdk-11.5.3-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

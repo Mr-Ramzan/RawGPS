@@ -5,6 +5,9 @@
     android:layout_height="fill_parent"
     android:background="@color/transparent">
 
+
+
+
     <com.github.anastr.speedviewlib.DeluxeSpeedView
         android:id="@+id/deluxeSpeedView"
         android:layout_width="0dp"
