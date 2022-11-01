@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -30,11 +32,12 @@ class Splash : AppCompatActivity() {
     private val COUNTER_TIME = 5L;
     private lateinit var binding: ActivitySplashBinding
     private lateinit var windowInsetsController: WindowInsetsControllerCompat
-
+    private lateinit var bounceAnimation: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
         setContentView(binding.root)
         setupBg()
         hideSystemBars()
@@ -43,8 +46,28 @@ class Splash : AppCompatActivity() {
             (application as RawGpsApp).appContainer.prefs.disableAppOpenAds()
             goToHome()
         } else {
+
             createTimer(COUNTER_TIME)
+
         }
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.splashTittle.post {
+
+                binding.splashTittle.startAnimation(bounceAnimation)
+
+            }
+        }, 2000)
+        bounceAnimation.setAnimationListener(object :Animation.AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                binding.splashTittle.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+        })
     }
 
     private fun setupBg() {
@@ -72,6 +95,7 @@ class Splash : AppCompatActivity() {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
         }
+
     }
 
 
@@ -86,12 +110,15 @@ class Splash : AppCompatActivity() {
 
 
     private fun goToHome() {
+
         try {
             startActivity(Intent(this@Splash, MainController::class.java))
             Handler(Looper.getMainLooper()).postDelayed({ this@Splash.finish() }, 700)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+
     }
 
 
@@ -103,13 +130,9 @@ class Splash : AppCompatActivity() {
     private fun createTimer(seconds: Long) {
         val countDownTimer: CountDownTimer = object : CountDownTimer(seconds * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-
             }
-
             override fun onFinish() {
-
                 val application = application
-
                 // If the application is not an instance of MyApplication, log an error message and
                 // start the MainActivity without showing the app open ad.
                 if (application !is RawGpsApp) {

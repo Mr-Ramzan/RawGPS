@@ -1,6 +1,8 @@
 package com.otl.gps.navigation.map.route.view.fragment.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -81,52 +83,124 @@ class HomeFragment : Fragment() {
     private fun setListeners() {
 
         binding.routeFinderButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_ROUTE))
         }
 
         binding.myLocation.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_LOCATION))
         }
 
         binding.satelliteButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_SATELLITE))
         }
 
         binding.trafficView.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_TRAFFIC))
         }
 
 
         binding.nearbyPlaces.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_EXPLORE_PLACES))
         }
 
 
         binding.travelToolsButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
         }
         binding.compass.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_COMPASS))
         }
 
 
         binding.currencyConverterButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
         }
         binding.infoButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(ACTION_POLICY))
         }
         binding.shareAppIb.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(ACTION_SHARE))
         }
 
 
         binding.speedometerButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_SPEEDOMETER))
         }
 
 
         binding.menuButton.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
 //            EventBus.getDefault().post(NavEvent(OPEN_DRAWER))
         }
 

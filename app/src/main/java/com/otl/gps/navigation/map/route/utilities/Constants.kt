@@ -17,7 +17,7 @@ object Constants {
     const val FROM_SPLASH = "splash"
     const val FROM_HOME = "home"
     const val FROM_NAVIGATION = "navigation"
-     var MAP_BOX_ACCESS_TOKEN = "sk.eyJ1IjoiamF3YWRhbWphZCIsImEiOiJjbDVzMDN5c2cwN3FvM2Zxd3I2NHMyaDR6In0.QSbUNh97LzqUmx00LcvJpQ"
+     var MAP_BOX_ACCESS_TOKEN = "sk.eyJ1IjoibmV3dG9tYXBib3giLCJhIjoiY2w5eHRncXFrMGRsNjNycGliM2ltdGoyNyJ9.6qiaDhJraQ7aYCdIudFlUw"
 
     /////////////////////////////////////////////////////////////
     lateinit var savedPlace: SavedPlace
@@ -26,9 +26,7 @@ object Constants {
     /*==========================================================
                           IN APPS
     ===========================================================*/
-    val PREF_REMOVE_ADS: String = "ads_removed"
-    const val PREF_REMOVE_AD_INAPP = "com.abl.gpstracker.navigation.maps.routefinder.app.remove_ads"
-    const val PREMIUM_ADS = "com.abl.gps.maps.premium.subscription"
+
 
     /////////////////////////////////////////////////////////////////////////////
     //Navigation Events

@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import androidx.fragment.app.FragmentPagerAdapter
 import application.RawGpsApp
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
 
 import com.google.android.gms.common.api.ApiException
@@ -31,6 +32,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySpeedometerBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.interfaces.locationCallback
@@ -114,12 +116,25 @@ class SpeedoMeterActivity : AppCompatActivity() {
             })
     }
 
+
+
+    private fun setupBg() {
+
+        try {
+            Glide.with(this).load(R.drawable.home_bg).into(binding.homeBgView)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySpeedometerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        setupBg()
         loadBanner()
         setupViewPager(binding.viewPager)
         binding.dotsIndicator.attachTo(binding.viewPager);
@@ -174,11 +189,11 @@ class SpeedoMeterActivity : AppCompatActivity() {
             fragsList.clear()
             fragsList.add(AnalogSpeedFragment())
             fragsList.add(AwesomeSpeedFragment())
-            fragsList.add(DulexSpeedFragment())
-            fragsList.add(RaySpeedFragment())
-            fragsList.add(LinearSpeedFragment())
-            fragsList.add(TubeSpeedFragment())
-            fragsList.add(PointerSpeedFragment())
+//            fragsList.add(DulexSpeedFragment())
+//            fragsList.add(RaySpeedFragment())
+//            fragsList.add(LinearSpeedFragment())
+//            fragsList.add(TubeSpeedFragment())
+//            fragsList.add(PointerSpeedFragment())
 
 
 
