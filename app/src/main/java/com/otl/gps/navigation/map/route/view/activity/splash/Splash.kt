@@ -124,7 +124,8 @@ class Splash : AppCompatActivity() {
                             this@Splash, object : RawGpsApp.OnShowAdCompleteListener {
                                 override fun onShowAdComplete() {
                                     if ((application as RawGpsApp).appContainer.prefs.getFirstLaunch()) {
-                                        goToOnBoarding()
+//                                        goToOnBoarding()
+                                        goToHome()
                                     } else {
 //                                        Log.e("Max Threshold==========>","======>${prefs.getPremiumScreenThreshHold()}")
 //                                        Log.e("AppLaunchCount==========>","======>${prefs.getAppLaunchCount()}")

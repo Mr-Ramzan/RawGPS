@@ -29,29 +29,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/currentLayout"
         android:layout_width="@dimen/_170sdp"
-        android:layout_height="@dimen/_220sdp"
+        android:layout_height="@dimen/_200sdp"
         android:layout_marginTop="8dp"
 
 
         android:background="@drawable/weather_card_bg"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardMain"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/searchCardMain">
 
 
         <TextView
             android:id="@+id/homeCity"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
             android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:maxLines="2"
             android:text="Today"
             android:textColor="@color/white"
-            android:textSize="34sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +100,10 @@
 
         <TextView
             android:id="@+id/time"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/poppins"
             android:gravity="center"
@@ -113,7 +115,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/temperature"
+            app:layout_constraintTop_toTopOf="@+id/temperature"
             app:layout_constraintVertical_bias="0.0" />
 
         <View
@@ -314,6 +316,7 @@
         android:id="@+id/forcastCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:alpha=".7"
         android:paddingStart="@dimen/_6sdp"
         android:paddingEnd="@dimen/_6sdp"
@@ -322,7 +325,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bannerAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/currentLayout"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -477,10 +480,4 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.54" />
 </androidx.constraintlayout.widget.ConstraintLayout>
