@@ -32,6 +32,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.mapbox.geojson.Point
 import com.otl.gps.navigation.map.route.databinding.ActivityLocationFromGoogleMapBinding
+import com.otl.gps.navigation.map.route.databinding.ActivityPreviewPlacesBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
@@ -45,7 +46,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
 
-    private lateinit var binding: ActivityLocationFromGoogleMapBinding
+    private lateinit var binding: ActivityPreviewPlacesBinding
     lateinit var locationManager: LocationManager
     private var locationByNetwork: Location? = null
     private var TAG = "SelectMapLocationActivity"
@@ -79,18 +80,18 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DialogUtils.showLoadingDialog(this)
-        binding = ActivityLocationFromGoogleMapBinding.inflate(layoutInflater)
+        binding = ActivityPreviewPlacesBinding.inflate(layoutInflater)
         getIntentData()
         val view = binding.root
         setContentView(view)
         loadMap()
         //loadNativeBanner()
         loadBanner()
-        binding.layoutHeader.tvTitle.text = "Select Location"
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         geoCoderAddress = GeoCoderAddress(this)
         clickEvent()
+        getLocationAddress()
 
     }
 
@@ -204,6 +205,26 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         }
     }
 
+
+    private fun getLocationAddress(){
+
+        try {
+            CoroutineScope(Dispatchers.Main).launch {
+                geoCoderAddress.getCompleteAddress(
+                    placeToPreview.latitude!!.toDouble(), placeToPreview.longitude!!.toDouble(),
+                    binding.tvAddress
+                ) {
+                    if (it != null) {
+                        address = it
+                    }
+                }
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     @SuppressLint("MissingPermission")
     private fun getLocation() {
         val hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -221,14 +242,14 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
 
                     try {
                         CoroutineScope(Dispatchers.Default).launch {
-                            geoCoderAddress.getCompleteAddress(
-                                locationByNetwork!!.latitude, locationByNetwork!!.longitude,
-                                binding.tvAddress
-                            ) {
-                                if (it != null) {
-                                    address = it
-                                }
-                            }
+//                            geoCoderAddress.getCompleteAddress(
+//                                placeToPreview.longitude!!.toDouble(), placeToPreview.longitude!!.toDouble(),
+//                                binding.tvAddress
+//                            ) {
+//                                if (it != null) {
+//                                    address = it
+//                                }
+//                            }
                         }
 
                     } catch (e: Exception) {
@@ -288,7 +309,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         try{
             marker = map.addMarker(
                         MarkerOptions()
-                            .position(LatLng(placeToPreview.latitude!!.toDouble(), placeToPreview.longitude!!.toDouble()))
+                            .position(LatLng(placeToPreview.latitude.toDouble(), placeToPreview.longitude!!.toDouble()))
                             .title("")
                             .anchor(0f, 0f)
                             .infoWindowAnchor(0.5f, 0.5f)
@@ -296,6 +317,37 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
                     )!!
 
         }catch (e:Exception){e.printStackTrace()}
+
+
+        try {
+            val cameraPos: CameraPosition = CameraPosition.Builder()
+                .target(
+                    LatLng(
+                        placeToPreview.latitude.toDouble(),
+                        placeToPreview.longitude.toDouble()
+                    )
+                )
+                .zoom(15.5f)
+                .bearing(0f)
+                .tilt(25f)
+                .build()
+            checkReadyThen {
+                changeCamera(
+                    CameraUpdateFactory.newCameraPosition(cameraPos),
+                    object : GoogleMap.CancelableCallback {
+                        override fun onFinish() {
+                        }
+
+                        override fun onCancel() {
+                        }
+                    })
+            }
+
+        }catch (e:Exception){e.printStackTrace()}
+
+
+
+
     }
 
     private fun clickEvent() {
@@ -309,58 +361,32 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
 
         Log.d(TAG, isFindAddressClick.toString())
 
-        binding.SelectLocationButton
+        binding.llShareLocation
             .setOnClickListener {
                 if (isMapLoaded) {
 
 
-                    if (fromLocation) {
+                            shareLocation()
+                        }
 
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.ADDRESS_FROM_LOCATION, address)
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.LATITUDE_FROM_LOCATION, latitude)
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.LONGITUDE_FROM_LOCATION, longitude)
-
-
-                    }
-
-                    if (toLocation) {
-
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.ADDRESS_TO_LOCATION, address)
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.LATITUDE_TO_LOCATION, latitude)
-                       (application as RawGpsApp).appContainer. prefs.setString(Constants.LONGITUDE_TO_LOCATION, longitude)
-
-
-                    }
-
-
-                    if (isFindAddressClick) {
-                        val intent = Intent()
-                        intent.putExtra("address", address)
-                        intent.putExtra("latitude", latitude)
-                        intent.putExtra("longitude", longitude)
-                        intent.putExtra("isFindAddressClick", true)
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-                    }
-
-                    if (isSelectOnMapClick) {
-                        val intent = Intent()
-                        intent.putExtra("address", address)
-                        intent.putExtra("isFromLocationClick", fromLocation)
-                        intent.putExtra("isToLocationClick", toLocation)
-                        intent.putExtra("isSelectOnMapClick", true)
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-                    }
                 }
-            }
 
-        binding.layoutHeader.ivBack.setOnClickListener {
+
+        binding.backButton.setOnClickListener {
             finish()
         }
 
     }
 
+
+    private fun shareLocation() {
+        val uri =
+            "http://maps.google.com/maps?daddr=" + placeToPreview.latitude + "," + placeToPreview.longitude
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, uri)
+        startActivity(Intent.createChooser(sharingIntent, "Share in..."))
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -530,7 +556,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
         val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(latitude!!.toDouble(), longitude!!.toDouble()))
+            .target(LatLng(placeToPreview.latitude!!.toDouble(),placeToPreview.longitude!!.toDouble()))
             .zoom(15.5f)
             .bearing(0f)
             .tilt(25f)
