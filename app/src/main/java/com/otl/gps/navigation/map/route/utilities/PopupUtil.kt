@@ -17,7 +17,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 object PopupUtil
 {
 
-    public fun showDeleteDialog(context:Context, Header:String, Desc:String, done:(success:Boolean)->Unit) {
+    fun showDeleteDialog(context:Context, Header:String, Desc:String, done:(success:Boolean)->Unit) {
         val deleteDialog: AlertDialog
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_exit, null)
         val yes = dialogView.findViewById<TextView>(R.id.btn_yes)
@@ -32,7 +32,7 @@ object PopupUtil
 //            )
 
             ((context as Activity).application as RawGpsApp).appContainer.myAdsUtill .AddBannerToLayout(
-                context as Activity,
+                context,
                 nativeAd,
                 AdSize.MEDIUM_RECTANGLE,
                 object : AdLoadedCallback {
@@ -61,7 +61,7 @@ object PopupUtil
 
 
     @SuppressLint("SetTextI18n")
-    public fun showPermissionSettingPopup(context:Context, done:(success:Boolean)->Unit) {
+    fun showPermissionSettingPopup(context:Context, done:(success:Boolean)->Unit) {
         val deleteDialog: AlertDialog
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_exit, null)
         val yes = dialogView.findViewById<TextView>(R.id.btn_yes)

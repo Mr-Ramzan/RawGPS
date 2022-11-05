@@ -64,17 +64,13 @@ class QiblaCompassFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
     {
         binding = FragmentQiblaCompassBinding.inflate(inflater, container, false)
-        return binding!!.root
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
     private fun setupBg() {
 
         try {
-            Glide.with(this).load(R.drawable.home_bg).into(binding!!.bgImage)
+            Glide.with(this).load(R.drawable.home_bg).into(binding.bgImage)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -159,9 +155,9 @@ class QiblaCompassFragment : Fragment(){
 //    }
 
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddSquareBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddSquareBannerToLayout(
             requireActivity(),
-            binding!!.adsContainer,
+            binding.adsContainer,
             AdSize.MEDIUM_RECTANGLE,
             object : AdLoadedCallback {
 

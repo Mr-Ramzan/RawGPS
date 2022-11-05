@@ -61,13 +61,6 @@ class SavedPlacesListFragment : Fragment() {
     var canShowNativeAd = false
     var adsReloadTry = 0
 
-    //    private lateinit var adsUtill: MyAdsUtill
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        adsUtill = MyAdsUtill(requireActivity())
-
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -143,7 +136,7 @@ class SavedPlacesListFragment : Fragment() {
     }
 
 
-    public fun setupRv() {
+    fun setupRv() {
         fetchSavedPlaces()
         binding.placesButtonRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -176,9 +169,6 @@ class SavedPlacesListFragment : Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -188,7 +178,7 @@ class SavedPlacesListFragment : Fragment() {
             Uri.parse("geo:" + mCurrentLocation?.latitude + "," + mCurrentLocation?.longitude + "?q=" + type)
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
-        if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+        if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
             showInterAds {
                 startActivity(mapIntent)
             }
@@ -209,8 +199,8 @@ class SavedPlacesListFragment : Fragment() {
 
 
     private fun loadInter() {
-        if ((requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.mInterstitialAd == null) {
-            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.loadInterestitial(
+        if ((requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.mInterstitialAd == null) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.loadInterestitial(
                 requireActivity()
             ) {
                 canShowInter = it
@@ -222,7 +212,7 @@ class SavedPlacesListFragment : Fragment() {
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.showInterestitial(
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.showInterestitial(
                 requireActivity()
             ) {
                 shown(it)
@@ -260,7 +250,7 @@ class SavedPlacesListFragment : Fragment() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
             requireActivity(),
             binding.adsParent,
             AdSize.LARGE_BANNER,
@@ -273,7 +263,7 @@ class SavedPlacesListFragment : Fragment() {
     }
 
     private fun hideShowInappsButton() {
-        if ((requireActivity().application as RawGpsApp).appContainer!!. prefs!!.areAdsRemoved()!!) {
+        if ((requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             binding.placesButtonRv.visibility = View.GONE
             EventBus.getDefault().post(NavEvent(UPDATE_CANCEL_BUTTON))
 
@@ -603,7 +593,7 @@ class SavedPlacesListFragment : Fragment() {
         try {
             var results = RawGpsApp.realmDB?.getSavedPlaces()
             if (!results.isNullOrEmpty()) {
-                savedPlaces.addAll(results!!)
+                savedPlaces.addAll(results)
             } else {
                 Toast.makeText(requireContext(), "No saved places found!", Toast.LENGTH_SHORT)
                     .show()

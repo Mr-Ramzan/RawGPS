@@ -33,7 +33,7 @@ class AnalogSpeedFragment : Fragment(), locationCallback {
 
     override fun locationCallback(location: Location) {
         Log.e("Analog","Analog<============>${location.latitude}/${location.longitude}")
-        val speed = (location!!.speed * 3.6).toFloat()
+        val speed = (location.speed * 3.6).toFloat()
         binding!!.speedometer.setSpeed(speed.toInt(), 700) {}
     }
 }

@@ -54,7 +54,7 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
     }
 
-    public fun initializeSearchSDK(){
+    fun initializeSearchSDK(){
 
         MapboxSearchSdk.initialize(
             application = this@RawGpsApp,

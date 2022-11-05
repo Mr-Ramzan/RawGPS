@@ -12,7 +12,7 @@ plugins {
 
 }
 
-android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
+//android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
 
 android {
     compileSdk 32
@@ -22,9 +22,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "x86", "armeabi-v7a"
-        }
+
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
         }
@@ -36,14 +34,14 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
@@ -85,11 +83,11 @@ android {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -101,10 +99,9 @@ android {
     buildFeatures {
         viewBinding true
     }
-    ndkVersion '21.3.6528147'
+//    ndkVersion '21.3.6528147'
     compileOptions {
 //        coreLibraryDesugaringEnabled true
-
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
@@ -206,8 +203,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
     implementation 'com.google.ads.mediation:facebook:6.11.0.1'
-//    implementation 'com.unity3d.ads:unity-ads:4.4.1'
-//    implementation 'com.google.ads.mediation:unity:4.4.1.0'
+    implementation 'com.unity3d.ads:unity-ads:4.4.1'
+    implementation 'com.google.ads.mediation:unity:4.4.1.0'
 
     implementation 'com.google.android.gms:play-services-ads:21.3.0'
     implementation 'com.google.ads.mediation:applovin:11.5.3.1'

@@ -29,7 +29,7 @@ class Splash : AppCompatActivity() {
      * Number of seconds to count down before showing the app open ad. This simulates the time needed
      * to load the app.
      */
-    private val COUNTER_TIME = 5L;
+    private val COUNTER_TIME = 5L
     private lateinit var binding: ActivitySplashBinding
     private lateinit var windowInsetsController: WindowInsetsControllerCompat
     private lateinit var bounceAnimation: Animation
@@ -84,7 +84,7 @@ class Splash : AppCompatActivity() {
     private fun hideSystemBars() {
 
         windowInsetsController =
-            WindowCompat.getInsetsController(window, window.decorView) ?: return
+            WindowCompat.getInsetsController(window, window.decorView)
         // Configure the behavior of the hidden system bars
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -140,29 +140,22 @@ class Splash : AppCompatActivity() {
                     goToHome()
                     return
                 }
-                if (!(application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+                if (!application.appContainer.prefs.areAdsRemoved()) {
                     // Show the app open ad.
-                    (application as RawGpsApp)
+                    application
                         .showAdIfAvailable(
                             this@Splash, object : RawGpsApp.OnShowAdCompleteListener {
                                 override fun onShowAdComplete() {
-                                    if ((application as RawGpsApp).appContainer.prefs.getFirstLaunch()) {
-//                                        goToOnBoarding()
+                                    if (application.appContainer.prefs.getFirstLaunch()) {
                                         goToHome()
                                     } else {
-//                                        Log.e("Max Threshold==========>","======>${prefs.getPremiumScreenThreshHold()}")
-//                                        Log.e("AppLaunchCount==========>","======>${prefs.getAppLaunchCount()}")
-//                                        if (prefs.getAppLaunchCount() >= prefs.getPremiumScreenThreshHold()) {
-//                                            goToPremium()
-//                                        } else {
                                         goToHome()
-//                                        }
                                     }
                                 }
                             })
                 } else {
 
-                    if ((application as RawGpsApp).appContainer.prefs.getFirstLaunch()) {
+                    if (application.appContainer.prefs.getFirstLaunch()) {
 
                         goToOnBoarding()
 

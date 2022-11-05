@@ -24,7 +24,7 @@ class RealmDB {
                 .equalTo("latitude", placeToDelete.latitude)
                 .findFirst()
             if (result != null) {
-                result?.deleteFromRealm()
+                result.deleteFromRealm()
                 success(true)
             } else {
                 success(false)
@@ -36,7 +36,7 @@ class RealmDB {
 //        }
     }
 
-    public fun checkIfExist(primaryKey: String, exists: (exists: Boolean) -> Unit) {
+    fun checkIfExist(primaryKey: String, exists: (exists: Boolean) -> Unit) {
         try {
             if (realm == null || primaryKey.isEmpty()) {
                 return
@@ -78,7 +78,7 @@ class RealmDB {
         }
     }
 
-    public fun getSavedPlaces(): ArrayList<SavedPlace> {
+    fun getSavedPlaces(): ArrayList<SavedPlace> {
         var savedPlaces = ArrayList<SavedPlace>()
         if (realm != null) {
             val result = realm.where(SavedPlace::class.java).findAllAsync()

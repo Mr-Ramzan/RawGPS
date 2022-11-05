@@ -148,7 +148,7 @@ class WeatherDetailActivity : AppCompatActivity(){
             binding.farhenhite.background =
                 resources.getDrawable(R.drawable.button_background_drawable)
             binding.celcius.setBackgroundResource(R.drawable.ic_c_unselected)
-            var fahrenheit = ((data_temperature.toInt() * 9) / 5) + 32;
+            var fahrenheit = ((data_temperature.toInt() * 9) / 5) + 32
             _binding!!.temperature.text = "$fahrenheit K"
             _binding!!.feelLikeValue.text = "$fahrenheit K"
         }
@@ -157,7 +157,7 @@ class WeatherDetailActivity : AppCompatActivity(){
 
 
     private fun loadBanner() {
-        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
 
             this,
             binding.bannerAd,

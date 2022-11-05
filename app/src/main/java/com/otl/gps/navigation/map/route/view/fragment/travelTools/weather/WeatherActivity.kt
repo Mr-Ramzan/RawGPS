@@ -60,12 +60,12 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         currWViewModel = ViewModelProvider(this).get(CurrentWeatherViewModel::class.java)
         forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
         viewModel = ViewModelProvider(this).get(cityWeatherViewModel::class.java)
-        latitude = (application as RawGpsApp).appContainer!!.prefs!!.getString(
+        latitude = (application as RawGpsApp).appContainer.prefs.getString(
 
             LATITUDE_FROM_LOCATION,
             ""
         )
-        longitude = (application as RawGpsApp).appContainer!!.prefs!!.getString(
+        longitude = (application as RawGpsApp).appContainer.prefs.getString(
             LONGITUDE_FROM_LOCATION,
             ""
         )
@@ -196,7 +196,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
     }
 
     private fun loadBanner() {
-        (application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
+        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
 
             this,
             binding.bannerAd,

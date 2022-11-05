@@ -79,10 +79,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     private var destMarker: Marker? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -208,13 +204,13 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
 
         if (locationByNetwork == null && longSrcLocation.isNotEmpty() && latSrcLocation.isNotEmpty()) {
-            locationByNetwork = Location("");//provider name is unnecessary
-            locationByNetwork?.latitude = latSrcLocation.toDouble();//your coords of course
-            locationByNetwork?.longitude = longSrcLocation.toDouble();
+            locationByNetwork = Location("")//provider name is unnecessary
+            locationByNetwork?.latitude = latSrcLocation.toDouble()//your coords of course
+            locationByNetwork?.longitude = longSrcLocation.toDouble()
             updateMarkers()
         } else {
-            locationByNetwork?.latitude = latSrcLocation.toDouble();//your coords of course
-            locationByNetwork?.longitude = longSrcLocation.toDouble();
+            locationByNetwork?.latitude = latSrcLocation.toDouble()//your coords of course
+            locationByNetwork?.longitude = longSrcLocation.toDouble()
             updateMarkers()
         }
 
@@ -499,12 +495,12 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
 
     private fun getKms(distance: Double): Double {
-        return distance * 0.621371;
+        return distance * 0.621371
 
     }
 
     private fun getMiles(distance: Double): Double {
-        return distance * 1.60934;
+        return distance * 1.60934
 
     }
 
@@ -763,7 +759,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
@@ -865,7 +861,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
         val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(latSrcLocation!!.toDouble(), longSrcLocation!!.toDouble()))
+            .target(LatLng(latSrcLocation.toDouble(), longSrcLocation.toDouble()))
             .zoom(15.5f)
             .bearing(0f)
             .tilt(25f)

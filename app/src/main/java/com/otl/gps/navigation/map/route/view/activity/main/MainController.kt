@@ -90,7 +90,7 @@ class MainController : AppCompatActivity() {
         setContentView(binding.root)
         EventBus.getDefault().register(this)
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,GravityCompat.START);
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,GravityCompat.START)
         setupNoInternetPopup()
 
         loadInter()
@@ -188,7 +188,7 @@ class MainController : AppCompatActivity() {
     }
 
     @Subscribe
-    public fun onEvent(eve: NavEvent) {
+    fun onEvent(eve: NavEvent) {
 
         when (eve.event) {
 

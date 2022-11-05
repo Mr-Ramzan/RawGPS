@@ -361,9 +361,9 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         }
 
         if (locationByNetwork == null && longitude!!.isNotEmpty() && latitude!!.isNotEmpty()) {
-            locationByNetwork = Location("");//provider name is unnecessary
-            locationByNetwork?.latitude = origin!!.latitude();//your coords of course
-            locationByNetwork?.longitude = origin.longitude();
+            locationByNetwork = Location("")//provider name is unnecessary
+            locationByNetwork?.latitude = origin!!.latitude()//your coords of course
+            locationByNetwork?.longitude = origin.longitude()
             recenterCamera()
         } else {
             recenterCamera()
@@ -375,7 +375,7 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
@@ -422,7 +422,7 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
                         binding.tvAddress
                     ) {
                         address = it
-                        binding.tvAddress.setText(it)
+                        binding.tvAddress.text = it
                         DialogUtils.dismissLoading()
 
                     }

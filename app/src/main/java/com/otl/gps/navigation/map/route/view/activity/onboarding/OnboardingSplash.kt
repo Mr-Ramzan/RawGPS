@@ -38,12 +38,6 @@ class OnboardingSplash  : AppCompatActivity() {
         setlisteners()
     }
 
-    override fun onDestroy() {
-//        showSystemBars()
-        super.onDestroy()
-
-    }
-
 
     private fun hideSystemBars() {
         windowInsetsController =
@@ -111,11 +105,11 @@ class OnboardingSplash  : AppCompatActivity() {
      */
     private fun setUpViewPager() {
         var compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(40));
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
         compositePageTransformer.addTransformer { page, position ->
 
             var r: Float = 1F - Math.abs(position)
-            page.setScaleY(0.85f + r * 0.15f);
+            page.scaleY = 0.85f + r * 0.15f
 
 
         }
@@ -131,30 +125,20 @@ class OnboardingSplash  : AppCompatActivity() {
                 }
             }
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                }
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
 //                    Toast.makeText(this@SplashOnboardActivity,"position is "+position,Toast.LENGTH_SHORT).show()
                     if (position < 2f) {
-                        binding.nextButton.setText("Next")
+                        binding.nextButton.text = "Next"
                     } else {
-                        binding.nextButton.setText("Lets Go!")
+                        binding.nextButton.text = "Lets Go!"
                     }
                 }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                    super.onPageScrollStateChanged(state)
-                }
             })
             offscreenPageLimit = 3
-            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER;
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
             registerOnPageChangeCallback(pagerCallback)
             adapter?.notifyDataSetChanged()
 

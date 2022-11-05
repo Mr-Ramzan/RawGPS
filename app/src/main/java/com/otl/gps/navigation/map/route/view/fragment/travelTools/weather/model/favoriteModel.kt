@@ -7,6 +7,4 @@ data class favoriteModel(
     val wind_speed: String, val water_drop: String,
     val mintemp: String, val maxtemp: String,
     val lat: String, val long: String
-) {
-
-}
+)

@@ -503,7 +503,7 @@ GoogleMap.OnMyLocationClickListener {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public fun formattedAddress(name: String, address: SearchAddress): String {
+    fun formattedAddress(name: String, address: SearchAddress): String {
 
         var sddressString = ""
 
@@ -670,14 +670,14 @@ GoogleMap.OnMyLocationClickListener {
         longitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
         var origin: Point? = null
 
-        if (latitude!!.isNotEmpty() && longitude!!.isNotEmpty()) {
-            origin = Point.fromLngLat(longitude!!.toDouble(), latitude!!.toDouble())
+        if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
+            origin = Point.fromLngLat(longitude.toDouble(), latitude.toDouble())
         }
 
-        if (locationByNetwork == null && longitude!!.isNotEmpty() && latitude!!.isNotEmpty()) {
-            locationByNetwork = Location("");//provider name is unnecessary
-            locationByNetwork?.latitude = origin!!.latitude();//your coords of course
-            locationByNetwork?.longitude = origin.longitude();
+        if (locationByNetwork == null && longitude.isNotEmpty() && latitude.isNotEmpty()) {
+            locationByNetwork = Location("")//provider name is unnecessary
+            locationByNetwork?.latitude = origin!!.latitude()//your coords of course
+            locationByNetwork?.longitude = origin.longitude()
             recenterCamera()
         } else {
             recenterCamera()
@@ -689,7 +689,7 @@ GoogleMap.OnMyLocationClickListener {
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
@@ -718,7 +718,7 @@ GoogleMap.OnMyLocationClickListener {
                 try {
                     marker = map.addMarker(
                         MarkerOptions()
-                            .position(LatLng(latitude!!.toDouble(), longitude!!.toDouble()))
+                            .position(LatLng(latitude.toDouble(), longitude.toDouble()))
                             .title("")
                             .anchor(0f, 0f)
                             .infoWindowAnchor(0.5f, 0.5f)
@@ -736,7 +736,7 @@ GoogleMap.OnMyLocationClickListener {
                         binding.tvAddress
                     ) {
                         address = it
-                        binding.tvAddress.setText(it)
+                        binding.tvAddress.text = it
                         DialogUtils.dismissLoading()
 
                     }
@@ -795,7 +795,7 @@ GoogleMap.OnMyLocationClickListener {
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
         val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(latitude!!.toDouble(), longitude!!.toDouble()))
+            .target(LatLng(latitude.toDouble(), longitude.toDouble()))
             .zoom(15.5f)
             .bearing(0f)
             .tilt(25f)

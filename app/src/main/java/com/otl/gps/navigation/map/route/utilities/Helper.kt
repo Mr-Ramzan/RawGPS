@@ -33,18 +33,18 @@ object Helper {
     var CITY_CLOCK_NAME = "city_clock"
 
     //    ad view types
-    public val POPUP_NATIVE = "popup_ads"
-    public val START_NATIVE_SMALL = "native_small_button_start"
-    public val STYLE_LIST_NATIVE_SMALL = "native_small_style_list"
-    public val START_NATIVE = "native_samll_start"
-    public val MENU_NATIVE = "native_samll_menu"
-    public val BIG_NATIVE = "native_big"
+    val POPUP_NATIVE = "popup_ads"
+    val START_NATIVE_SMALL = "native_small_button_start"
+    val STYLE_LIST_NATIVE_SMALL = "native_small_style_list"
+    val START_NATIVE = "native_samll_start"
+    val MENU_NATIVE = "native_samll_menu"
+    val BIG_NATIVE = "native_big"
 
     /*==========================================================
                               IN APPS
     ===========================================================*/
     val PREF_REMOVE_ADS: String = "ads_removed"
-    public val PREF_REMOVE_AD_INAPP =
+    val PREF_REMOVE_AD_INAPP =
         "com.abl.stickermaker.forwhatsapp.remove_ads"
 
 
@@ -151,7 +151,7 @@ object Helper {
         if (view != null) {
             val inputManager =
                 activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager!!.hideSoftInputFromWindow(view.windowToken, 0)
+            inputManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 

@@ -151,7 +151,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
     }
 
 
-    public fun setupRv(){
+    fun setupRv(){
         binding.bottomSheet.placesRv.apply {
             layoutManager = GridLayoutManager(requireContext(), 5)
             adapter = SearchPlacesAdapter(preparePlacesList(),requireContext(),object:
@@ -170,9 +170,6 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -182,7 +179,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             Uri.parse("geo:" + mCurrentLocation?.latitude + "," + mCurrentLocation?.longitude + "?q=" + type)
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
-        if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+        if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
             showInterAds {
                 startActivity(mapIntent)
             }
@@ -226,7 +223,7 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
@@ -591,17 +588,6 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
             .addOnCompleteListener(requireActivity()) {
                 mRequestingLocationUpdates = false
             }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // Within {@code onPause()}, we remove location updates. Here, we resume receiving
-        // location updates if the user has requested them.
-//        if (mRequestingLocationUpdates && checkPermissions()) {
-//            startLocationUpdates();
-//        } else if (!checkPermissions()) {
-//            requestPermissions();
-//        }
     }
 
     override fun onPause() {

@@ -26,11 +26,6 @@ class TravelToolsFragment : Fragment() {
     private lateinit var binding: TravelToolsBinding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +45,7 @@ class TravelToolsFragment : Fragment() {
     }
 
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
             requireActivity(),
             binding.adsParent,
             AdSize.MEDIUM_RECTANGLE,
@@ -105,7 +100,7 @@ class TravelToolsFragment : Fragment() {
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.showInterestitial(
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.showInterestitial(
                 requireActivity()
             ) {
                 shown(it)

@@ -41,7 +41,7 @@ class SharedPreferencesManager(mContext: Context) {
     }
 
     operator fun contains(key: String?): Boolean {
-        return if (sharedPreferences!!.contains(key)) true else false
+        return sharedPreferences!!.contains(key)
     }
 
     fun getInt(key: String?, defaultvalue: Int): Int {
@@ -76,15 +76,15 @@ class SharedPreferencesManager(mContext: Context) {
     }
 
     fun getPremiumScreenThreshHold(value: Int = 0): Int {
-        return sharedPreferences!!.getInt(PREMIUM_SCREEN_THRESH_HOLD, value);
+        return sharedPreferences!!.getInt(PREMIUM_SCREEN_THRESH_HOLD, value)
     }
 
     fun getNavigationCount(value: Int = 0): Int {
-        return sharedPreferences!!.getInt(NAVIGATION_COUNT, value);
+        return sharedPreferences!!.getInt(NAVIGATION_COUNT, value)
     }
 
     fun getNavigationMaxCount(value: Int = 0): Int {
-        return sharedPreferences!!.getInt(NAVIGATION_MAX_COUNT, value);
+        return sharedPreferences!!.getInt(NAVIGATION_MAX_COUNT, value)
     }
 
     fun getMaxTriesReached(defaultvalue: Boolean = false): Boolean {

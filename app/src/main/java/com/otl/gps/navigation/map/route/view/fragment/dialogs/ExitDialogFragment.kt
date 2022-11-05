@@ -62,7 +62,7 @@ class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
             if (dialog != null && dialog!!.window != null) {
 
-                dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation;
+                dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -140,11 +140,6 @@ class ExitDialogFragment : BottomSheetDialogFragment(), View.OnClickListener {
         super.onStop()
     }
 
-
-    override fun onDetach() {
-//        BottomSheetFragmentListner = null;
-        super.onDetach()
-    }
 
     companion object {
         @JvmStatic

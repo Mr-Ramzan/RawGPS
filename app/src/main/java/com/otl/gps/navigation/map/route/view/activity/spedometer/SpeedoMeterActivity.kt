@@ -103,7 +103,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun  loadBanner(){
-        (application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
+        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
             this,
             binding.adViewBanner,
             AdSize.MEDIUM_RECTANGLE,
@@ -137,7 +137,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
 //        setupBg()
         loadBanner()
         setupViewPager(binding.viewPager)
-        binding.dotsIndicator.attachTo(binding.viewPager);
+        binding.dotsIndicator.attachTo(binding.viewPager)
         setListeners()
         loadInter()
 
@@ -236,8 +236,8 @@ class SpeedoMeterActivity : AppCompatActivity() {
 
 
     private fun loadInter() {
-        if ((application as RawGpsApp).appContainer?.myAdsUtill?.mInterstitialAd == null) {
-            (application as RawGpsApp).appContainer?.myAdsUtill?.loadInterestitial(
+        if ((application as RawGpsApp).appContainer.myAdsUtill?.mInterstitialAd == null) {
+            (application as RawGpsApp).appContainer.myAdsUtill?.loadInterestitial(
                 this
             ) {
                 canShowInter = it
@@ -249,7 +249,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (application as RawGpsApp).appContainer?.myAdsUtill?.showInterestitial(
+            (application as RawGpsApp).appContainer.myAdsUtill?.showInterestitial(
                 this
             ) {
                 shown(it)
@@ -365,7 +365,7 @@ class SpeedoMeterActivity : AppCompatActivity() {
 
                 mCurrentLocation = locationResult.lastLocation
                 mLastUpdateTime = DateFormat.getTimeInstance().format(Date())
-                updateLocationUI();
+                updateLocationUI()
 
             }
         }

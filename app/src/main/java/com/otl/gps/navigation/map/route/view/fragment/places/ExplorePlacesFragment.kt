@@ -27,11 +27,6 @@ class ExplorePlacesFragment : Fragment() {
     private lateinit var binding: ExplorePlacesBinding
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +54,7 @@ class ExplorePlacesFragment : Fragment() {
 
     }
     private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddSquareBannerToLayout(
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
             requireActivity(),
             binding.adsParent,
             AdSize.MEDIUM_RECTANGLE,
@@ -107,7 +102,7 @@ class ExplorePlacesFragment : Fragment() {
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.showInterestitial(
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.showInterestitial(
                 requireActivity()
             ) {
                 shown(it)

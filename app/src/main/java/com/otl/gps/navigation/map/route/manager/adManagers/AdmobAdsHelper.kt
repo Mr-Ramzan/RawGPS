@@ -31,7 +31,7 @@ class AdmobAdsHelper (mContext: Context) {
         //    var bannerInstace: AdView? = null
 //    var bigBannerInstance: AdView? = null
         private set
-    public var mNativeAds: NativeAd? = null
+    var mNativeAds: NativeAd? = null
     var mInterstitialAd: InterstitialAd? = null
     var mRewardedVideoAd: RewardedAd? = null
     private var consentForAds = true
@@ -156,7 +156,7 @@ class AdmobAdsHelper (mContext: Context) {
     fun showInterestitial(context: Activity, shown:(success:Boolean)->Unit) {
         try {
 
-            if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!! || !isSDKInitialized)
+            if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved() || !isSDKInitialized)
             {
                 shown(true)
                 log("Ads are Removed or SDK is not Initiaized")
@@ -168,11 +168,6 @@ class AdmobAdsHelper (mContext: Context) {
                     override fun onAdDismissedFullScreenContent() {
                         Log.d("Dismissed", "Ad was dismissed.")
                         shown(true)
-                    }
-
-                    override fun onAdClicked() {
-                        super.onAdClicked()
-//                        Logging.logImpressionForAds(context)
                     }
 
                     override fun onAdShowedFullScreenContent() {
@@ -310,7 +305,7 @@ class AdmobAdsHelper (mContext: Context) {
     fun AddSquareBannerToLayout(context: Activity, layout: FrameLayout, size: AdSize, loadCallback: AdLoadedCallback?)
     {
 
-        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!!) {
+        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             return
         }
         if (!isSDKInitialized) {
@@ -320,8 +315,8 @@ class AdmobAdsHelper (mContext: Context) {
         {
             try {
                 var bannerInstace = AdView(context)
-                bannerInstace?.setAdSize(size)
-                bannerInstace!!.adUnitId = context.getString(R.string.gps_square_banner_id)
+                bannerInstace.setAdSize(size)
+                bannerInstace.adUnitId = context.getString(R.string.gps_square_banner_id)
                 layout.addView(bannerInstace)
                 if (consentForAds) {
                     bannerAdRequest = AdRequest.Builder().build()
@@ -372,7 +367,7 @@ class AdmobAdsHelper (mContext: Context) {
     fun AddBannerToLayout(context: Activity, layout: FrameLayout, size: AdSize, loadCallback: AdLoadedCallback?)
     {
 
-        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!!) {
+        if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
             return
         }
         if (!isSDKInitialized) {
@@ -382,8 +377,8 @@ class AdmobAdsHelper (mContext: Context) {
         {
             try {
                 var bannerInstace = AdView(context)
-                bannerInstace?.setAdSize(size)
-                bannerInstace!!.adUnitId = context.getString(R.string.gps_banner_id)
+                bannerInstace.setAdSize(size)
+                bannerInstace.adUnitId = context.getString(R.string.gps_banner_id)
                 layout.addView(bannerInstace)
                 if (consentForAds) {
                     bannerAdRequest = AdRequest.Builder().build()
@@ -449,8 +444,8 @@ class AdmobAdsHelper (mContext: Context) {
 
 
                 var bannerInstace = AdView(context)
-                bannerInstace?.setAdSize(size)
-                bannerInstace!!.adUnitId = context.getString(R.string.gps_banner_id)
+                bannerInstace.setAdSize(size)
+                bannerInstace.adUnitId = context.getString(R.string.gps_banner_id)
                 if (consentForAds) {
                     bannerAdRequest = AdRequest.Builder().build()
                     log("Requesting Personlized Banner Ads")
@@ -467,9 +462,9 @@ class AdmobAdsHelper (mContext: Context) {
                         ).build()
                     log("Requesting Non Personlized Banner Ads")
                 }
-                bannerInstace!!.loadAd(bannerAdRequest!!)
+                bannerInstace.loadAd(bannerAdRequest!!)
                 log("Requesting Banner Ad")
-                bannerInstace!!.adListener = object : AdListener() {
+                bannerInstace.adListener = object : AdListener() {
                     override fun onAdLoaded() {
                         loadCallback?.addLoaded(true)
                         log("Banner Ad Loaded, Adding to Layout")
@@ -517,8 +512,8 @@ class AdmobAdsHelper (mContext: Context) {
 
 
                 var bannerInstace = AdView(context)
-                bannerInstace?.setAdSize(size)
-                bannerInstace!!.adUnitId = context.getString(R.string.gps_banner_id)
+                bannerInstace.setAdSize(size)
+                bannerInstace.adUnitId = context.getString(R.string.gps_banner_id)
                 if (consentForAds) {
                     bannerAdRequest = AdRequest.Builder().build()
                     log("Requesting Personlized Banner Ads")
@@ -535,9 +530,9 @@ class AdmobAdsHelper (mContext: Context) {
                         ).build()
                     log("Requesting Non Personlized Banner Ads")
                 }
-                bannerInstace!!.loadAd(bannerAdRequest!!)
+                bannerInstace.loadAd(bannerAdRequest!!)
                 log("Requesting Banner Ad")
-                bannerInstace!!.adListener = object : AdListener() {
+                bannerInstace.adListener = object : AdListener() {
                     override fun onAdLoaded() {
                         loadCallback?.addLoaded(true)
                         log("Banner Ad Loaded, Adding to Layout")
@@ -797,7 +792,7 @@ class AdmobAdsHelper (mContext: Context) {
         fun RewardUser()
     }
 
-    public fun onDestroy() {
+    fun onDestroy() {
         if (ctx != null) {
             ctx = null
         }

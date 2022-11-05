@@ -357,12 +357,12 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 Constants.LONGITUDE_FROM_LOCATION,
                 ""
             ).toString()
-        binding.tvAddress.setText(addressFromLocationSharedPref)
+        binding.tvAddress.text = addressFromLocationSharedPref
 //        binding.tvLatLng.setText("$latitudeFromLocation,$longitudeFromLocation")
         if (locationByNetwork == null && longitudeFromLocation.isNotEmpty() && latitudeFromLocation.isNotEmpty()) {
-            locationByNetwork = Location("");//provider name is unnecessary
-            locationByNetwork?.latitude = latitudeFromLocation.toDouble();//your coords of course
-            locationByNetwork?.longitude = longitudeFromLocation.toDouble();
+            locationByNetwork = Location("")//provider name is unnecessary
+            locationByNetwork?.latitude = latitudeFromLocation.toDouble()//your coords of course
+            locationByNetwork?.longitude = longitudeFromLocation.toDouble()
             zoomCamera()
         } else {
             zoomCamera()
@@ -460,8 +460,8 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
     }
 
 
-    public fun showOverWriteConfirmation(name: String, overwrite: (yes: Boolean) -> Unit) {
-        var alertDialogBuilder = AlertDialog.Builder(requireContext());
+    fun showOverWriteConfirmation(name: String, overwrite: (yes: Boolean) -> Unit) {
+        var alertDialogBuilder = AlertDialog.Builder(requireContext())
         alertDialogBuilder.setMessage("Pace with name \"$name\" already exists. Do you want to overwrite it?")
         alertDialogBuilder.setPositiveButton(
             "yes"
@@ -477,8 +477,8 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
         }
 
-        var alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        var alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
 
@@ -527,16 +527,6 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
         startActivity(Intent.createChooser(sharingIntent, "Share in..."))
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //  binding.map.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        // binding.map.onPause()
     }
 
     private fun stopLocationUpdates() {
@@ -622,7 +612,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             isMapLoaded = true
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()

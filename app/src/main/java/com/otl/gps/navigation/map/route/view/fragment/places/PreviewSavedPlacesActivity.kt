@@ -211,7 +211,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         try {
             CoroutineScope(Dispatchers.Main).launch {
                 geoCoderAddress.getCompleteAddress(
-                    placeToPreview.latitude!!.toDouble(), placeToPreview.longitude!!.toDouble(),
+                    placeToPreview.latitude.toDouble(), placeToPreview.longitude.toDouble(),
                     binding.tvAddress
                 ) {
                     if (it != null) {
@@ -309,7 +309,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         try{
             marker = map.addMarker(
                         MarkerOptions()
-                            .position(LatLng(placeToPreview.latitude.toDouble(), placeToPreview.longitude!!.toDouble()))
+                            .position(LatLng(placeToPreview.latitude.toDouble(), placeToPreview.longitude.toDouble()))
                             .title("")
                             .anchor(0f, 0f)
                             .infoWindowAnchor(0.5f, 0.5f)
@@ -417,7 +417,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private fun loadBanner() {
-        (application as RawGpsApp).appContainer?.myAdsUtill?.AddBannerToLayout(
+        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
             this,
             binding.adsParent,
             AdSize.LARGE_BANNER,
@@ -433,14 +433,14 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         longitude =(application as RawGpsApp).appContainer. prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
         var origin: Point? = null
 
-        if (latitude!!.isNotEmpty() && longitude!!.isNotEmpty()) {
-            origin = Point.fromLngLat(longitude!!.toDouble(), latitude!!.toDouble())
+        if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
+            origin = Point.fromLngLat(longitude.toDouble(), latitude.toDouble())
         }
 
-        if (locationByNetwork == null && longitude!!.isNotEmpty() && latitude!!.isNotEmpty()) {
-            locationByNetwork = Location("");//provider name is unnecessary
-            locationByNetwork?.latitude = origin!!.latitude();//your coords of course
-            locationByNetwork?.longitude = origin.longitude();
+        if (locationByNetwork == null && longitude.isNotEmpty() && latitude.isNotEmpty()) {
+            locationByNetwork = Location("")//provider name is unnecessary
+            locationByNetwork?.latitude = origin!!.latitude()//your coords of course
+            locationByNetwork?.longitude = origin.longitude()
             recenterCamera()
         } else {
             recenterCamera()
@@ -452,7 +452,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         try {
-            map = googleMap ?: return
+            map = googleMap
             googleMap.setOnMyLocationClickListener(this)
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
@@ -556,7 +556,7 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
         val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(placeToPreview.latitude!!.toDouble(),placeToPreview.longitude!!.toDouble()))
+            .target(LatLng(placeToPreview.latitude.toDouble(), placeToPreview.longitude.toDouble()))
             .zoom(15.5f)
             .bearing(0f)
             .tilt(25f)

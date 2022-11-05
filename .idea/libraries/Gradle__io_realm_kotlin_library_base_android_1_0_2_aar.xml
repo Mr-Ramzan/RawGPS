@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: io.realm.kotlin:library-base-android:1.0.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/163c2b27427588ece29a23669e09fa5c/transformed/library-base-release/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/163c2b27427588ece29a23669e09fa5c/transformed/library-base-release/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/163c2b27427588ece29a23669e09fa5c/transformed/library-base-release/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm.kotlin/library-base-android/1.0.2/c911e9ad5f101cc371f1016645085949698c7088/library-base-android-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm.kotlin/library-base-android/1.0.2/db9967788f45cf054fd93fc4b896f9a04da26d26/library-base-android-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

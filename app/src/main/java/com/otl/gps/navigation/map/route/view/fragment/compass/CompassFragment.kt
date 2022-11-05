@@ -54,11 +54,6 @@ class CompassFragment : Fragment(), SensorEventListener {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        adsUtill = MyAdsUtill(requireActivity())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBg()

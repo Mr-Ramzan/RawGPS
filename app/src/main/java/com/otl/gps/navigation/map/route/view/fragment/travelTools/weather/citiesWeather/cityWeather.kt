@@ -23,7 +23,7 @@ class cityWeather(private val viewModel: cityWeatherViewModel) {
         for (countryCode in locales) {
             val obj = Locale("", countryCode)
             System.out.println("Country Name = " + obj.displayCountry)
-            list.add(obj.getDisplayCountry())
+            list.add(obj.displayCountry)
         }
 
         //loop through cities
