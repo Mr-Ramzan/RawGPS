@@ -364,7 +364,6 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/button_background"
         android:gravity="center"
         android:paddingStart="10dp"
@@ -374,7 +373,6 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/layer_relocate_container"
         app:layout_constraintEnd_toEndOf="@+id/google_map" />
 
 

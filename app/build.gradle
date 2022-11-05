@@ -53,11 +53,15 @@ android {
     buildTypes {
 
         release {
+//        liv
             resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
             resValue 'string', 'gps_inter_id', '"ca-app-pub-8804904864147916/6388970608"'
             resValue 'string', 'gps_appopen_id', '"ca-app-pub-8804904864147916/6197398911"'
             resValue 'string', 'gps_banner_id', '"ca-app-pub-8804904864147916/8719620470"'
             resValue 'string', 'gps_square_banner_id', '"ca-app-pub-8804904864147916/6568637221"'
+
+
+
             minifyEnabled true
             shrinkResources true
             signingConfig signingConfigs.release
