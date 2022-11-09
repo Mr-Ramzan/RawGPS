@@ -70,6 +70,7 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="@string/navigation"
+                    android:textSize="12dp"
                     android:textColor="@color/black_text_color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -115,6 +116,7 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
+                    android:textSize="12dp"
                     android:text="@string/my_location"
                     android:textColor="@color/black_text_color"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -161,6 +163,7 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
+                    android:textSize="12dp"
                     android:text="Satellite Map"
                     android:textColor="@color/black_text_color"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -207,6 +210,8 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="Travel Tools"
+                    android:textSize="12dp"
+
                     android:textColor="@color/black_text_color"
                     android:fontFamily="@font/poppins"
 
@@ -256,6 +261,7 @@
                     android:gravity="center"
                     android:text="Traffic Updates"
                     android:fontFamily="@font/poppins"
+                    android:textSize="12dp"
 
                     android:textColor="@color/black_text_color"
 
@@ -304,6 +310,7 @@
                     android:gravity="center"
                     android:text="Explore Places"
                     android:fontFamily="@font/poppins"
+                    android:textSize="12dp"
 
                     android:textColor="@color/black_text_color"
 
@@ -351,6 +358,8 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="Compass"
+                    android:textSize="12dp"
+
                     android:textColor="@color/black_text_color"
                     android:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -396,6 +405,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
                     android:gravity="center"
+                    android:textSize="12dp"
+
                     android:text="Currency Calculator"
                     android:textColor="@color/black_text_color"
                     app:layout_constrainedWidth="true"
@@ -445,6 +456,7 @@
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
                     android:text="Speedometer"
+                    android:textSize="12dp"
                     android:textColor="@color/black_text_color"
                     android:fontFamily="@font/poppins"
 

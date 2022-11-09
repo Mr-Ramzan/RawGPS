@@ -98,8 +98,6 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
     }
 
-
-
     /**
      * ActivityLifecycleCallback methods.
      */
@@ -130,13 +128,11 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
     override fun onActivityStopped(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {}
-
     /**
      * Shows an app open ad.
      * @param activity                 the activity that shows the app open ad
      * @param onShowAdCompleteListener the listener to be notified when an app open ad is complete
      */
-
     fun showAdIfAvailable(
         activity: Activity,
         onShowAdCompleteListener: OnShowAdCompleteListener
@@ -145,7 +141,6 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         // class.
         appOpenAdManager!!.showAdIfAvailable(activity, onShowAdCompleteListener)
     }
-
     /**
      * Interface definition for a callback to be invoked when an app open ad is complete
      * (i.e. dismissed or fails to show).
@@ -153,11 +148,7 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
     interface OnShowAdCompleteListener {
         fun onShowAdComplete()
     }
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////
-
-
     override fun onStart(owner: LifecycleOwner) {
         super.onStart(owner)
         // super<DefaultLifecycleObserver>.onCreate(owner)
@@ -169,8 +160,6 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
         }
     }
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
