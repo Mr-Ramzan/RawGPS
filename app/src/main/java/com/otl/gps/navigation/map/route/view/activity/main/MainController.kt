@@ -261,7 +261,7 @@ class MainController : AppCompatActivity() {
             NAVIGATE_SAVED_PLACES -> {
                 navigateSavedPlaces()
             }
-            NAVIGATE_SPEEDOMETER -> {
+            NAVIGATE_SPEDOMETER -> {
                 navigateSpeedoMeter()
             }
 
