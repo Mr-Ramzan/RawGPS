@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.navigation:ui-base:2.6.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4b449399a5f40bf3d5347b11cf97a473/transformed/ui-base-2.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b449399a5f40bf3d5347b11cf97a473/transformed/ui-base-2.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b449399a5f40bf3d5347b11cf97a473/transformed/ui-base-2.6.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bbb1b72e790cf3db71f47c4606891bb6/transformed/ui-base-2.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbb1b72e790cf3db71f47c4606891bb6/transformed/ui-base-2.6.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbb1b72e790cf3db71f47c4606891bb6/transformed/ui-base-2.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.navigation/ui-base/2.6.0/6ba1823da721e456c8fe56ee789cd669965f50bf/ui-base-2.6.0-javadoc.jar!/" />

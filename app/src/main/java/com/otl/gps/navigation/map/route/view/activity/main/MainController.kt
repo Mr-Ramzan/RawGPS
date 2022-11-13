@@ -54,6 +54,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CO
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREMIUM
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREVIEW_SAVED_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
@@ -66,6 +67,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAV_BACK
 import com.otl.gps.navigation.map.route.utilities.Constants.OPEN_DRAWER
 import com.otl.gps.navigation.map.route.utilities.Helper
 import com.otl.gps.navigation.map.route.utilities.PopupUtil
+import com.otl.gps.navigation.map.route.view.activity.goPro.PremiumActivity
 import com.otl.gps.navigation.map.route.view.activity.spedometer.SpeedoMeterActivity
 import com.otl.gps.navigation.map.route.view.fragment.dialogs.ExitDialogFragment
 import com.otl.gps.navigation.map.route.view.fragment.places.PreviewSavedPlacesActivity
@@ -90,7 +92,7 @@ class MainController : AppCompatActivity() {
         setContentView(binding.root)
         EventBus.getDefault().register(this)
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,GravityCompat.START)
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START)
         setupNoInternetPopup()
 
         loadInter()
@@ -206,7 +208,7 @@ class MainController : AppCompatActivity() {
 
 
             BACK_AND_EXIT -> {
-               super.onBackPressed()
+                super.onBackPressed()
             }
 
             NAVIGATE_LOCATION -> {
@@ -261,8 +263,11 @@ class MainController : AppCompatActivity() {
             NAVIGATE_SAVED_PLACES -> {
                 navigateSavedPlaces()
             }
-            NAVIGATE_SPEDOMETER -> {
+            NAVIGATE_SPEEDOMETER -> {
                 navigateSpeedoMeter()
+            }
+            NAVIGATE_PREMIUM -> {
+                openPremiumPopup()
             }
 
             NAV_BACK -> {
@@ -286,6 +291,15 @@ class MainController : AppCompatActivity() {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    private fun openPremiumPopup() {
+        try {
+            var intent: Intent = Intent(this, PremiumActivity::class.java)
+            intent.putExtra(Constants.PREMIUM_FROM, Constants.FROM_HOME)
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
 
     private fun previewSavedPlaces() {
         try {
@@ -308,9 +322,11 @@ class MainController : AppCompatActivity() {
         try {
             val navBuilder = NavOptions.Builder()
             navBuilder.setEnterAnim(R.anim.slide_in_right).setExitAnim(
-                R.anim.slide_out_left)
+                R.anim.slide_out_left
+            )
                 .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(
-                    R.anim.slide_out_right)
+                    R.anim.slide_out_right
+                )
             val bundle = bundleOf("title" to "")
             navController.navigate(R.id.navigation_saved_places, bundle, navBuilder.build())
         } catch (e: java.lang.Exception) {
@@ -320,7 +336,7 @@ class MainController : AppCompatActivity() {
 
     private fun navigateSpeedoMeter() {
         try {
-                startActivity(Intent(this, SpeedoMeterActivity::class.java))
+            startActivity(Intent(this, SpeedoMeterActivity::class.java))
 
         } catch (e: java.lang.Exception) {
             e.printStackTrace()
@@ -359,8 +375,6 @@ class MainController : AppCompatActivity() {
 
 
     }
-
-
 
 
     private fun navigateMyLocation() {
@@ -539,24 +553,23 @@ class MainController : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-     if (navController.currentDestination?.id != R.id.nav_home) {
+        if (navController.currentDestination?.id != R.id.nav_home) {
 
             showInterAds {
                 navController.navigateUp()
             }
-        }  else {
+        } else {
 
-         try {
+            try {
 
-             val addPhotoBottomDialogFragment: ExitDialogFragment =
-                 ExitDialogFragment.newInstance()
-             addPhotoBottomDialogFragment.show(
-                 supportFragmentManager, "exit dialog!"
-             )
-         } catch (e: java.lang.Exception) {
-             e.printStackTrace()
-         }
-
+                val addPhotoBottomDialogFragment: ExitDialogFragment =
+                    ExitDialogFragment.newInstance()
+                addPhotoBottomDialogFragment.show(
+                    supportFragmentManager, "exit dialog!"
+                )
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
 
 
 //        PopupUtil.showDeleteDialog(
@@ -570,7 +583,7 @@ class MainController : AppCompatActivity() {
 //            }
 //        }
 
-    }
+        }
     }
 
     private fun showComingSoon(msg: String = "Coming Soon!") {
@@ -580,7 +593,7 @@ class MainController : AppCompatActivity() {
     /**
      * Open Policy URL
      */
-    private fun gotoPrivacyPolicy(url: String = "https://theomegatechlab.blogspot.com/p/privacy-policy_27.html"){
+    private fun gotoPrivacyPolicy(url: String = "https://theomegatechlab.blogspot.com/p/privacy-policy_27.html") {
         try {
             if (url.startsWith("http") || url.startsWith("https")) {
                 Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {

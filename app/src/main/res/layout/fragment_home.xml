@@ -16,18 +16,73 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pro_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:elevation="2dp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/tittle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pro_banner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="@dimen/_68sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/crown"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView13"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy Premium"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:maxWidth="800dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tittle"
+        app:layout_constraintTop_toBottomOf="@+id/pro_button"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_max="500dp">
 
@@ -70,8 +125,8 @@
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="@string/navigation"
-                    android:textSize="12dp"
                     android:textColor="@color/black_text_color"
+                    android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -116,9 +171,9 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:textSize="12dp"
                     android:text="@string/my_location"
                     android:textColor="@color/black_text_color"
+                    android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -163,9 +218,9 @@
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:textSize="12dp"
                     android:text="Satellite Map"
                     android:textColor="@color/black_text_color"
+                    android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -173,7 +228,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/travel_tools_button"
+            android:id="@+id/weather"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -197,7 +252,7 @@
                     android:layout_height="0dp"
                     android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/travel_tool_icon"
+                    android:src="@drawable/weather_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -208,12 +263,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="Travel Tools"
-                    android:textSize="12dp"
+                    android:text="Weather"
 
                     android:textColor="@color/black_text_color"
-                    android:fontFamily="@font/poppins"
+                    android:textSize="12dp"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -258,12 +313,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Traffic Updates"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12dp"
-
                     android:textColor="@color/black_text_color"
+
+                    android:textSize="12dp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -307,12 +362,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Explore Places"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12dp"
-
                     android:textColor="@color/black_text_color"
+
+                    android:textSize="12dp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -356,12 +411,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Compass"
-                    android:textSize="12dp"
 
                     android:textColor="@color/black_text_color"
-                    android:fontFamily="@font/poppins"
+                    android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -369,7 +424,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/currency_converter_button"
+            android:id="@+id/qibla_compass"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
@@ -393,7 +448,7 @@
                     android:layout_height="0dp"
                     android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/currency_icon"
+                    android:src="@drawable/qibla_compass_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -404,13 +459,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="3dp"
-                    android:gravity="center"
-                    android:textSize="12dp"
-
-                    android:text="Currency Calculator"
-                    android:textColor="@color/black_text_color"
-                    app:layout_constrainedWidth="true"
                     android:fontFamily="@font/poppins"
+                    android:gravity="center"
+
+                    android:text="Qibla Compass"
+                    android:textColor="@color/black_text_color"
+                    android:textSize="12dp"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -446,19 +501,18 @@
                     app:layout_constraintBottom_toTopOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Speedometer"
-                    android:textSize="12dp"
                     android:textColor="@color/black_text_color"
-                    android:fontFamily="@font/poppins"
+                    android:textSize="12dp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -520,9 +574,8 @@
         android:textColor="#353535"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button" />
+        app:layout_constraintStart_toStartOf="@+id/menu_button"
+        app:layout_constraintTop_toTopOf="@+id/menu_button" />
 
     <ImageButton
         android:id="@+id/share_app_ib"
@@ -555,7 +608,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.58" />
+        app:layout_constraintGuide_percent="0.63" />
 
     <FrameLayout
         android:id="@+id/ads_parent"

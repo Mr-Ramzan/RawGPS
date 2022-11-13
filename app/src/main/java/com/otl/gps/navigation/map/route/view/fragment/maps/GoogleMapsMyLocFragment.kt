@@ -24,9 +24,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
-import application.RawGpsApp.Companion.realmDB
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
-import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
@@ -392,20 +390,22 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                                     addressFromMyLocation!!, latitudeMyLocation!!,
                                     longitudeMyLocation!!, ""
                                 )
-                                realmDB?.checkIfExist(binding.placeNameInput.text.toString()) {
+                                checkIfPlacesExist(binding.placeNameInput.text.toString()) {
                                     if (it) {
                                         showOverWriteConfirmation(binding.placeNameInput.text.toString())
                                         {
                                             if (it) {
 
-                                                realmDB?.updateSavedItem(savedPlace)
-                                                binding.placeNameInput.setText("")
-                                                binding.placeNameLayout.visibility = GONE
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Place Saved!",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                overwriteSaveAndPlace(savedPlace){
+                                                    binding.placeNameInput.setText("")
+                                                    binding.placeNameLayout.visibility = GONE
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Place Saved!",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+
                                             } else {
                                                 binding.placeNameInput.setText("")
                                                 binding.placeNameInput.requestFocus()
@@ -414,14 +414,16 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                                         }
                                     } else {
 
-                                        realmDB?.updateSavedItem(savedPlace)
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Place Saved!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        binding.placeNameInput.setText("")
-                                        binding.placeNameLayout.visibility = GONE
+                                        saveNewPlace(savedPlace){
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Place Saved!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            binding.placeNameInput.setText("")
+                                            binding.placeNameLayout.visibility = GONE
+                                        }
+
 
 
                                     }
@@ -731,6 +733,9 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             stuffToDo()
         }
     }
+
+
+
     /**
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.
@@ -740,4 +745,62 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
         map.animateCamera(update, 1000, callback)
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun checkIfPlacesExist(name: String,exists:(yes:Boolean)->Unit)
+    {
+        var listOfPlaces = (requireActivity().application as RawGpsApp).appContainer.prefs.getSavedPlaces()
+        if(listOfPlaces.isNotEmpty()){
+            for(item in  listOfPlaces){
+                if(item.name==name){
+                    exists(true)
+                    return
+                }
+            }
+        }
+        exists(false)
+
+    }
+
+
+
+    private fun overwriteSaveAndPlace(place: SavedPlace,saved:(yes:Boolean)->Unit)
+    {
+        var listOfPlaces = (requireActivity().application as RawGpsApp).appContainer.prefs.getSavedPlaces()
+        var indexedValue = -1
+        if(listOfPlaces.isNotEmpty()){
+            for(item in  listOfPlaces)
+            {
+                if(item.name==place.name)
+                {
+                    indexedValue  = listOfPlaces.indexOf(item)
+                    break
+                }
+            }
+        }
+        if(indexedValue!=-1) {
+            listOfPlaces.removeAt(indexedValue)
+        }
+        listOfPlaces.add(0,place)
+        (requireActivity().application as RawGpsApp).appContainer.prefs.setSavedPLaces(listOfPlaces)
+        saved(true)
+    }
+
+
+
+    private fun saveNewPlace(place: SavedPlace,saved:(yes:Boolean)->Unit)
+    {
+        var listOfPlaces = (requireActivity().application as RawGpsApp).appContainer.prefs.getSavedPlaces()
+        listOfPlaces.add(0,place)
+        (requireActivity().application as RawGpsApp).appContainer.prefs.setSavedPLaces(listOfPlaces)
+        saved(true)
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.navigation:ui-voice:2.6.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fe14f47a15e0e32ccdb4c7fa5937b520/transformed/ui-voice-2.6.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/fe14f47a15e0e32ccdb4c7fa5937b520/transformed/ui-voice-2.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/fe14f47a15e0e32ccdb4c7fa5937b520/transformed/ui-voice-2.6.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/acae00b0cc974c5966dddf8ffc57af0b/transformed/ui-voice-2.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/acae00b0cc974c5966dddf8ffc57af0b/transformed/ui-voice-2.6.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/acae00b0cc974c5966dddf8ffc57af0b/transformed/ui-voice-2.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.navigation/ui-voice/2.6.0/bb2e9e65298e148dc90f0a15c050c8b300b11dfc/ui-voice-2.6.0-javadoc.jar!/" />

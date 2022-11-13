@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.moisoni97:google-inapp-billing:1.1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0c3a36aafed7e2e2bd6c25f151281cfb/transformed/google-inapp-billing-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0c3a36aafed7e2e2bd6c25f151281cfb/transformed/google-inapp-billing-1.1.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.moisoni97/google-inapp-billing/1.1.1/6e36f725e25759b3a1a365fc57e9d3e04da9bc52/google-inapp-billing-1.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.moisoni97/google-inapp-billing/1.1.1/f1f9d6b62ea2b159124fe66f470a5b01d4e52e36/google-inapp-billing-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

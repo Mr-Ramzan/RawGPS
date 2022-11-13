@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mapbox.navigation:ui-maneuver:2.6.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a8f410ebe4e66a96eed480430eef5f94/transformed/ui-maneuver-2.6.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a8f410ebe4e66a96eed480430eef5f94/transformed/ui-maneuver-2.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a8f410ebe4e66a96eed480430eef5f94/transformed/ui-maneuver-2.6.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a1a6e45ca209e755805ac1aabae1b0b/transformed/ui-maneuver-2.6.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4a1a6e45ca209e755805ac1aabae1b0b/transformed/ui-maneuver-2.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4a1a6e45ca209e755805ac1aabae1b0b/transformed/ui-maneuver-2.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mapbox.navigation/ui-maneuver/2.6.0/4bdb300ced74d2900edc6c5fa28c6569173e6d65/ui-maneuver-2.6.0-javadoc.jar!/" />

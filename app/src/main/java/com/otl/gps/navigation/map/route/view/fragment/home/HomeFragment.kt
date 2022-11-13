@@ -17,6 +17,7 @@ import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.FragmentHomeBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
+import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
@@ -25,6 +26,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_CURRENCY_CONVERTER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREMIUM
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SPEEDOMETER
@@ -134,14 +136,23 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.travelToolsButton.setOnClickListener {
+//        binding.travelToolsButton.setOnClickListener {
+//            it.isEnabled = false
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                it.isEnabled = true
+//            }, 700)
+//            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
+//        }
+
+
+        binding.proButton.setOnClickListener {
             it.isEnabled = false
 
             Handler(Looper.getMainLooper()).postDelayed({
 
                 it.isEnabled = true
             }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
+            EventBus.getDefault().post(NavEvent(NAVIGATE_PREMIUM))
         }
         binding.compass.setOnClickListener {
             it.isEnabled = false
@@ -153,16 +164,35 @@ class HomeFragment : Fragment() {
             EventBus.getDefault().post(NavEvent(NAVIGATE_COMPASS))
         }
 
-
-        binding.currencyConverterButton.setOnClickListener {
+        binding.weather.setOnClickListener {
             it.isEnabled = false
 
             Handler(Looper.getMainLooper()).postDelayed({
 
                 it.isEnabled = true
             }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
         }
+
+
+        binding.qiblaCompass.setOnClickListener {
+            it.isEnabled = false
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                it.isEnabled = true
+            }, 700)
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
+        }
+//        binding.currencyConverterButton.setOnClickListener {
+//            it.isEnabled = false
+//
+//            Handler(Looper.getMainLooper()).postDelayed({
+//
+//                it.isEnabled = true
+//            }, 700)
+//            EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
+//        }
         binding.infoButton.setOnClickListener {
             it.isEnabled = false
 

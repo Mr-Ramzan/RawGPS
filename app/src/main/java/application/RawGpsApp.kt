@@ -14,10 +14,7 @@ import com.google.android.gms.ads.RequestConfiguration
 import com.mapbox.android.core.location.LocationEngineProvider
 import com.mapbox.search.MapboxSearchSdk
 import com.mapbox.search.SearchSdkSettings
-import com.otl.gps.navigation.map.route.databases.RealmDB
-import com.otl.gps.navigation.map.route.databases.RealmDB.Companion.init
 import com.otl.gps.navigation.map.route.di.AppDIs
-import com.otl.gps.navigation.map.route.manager.SharedPreferencesManager
 import com.otl.gps.navigation.map.route.manager.adManagers.AppOpenAdHelper
 import com.otl.gps.navigation.map.route.utilities.Constants
 import kotlinx.coroutines.CoroutineScope
@@ -48,8 +45,6 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
         CoroutineScope(Dispatchers.Main).launch {
             appContext = this@RawGpsApp.applicationContext
-            init(this@RawGpsApp)
-            realmDB = RealmDB()
         }
 
     }
@@ -165,7 +160,6 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
     companion object
     {
-        var realmDB: RealmDB? = null
         var instance: RawGpsApp? = null
         var isSDKInitialized = true
         var isConsentGiven = false

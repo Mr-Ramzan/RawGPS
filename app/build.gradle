@@ -7,8 +7,6 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'com.mapbox.maps.token'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-    id 'org.jetbrains.kotlin.kapt'
-    id 'realm-android'
 
 }
 
@@ -34,14 +32,14 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
+            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
+            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
@@ -61,7 +59,6 @@ android {
 
 
             minifyEnabled true
-            shrinkResources true
             signingConfig signingConfigs.release
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -76,7 +73,6 @@ android {
             resValue 'string', 'gps_square_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
             ext.enableCrashlytics = false
             minifyEnabled true
-            shrinkResources true
             signingConfig signingConfigs.debug
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -167,7 +163,7 @@ dependencies {
     //lottie animations sdk
     implementation 'com.airbnb.android:lottie:5.1.1'
     //billing library
-    implementation 'com.github.moisoni97:google-inapp-billing:1.0.8'
+    implementation 'com.github.moisoni97:google-inapp-billing:1.1.1'
     //Spinkit loading animations
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     // Material Components for Android. Replace the version with the latest version of Material Components library.

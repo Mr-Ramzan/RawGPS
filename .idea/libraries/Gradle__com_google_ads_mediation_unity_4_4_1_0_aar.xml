@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.ads.mediation:unity:4.4.1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/86590425e07732b518eb15381cfe71ae/transformed/unity-4.4.1.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/86590425e07732b518eb15381cfe71ae/transformed/unity-4.4.1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/86590425e07732b518eb15381cfe71ae/transformed/unity-4.4.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8d1e05d72b79155598d957f2786303a4/transformed/unity-4.4.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8d1e05d72b79155598d957f2786303a4/transformed/unity-4.4.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

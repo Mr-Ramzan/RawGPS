@@ -3,6 +3,10 @@ package com.otl.gps.navigation.map.route.manager
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.otl.gps.navigation.map.route.model.PlacesModel
+import com.otl.gps.navigation.map.route.model.SavedPlace
 
 class SharedPreferencesManager(mContext: Context) {
 
@@ -10,6 +14,7 @@ class SharedPreferencesManager(mContext: Context) {
     private var FIRST_LAUNCH_KEY: String = "LAUNCH_FIRST_TIME"
     private var NAVIGATED_THRICE: String = "ONCE_NAVIGATED"
     private var NAVIGATION_COUNT: String = "NavCount"
+    private var SAVED_PLCACES :String = "Saved_places"
     private var NAVIGATION_MAX_COUNT: String = "NavCountMAX"
     private var PREMIUM_SCREEN_THRESH_HOLD: String = "premium_directions_max_count"
     private var APP_LAUNCH_COUNT: String = "app_launch_count"
@@ -167,4 +172,23 @@ class SharedPreferencesManager(mContext: Context) {
     fun resetAdsPurchase() {
         sharedPreferences!!.edit().putBoolean(ADS_REMOVED, false).apply()
     }
+
+
+    fun setSavedPLaces( value: ArrayList<SavedPlace>) {
+        sharedPreferences!!.edit().putString(NAVIGATION_COUNT, Gson().toJson(value)).apply()
+    }
+
+
+
+    fun getSavedPlaces(): ArrayList<SavedPlace>{
+        var placesList: ArrayList<SavedPlace> = ArrayList()
+        var jsonString : String = sharedPreferences!!.getString(NAVIGATION_COUNT, "[]").toString()
+        var list = Gson().fromJson<ArrayList<SavedPlace>>(jsonString, object : TypeToken<ArrayList<SavedPlace>>() {}.type)
+        if(!list.isNullOrEmpty()){
+        placesList.addAll(list)
+        }
+        return placesList
+    }
+
+
 }

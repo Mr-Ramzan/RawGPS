@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/RawGPS.iml" filepath="$PROJECT_DIR$/.idea/modules/RawGPS.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RawGPS.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RawGPS.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RawGPS.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RawGPS.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RawGPS.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RawGPS.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RawGPS.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RawGPS.app.unitTest.iml" />
     </modules>

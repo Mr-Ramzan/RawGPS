@@ -46,7 +46,6 @@ buildscript {
 
         classpath "com.mapbox.gradle.plugins:access-token:0.2.1"
 
-        classpath "io.realm:realm-gradle-plugin:10.10.1"
 
 
     }

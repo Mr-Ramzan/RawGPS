@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import application.RawGpsApp
-import application.RawGpsApp.Companion.realmDB
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -146,7 +145,7 @@ class SavedPlacesListFragment : Fragment() {
             },
                 { placesToDelete ->
 
-                    realmDB?.deletePlace(placesToDelete) {
+                    deletePlace(placesToDelete) {
 
                         if (it) {
                             Toast.makeText(
@@ -591,8 +590,8 @@ class SavedPlacesListFragment : Fragment() {
     private fun fetchSavedPlaces() {
         savedPlaces = ArrayList<SavedPlace>()
         try {
-            var results = RawGpsApp.realmDB?.getSavedPlaces()
-            if (!results.isNullOrEmpty()) {
+            var results = (requireActivity().application as RawGpsApp).appContainer.prefs.getSavedPlaces()
+            if (!results.isEmpty()) {
                 savedPlaces.addAll(results)
             } else {
                 Toast.makeText(requireContext(), "No saved places found!", Toast.LENGTH_SHORT)
@@ -615,4 +614,29 @@ class SavedPlacesListFragment : Fragment() {
         }
 
 
+
+
+    private fun deletePlace(place: SavedPlace,delete:(yes:Boolean)->Unit)
+    {
+
+        var listOfPlaces = (requireActivity().application as RawGpsApp).appContainer.prefs.getSavedPlaces()
+        var indexedValue = -1
+        if(listOfPlaces.isNotEmpty()){
+            for(item in  listOfPlaces)
+            {
+                if(item.name==place.name)
+                {
+                    indexedValue  = listOfPlaces.indexOf(item)
+                    break
+                }
+            }
+        }
+        if(indexedValue!=-1) {
+            listOfPlaces.removeAt(indexedValue)
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setSavedPLaces(listOfPlaces)
+            delete(true)
+        }else{
+            delete(false)
+        }
+    }
 }

@@ -205,7 +205,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
             object : AdLoadedCallback {
                 override fun addLoaded(success: Boolean?) {
 
-                    Toast.makeText(this@WeatherActivity, "Banner shown", Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(this@WeatherActivity, "Banner shown", Toast.LENGTH_SHORT).show()
                 }
             })
     }
