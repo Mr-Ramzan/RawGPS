@@ -70,8 +70,8 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         val view = binding.root
         setContentView(view)
         loadMap()
-        //loadNativeBanner()
-        loadBanner()
+        loadNativeBanner()
+//        loadBanner()
         binding.layoutHeader.tvTitle.text = "Select Location"
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -535,5 +535,81 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
+
+        if (!(application as RawGpsApp).appContainer!!.prefs!!.areAdsRemoved()) {
+            (application as RawGpsApp).appContainer?.myAdsUtill?.loadSmallNativeAd(
+                this,
+                true,
+                object : AdLoadedCallback {
+
+                    override fun addLoaded(success: Boolean?) {
+
+                        if (isDestroyed) {
+                            return
+                        }
+
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding.adsParent.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
+    }
+
+    private fun showNativeAd() {
+        try {
+            if (isDestroyed) {
+                return
+            }
+            val isAdsRemoved =
+                (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+            if (!isAdsRemoved) {
+
+                if (canShowNativeAd)
+                {
+                    (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                        this,
+                        Constants.START_NATIVE_SMALL,
+                        binding.adsParent, true, false
+                    )
+                }
+                else
+                {
+                    binding.adsParent.visibility = View.GONE
+                }
+
+
+            } else {
+                binding.adsParent.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 }

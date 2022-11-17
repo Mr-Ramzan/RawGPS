@@ -47,8 +47,8 @@
 
             <ImageView
                 android:id="@+id/imageView12"
-                android:layout_width="@dimen/_68sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/crown"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -59,12 +59,14 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
                 android:text="Buy Premium"
-                android:textColor="@color/white"
-                android:textSize="34sp"
+                android:textColor="@color/pro"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintEnd_toEndOf="@+id/imageView13"
+                app:layout_constraintStart_toStartOf="@+id/imageView13"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

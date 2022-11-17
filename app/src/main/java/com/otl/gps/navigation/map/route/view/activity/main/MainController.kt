@@ -3,6 +3,8 @@ package com.otl.gps.navigation.map.route.view.activity.main
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
@@ -42,6 +44,8 @@ import com.otl.gps.navigation.map.route.BuildConfig
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivityMainBinding
 import com.otl.gps.navigation.map.route.model.NavEvent
+import com.otl.gps.navigation.map.route.receivers.NotificationReceiver
+import com.otl.gps.navigation.map.route.utilities.BatteryOptimizationUtil
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_MORE_APPS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
@@ -77,6 +81,9 @@ import org.greenrobot.eventbus.Subscribe
 import org.imaginativeworld.oopsnointernet.callbacks.ConnectionCallback
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 import java.text.DateFormat
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class MainController : AppCompatActivity() {
@@ -94,7 +101,7 @@ class MainController : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START)
         setupNoInternetPopup()
-
+        initReminderNotification()
         loadInter()
         setListeners()
         try {
@@ -852,14 +859,13 @@ class MainController : AppCompatActivity() {
     /**
      * Creates a callback for receiving location events.
      */
+    private var gotLocationOnce = false
     private fun createLocationCallback() {
         mLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
-                if (locationResult.lastLocation == null) {
+                if(gotLocationOnce){
                     return
-                } else {
-                    stopLocationUpdates()
                 }
                 mCurrentLocation = locationResult.lastLocation
                 mLastUpdateTime = DateFormat.getTimeInstance().format(Date())
@@ -872,6 +878,10 @@ class MainController : AppCompatActivity() {
                     setCurrentLocationInPrefs()
                 }
                 setCurrentLocationInPrefs()
+                stopLocationUpdates()
+
+                gotLocationOnce = true
+
             }
         }
     }
@@ -903,6 +913,61 @@ class MainController : AppCompatActivity() {
             }
         }
     }
+
+
+
+    private lateinit var alarmManager: AlarmManager
+    private lateinit var pendingIntent: PendingIntent
+
+    private fun initReminderNotification() {
+        checkAndAskForBatteryOptimization()
+        val start: LocalDateTime = LocalDateTime.now()
+        // Hour + 1, set Minute and Second to 00
+        val end: LocalDateTime = start.plusMinutes(3).truncatedTo(ChronoUnit.HOURS)
+        // Get Duration
+        val duration: Duration = Duration.between(start, end)
+        val millis: Long = duration.toMillis()
+        val delayTimeInMillis = System.currentTimeMillis() + millis
+        val intent = Intent(this, NotificationReceiver::class.java)
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        pendingIntent = PendingIntent.getBroadcast(
+            this,
+            100101,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            delayTimeInMillis,
+            delayTimeInMillis,
+            pendingIntent
+        )
+
+
+    }
+
+    private fun checkAndAskForBatteryOptimization() {
+        try {
+            val dialog: AlertDialog? = BatteryOptimizationUtil.getBatteryOptimizationDialog(
+                this,
+                {
+                    Toast.makeText(this,"User Accepted",Toast.LENGTH_SHORT).show()
+                }
+            ) {
+                Toast.makeText(this,"User Denied",Toast.LENGTH_SHORT).show()
+
+            }
+            dialog?.show()
+
+        } catch (e: java.lang.Exception) {
+
+            e.printStackTrace()
+        }
+    }
+
+
+
+
 
     /**
      * Handles the Start Updates button and requests start of location updates. Does nothing if

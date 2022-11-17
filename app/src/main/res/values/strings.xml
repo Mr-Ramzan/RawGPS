@@ -53,5 +53,11 @@
     <string name="continue_with_ads">Continue With Ads</string>
     <string name="sub_id_Weekly">com.otl.gps.navigation.route.remove_adx</string>
     <string name="billing_hash">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs2iEIlA8pLT5D1qguYu4RIJMBxXF06A24pzHK2nk0qwI1HfXNqGLa+/70qpv6C0iDbQgZEG3uKtW6NqEYZXDJBcUEpHdbsioEzSyLcWIhQjFLoTHvcIPoRexE5pq9/Lg1T/dJwPqWUwaijEDnB9xP34FQ7cbxJXQbrrWyYy1PnPxB5ecVM2vp+TGM1QHGrHLQlX4PSWwmR0JpYzTWbi+Dc03JN1tMQ9xd95AC069nacszzeedwfk8Grtl+KwN24H2GFcyH/TF+Uq1pgqezbz7VgGxvbjfGu7HbZ7cWovNp0QldLerTGF0bsAuY2Yl4bB+dhPqLLYzt6SYHxPr5YGUQIDAQAB</string>
+    <string name="ad_label">AD</string>
+    <string name="download">Download</string>
+    <string name="dialog_battery_button_positive">"Accept "</string>
+    <string name="dialog_battery_button_negative">Deny</string>
+    <string name="dialog_battery_message">Add battery optimization exclusion for better performance and experience.</string>
+    <string name="dialog_battery_title">Battery Optimization</string>
 
 </resources>

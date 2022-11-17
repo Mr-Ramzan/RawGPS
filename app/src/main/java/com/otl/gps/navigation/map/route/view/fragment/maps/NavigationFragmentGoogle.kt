@@ -95,7 +95,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         DialogUtils.showLoadingDialog(requireActivity())
         loadMap()
-        loadBanner()
+//        loadBanner()
+        loadNativeBanner()
         initObjects()
         getLocationAndPermission()
         clickEvent()
@@ -920,7 +921,81 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         // The duration must be strictly positive so we make it at least 1.
         map.animateCamera(update, 1000, callback)
     }
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
 
+        if (!(requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.loadSmallNativeAd(
+                requireActivity(),
+                true,
+                object : AdLoadedCallback {
+
+                    override fun addLoaded(success: Boolean?) {
+
+                        if (isDetached) {
+                            return
+                        }
+
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding.adsParent.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
+    }
+
+    private fun showNativeAd() {
+        try {
+            if (isDetached) {
+                return
+            }
+            val isAdsRemoved =
+                (requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+            if (!isAdsRemoved) {
+
+                if (canShowNativeAd)
+                {
+                    (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                        requireActivity(),
+                        Constants.START_NATIVE_SMALL,
+                        binding.adsParent, true, false
+                    )
+                }
+                else
+                {
+                    binding.adsParent.visibility = View.GONE
+                }
+
+
+            } else {
+                binding.adsParent.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -23,6 +23,7 @@ import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
+import com.otl.gps.navigation.map.route.utilities.Constants
 import java.util.*
 
 class AdmobAdsHelper (mContext: Context) {
@@ -561,7 +562,7 @@ class AdmobAdsHelper (mContext: Context) {
     }
 
 
- /*   fun loadSmallNativeAd(
+    fun loadSmallNativeAd(
         mActivity: Activity,
         willBeEffectedByRemoveAds: Boolean,
         loadCallback: AdLoadedCallback?
@@ -571,7 +572,7 @@ class AdmobAdsHelper (mContext: Context) {
             log("SDK Not Initialized.")
         } else {
             try {
-                if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!! && willBeEffectedByRemoveAds) {
+                if (((mActivity as Activity).application as RawGpsApp).appContainer!!. prefs?.areAdsRemoved()!! && willBeEffectedByRemoveAds) {
                     return
                 }
                 val builder = AdLoader.Builder(mActivity, mActivity.getString(R.string.gps_native_id))
@@ -600,7 +601,7 @@ class AdmobAdsHelper (mContext: Context) {
         mActivity: Activity,
         SCREEN_TYPE: String,
         frameLayout: FrameLayout,
-        willBeEffectedByRemoveAds: Boolean, showMedia:Boolean
+        willBeEffectedByRemoveAds: Boolean,showMedia:Boolean
     ) {
         if (!isSDKInitialized) {
             log("SDK Not Initialized.")
@@ -609,7 +610,7 @@ class AdmobAdsHelper (mContext: Context) {
         else
         {
             try {
-                if ((context.application as RawGpsApp).appContainer.prefs.areAdsRemoved()!! && willBeEffectedByRemoveAds) {
+                if (((mActivity as Activity).application as RawGpsApp).appContainer!!. prefs?.areAdsRemoved()!! && willBeEffectedByRemoveAds) {
                     return
                 }
 
@@ -691,7 +692,7 @@ class AdmobAdsHelper (mContext: Context) {
                     adView.advertiserView = adView.findViewById(R.id.small_ad_advertiser)
                     adView.bodyView = adView.findViewById(R.id.small_ad_body)
                     adView.callToActionView = adView.findViewById(R.id.small_ad_call_to_action)
-                    (Objects.requireNonNull(adView.bodyView) as TextView).text = mNativeAds?.body
+                    (Objects.requireNonNull(adView.bodyView) as TextView).text = "AD -"+mNativeAds?.body
                     (Objects.requireNonNull(adView.headlineView) as TextView).text =
                         mNativeAds?.headline
                     (adView.headlineView as TextView).text = mNativeAds?.headline
@@ -742,7 +743,7 @@ class AdmobAdsHelper (mContext: Context) {
                     } else {
                         try {
                             (adView.advertiserView as TextView).text = mNativeAds!!.advertiser
-                            adView.advertiserView?.visibility = View.VISIBLE
+                            adView.advertiserView?.visibility = View.GONE
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -782,7 +783,6 @@ class AdmobAdsHelper (mContext: Context) {
             }
         }
     }
-*/
 
     private fun log(msg: String) {
         Log.e("MyAdsUtill", msg)

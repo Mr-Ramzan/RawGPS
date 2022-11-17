@@ -45,8 +45,7 @@ import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.util.*
 
-class QiblaCompassFragment : Fragment(){
-
+class QiblaCompassFragment : Fragment() {
 
 
     /**
@@ -61,8 +60,11 @@ class QiblaCompassFragment : Fragment(){
     private var currentNeedleDegree = 0f
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
-    {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentQiblaCompassBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -76,6 +78,7 @@ class QiblaCompassFragment : Fragment(){
         }
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadBanner()
@@ -115,7 +118,7 @@ class QiblaCompassFragment : Fragment(){
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.backButton.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -166,7 +169,11 @@ class QiblaCompassFragment : Fragment(){
             })
     }
 
-    private fun setUpQiblaComapassBuilder(){
+    private var setUpQiblaCompass = false
+    private fun setUpQiblaComapassBuilder() {
+        if (setUpQiblaCompass) {
+            return
+        }
         try {
             CompassQibla.Builder(requireActivity() as AppCompatActivity, mCurrentLocation!!)
                 .onGetLocationAddress { address ->
@@ -177,36 +184,42 @@ class QiblaCompassFragment : Fragment(){
                     }
                 }
                 .onDirectionChangeListener { qiblaDirection ->
-                        val rotateCompass = RotateAnimation(
-                            currentCompassDegree,
-                            qiblaDirection.compassAngle,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f
-                        ).apply {
-                            duration = 1000
-                        }
-                        currentCompassDegree = qiblaDirection.compassAngle
-                        binding.imgCompass.startAnimation(rotateCompass)
+                    val rotateCompass = RotateAnimation(
+                        currentCompassDegree,
+                        qiblaDirection.compassAngle,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    ).apply {
+                        duration = 1000
+                    }
+                    currentCompassDegree = qiblaDirection.compassAngle
+                    binding.imgCompass.startAnimation(rotateCompass)
 
 
-                        val rotateNeedle = RotateAnimation(
-                            currentNeedleDegree,
-                            qiblaDirection.needleAngle,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f,
-                            Animation.RELATIVE_TO_SELF,
-                            0.5f
-                        ).apply {
-                            duration = 1000
-                        }
-                        currentNeedleDegree = qiblaDirection.needleAngle
-                        binding.qiblaPointer.startAnimation(rotateNeedle)
+                    val rotateNeedle = RotateAnimation(
+                        currentNeedleDegree,
+                        qiblaDirection.needleAngle,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f,
+                        Animation.RELATIVE_TO_SELF,
+                        0.5f
+                    ).apply {
+                        duration = 1000
+                    }
+                    currentNeedleDegree = qiblaDirection.needleAngle
+                    binding.qiblaPointer.startAnimation(rotateNeedle)
 
                 }
                 .build()
-        }catch (e:Exception){e.printStackTrace()}
+            setUpQiblaCompass = true
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            setUpQiblaCompass = false
+
+        }
     }
 //==============================================================================================
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,7 +253,6 @@ class QiblaCompassFragment : Fragment(){
      * Represents a geographical location.
      */
     private var mCurrentLocation: Location? = null
-
 
 
     /**
@@ -326,17 +338,23 @@ class QiblaCompassFragment : Fragment(){
     /**
      * Creates a callback for receiving location events.
      */
+
+    private var gotLocationOnce = false
     private fun createLocationCallback() {
         mLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
+                if(gotLocationOnce)
+                {
+                 return
+
+                }
                 mCurrentLocation = locationResult.lastLocation
                 mLastUpdateTime = DateFormat.getTimeInstance().format(Date())
-
-
                 setUpQiblaComapassBuilder()
                 stopLocationUpdates()
 
+                gotLocationOnce=true
             }
         }
     }
@@ -454,7 +472,6 @@ class QiblaCompassFragment : Fragment(){
     }
 
 
-
     /**
      * Removes location updates from the FusedLocationApi.
      */
@@ -473,7 +490,6 @@ class QiblaCompassFragment : Fragment(){
                 setButtonsEnabledState()
             }
     }
-
 
 
     /**
@@ -525,11 +541,6 @@ class QiblaCompassFragment : Fragment(){
                 // Handle the Intent
             }
         }
-
-
-
-
-
 
 
 }

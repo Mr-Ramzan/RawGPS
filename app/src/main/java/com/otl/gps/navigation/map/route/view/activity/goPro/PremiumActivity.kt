@@ -173,7 +173,7 @@ class PremiumActivity : AppCompatActivity() {
                 var skutext = ""
                 if (!skuDetails.isNullOrEmpty())
                 {
-                    skutext = skuDetails[0].getSubscriptionOfferPrice(0,0)
+                    skutext = skuDetails[0].getSubscriptionOfferPrice(0,skuDetails[0].subscriptionOfferDetails.size-1)
                 }
                 binding.skuText.setText(skutext)
 
