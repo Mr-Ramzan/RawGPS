@@ -45,8 +45,7 @@ import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivityMainBinding
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.receivers.NotificationReceiver
-import com.otl.gps.navigation.map.route.utilities.BatteryOptimizationUtil
-import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.utilities.*
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_MORE_APPS
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_REMMOVE_ADS
@@ -69,8 +68,6 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOL
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_WEATHER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAV_BACK
 import com.otl.gps.navigation.map.route.utilities.Constants.OPEN_DRAWER
-import com.otl.gps.navigation.map.route.utilities.Helper
-import com.otl.gps.navigation.map.route.utilities.PopupUtil
 import com.otl.gps.navigation.map.route.view.activity.goPro.PremiumActivity
 import com.otl.gps.navigation.map.route.view.activity.spedometer.SpeedoMeterActivity
 import com.otl.gps.navigation.map.route.view.fragment.dialogs.ExitDialogFragment
@@ -97,6 +94,7 @@ class MainController : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        showConsent()
         EventBus.getDefault().register(this)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, GravityCompat.START)
@@ -191,7 +189,7 @@ class MainController : AppCompatActivity() {
 
 
         binding.privacyPolicyButton.setOnClickListener {
-            val url = "http://www.google.com"
+            val url = "https://omegatechlab.blogspot.com/p/privacy-policy.html"
             gotoPrivacyPolicy(url)
         }
     }
@@ -1178,4 +1176,26 @@ class MainController : AppCompatActivity() {
 
 
     }
+
+    /**
+     * show Consent method
+     */
+    private fun showConsent() {
+        val isAdsRemoved = (application as RawGpsApp).appContainer!!.prefs!!.areAdsRemoved()!!
+        if (!isAdsRemoved) {
+            UserConsent.CheckUserConsent(
+                getString(R.string.app_name),
+                this,
+                true,
+                false,
+              R.drawable.app_logo
+            )
+        }
+
+    }
+
+
+
+
+
 }

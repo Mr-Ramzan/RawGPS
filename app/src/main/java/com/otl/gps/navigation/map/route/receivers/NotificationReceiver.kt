@@ -43,38 +43,38 @@ class NotificationReceiver : BroadcastReceiver() {
         notificationsSlugs = ArrayList<NotificationSlugs>()
         notificationsSlugs.add(
             NotificationSlugs(
-                "Don't know where you are?",
+                "Your Location?",
                 "Pin point your location on the map Now!"
             )
         )
 
         notificationsSlugs.add(
             NotificationSlugs(
-                "Know your speed real time!",
+                "Speeedometer",
                 "Moving, know your speed using speedometer with beautiful interfaces."
             )
         )
         notificationsSlugs.add(
             NotificationSlugs(
-                "Enjoying this place? ",
+                "Explore Nearby",
                 "Save in your saved places for later."
             )
         )
         notificationsSlugs.add(
             NotificationSlugs(
-                "Which way is the north? ",
-                "Use Compass to find out.."
+                "Get Directions",
+                "Use Compass to find out North.."
             )
         )
         notificationsSlugs.add(
             NotificationSlugs(
-                "Get Weekly weather Updates",
-                "Plans on traveling get weather updates before hand."
+                "Weather Forcasts",
+                "Plans on go out get weather updates before hand."
             )
         )
         notificationsSlugs.add(
             NotificationSlugs(
-                "Never get Stuck in Traffic! ",
+                "Traffic Advisory",
                 "Get live Traffic Updates before travelling and never get stuck. "
             )
         )

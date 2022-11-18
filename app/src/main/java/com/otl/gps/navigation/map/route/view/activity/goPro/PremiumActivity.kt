@@ -1,6 +1,6 @@
 package com.otl.gps.navigation.map.route.view.activity.goPro
 
-import android.app.Activity
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import application.RawGpsApp
-import com.google.android.datatransport.runtime.logging.Logging
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.PremiumUserPopupBinding
 import com.otl.gps.navigation.map.route.model.NavEvent
@@ -20,6 +19,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.FROM_NAVIGATION
 import com.otl.gps.navigation.map.route.utilities.Constants.FROM_SPLASH
 import com.otl.gps.navigation.map.route.utilities.Constants.PREMIUM_FROM
 import com.otl.gps.navigation.map.route.view.activity.main.MainController
+import com.otl.gps.navigation.map.route.view.activity.splash.Splash
 import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
 import games.moisoni.google_iab.enums.ErrorType
@@ -27,10 +27,7 @@ import games.moisoni.google_iab.enums.ProductType
 import games.moisoni.google_iab.models.BillingResponse
 import games.moisoni.google_iab.models.ProductInfo
 import games.moisoni.google_iab.models.PurchaseInfo
-
-
 import org.greenrobot.eventbus.EventBus
-import java.lang.Exception
 
 
 class PremiumActivity : AppCompatActivity() {
@@ -126,8 +123,9 @@ class PremiumActivity : AppCompatActivity() {
 
     private fun subScribed() {
 
-        EventBus.getDefault().post(NavEvent(ACTION_SUBSCCRIBED))
         binding.closeButton.performClick()
+        restart()
+
     }
 
     private fun setupBillingActions() {
@@ -315,5 +313,9 @@ class PremiumActivity : AppCompatActivity() {
 
         }
     }
-
+    fun restart() {
+        val intent = Intent(this, Splash::class.java)
+        this.startActivity(intent)
+        finishAffinity()
+    }
 }

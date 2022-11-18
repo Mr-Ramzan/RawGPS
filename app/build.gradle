@@ -10,7 +10,7 @@ plugins {
 
 }
 
-//android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
+android.defaultConfig.ndk.debugSymbolLevel = 'FULL'
 
 android {
     compileSdk 32
@@ -20,10 +20,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
-        ndk {
-            debugSymbolLevel 'SYMBOL_TABLE'
-        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 
@@ -90,17 +86,17 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
-        freeCompilerArgs += [
-                "-Xjvm-default=all",
-        ]
+//        freeCompilerArgs += [
+//                "-Xjvm-default=all",
+//        ]
     }
 
     buildFeatures {
         viewBinding true
     }
-//    ndkVersion '21.3.6528147'
+    ndkVersion '21.3.6528147'
     compileOptions {
-//        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
@@ -114,6 +110,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -128,8 +125,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //event bus
     implementation 'org.greenrobot:eventbus:3.3.1'
-    //Segmented Buttons
-    implementation 'com.github.addisonelliott:SegmentedButton:3.1.9'
+
     //Gson
     implementation 'com.google.code.gson:gson:2.9.1'
     //GLIDE LIB
@@ -181,7 +177,7 @@ dependencies {
     // Firebase analytics
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
     // Declare the dependencies for the Crashlytics
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.2'
 
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
@@ -195,8 +191,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
     implementation 'com.squareup.okhttp3:mockwebserver:4.9.2'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
-    //Realm DB
-    implementation 'io.realm.kotlin:library-base:1.0.2'
 
     // volley
     implementation 'com.android.volley:volley:1.2.1'

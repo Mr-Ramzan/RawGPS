@@ -60,4 +60,13 @@
     <string name="dialog_battery_message">Add battery optimization exclusion for better performance and experience.</string>
     <string name="dialog_battery_title">Battery Optimization</string>
 
+
+
+    <string name="description1">Dear User,\n  Your privacy and data safety is our first priority. We make this app available for free by placing Ads.</string>
+    <string name="description2">As this app contains Ads. To see relevant ads that best suit your interest click agree to watch personalized ads. To see just random advertisement that dont relate to your interest you may click deny.</string>
+    <string name="privacy_link"><u>Privacy Policy</u></string>
+    <string name="positive_text_consent">Agree</string>
+    <string name="negative_consent_text">Deny</string>
+
+
 </resources>
