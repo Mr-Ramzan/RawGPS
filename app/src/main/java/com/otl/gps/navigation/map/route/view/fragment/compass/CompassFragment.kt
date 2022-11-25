@@ -18,6 +18,7 @@ import com.google.android.gms.ads.AdSize
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.FragmentCompassBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
+import com.otl.gps.navigation.map.route.utilities.Constants
 
 class CompassFragment : Fragment(), SensorEventListener {
     /**
@@ -57,7 +58,8 @@ class CompassFragment : Fragment(), SensorEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
-        loadBanner()
+//        loadBanner()
+        loadNativeBanner()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
         setListeners()
     }
@@ -94,13 +96,87 @@ class CompassFragment : Fragment(), SensorEventListener {
         binding!!.backButton.setOnClickListener { requireActivity().onBackPressed() }
     }
 
-    private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
-            requireActivity(),
-            binding!!.adsContainer,
-            AdSize.MEDIUM_RECTANGLE,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {}
-            })
+//    private fun loadBanner() {
+//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
+//            requireActivity(),
+//            binding!!.adsContainer,
+//            AdSize.MEDIUM_RECTANGLE,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {}
+//            })
+//    }
+
+
+
+    var canShowNativeAd = false
+    var adsReloadTry = 0
+
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
+
+        if (!(requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.loadSmallNativeAd(
+                requireActivity(),
+                true,
+                object : AdLoadedCallback {
+                    override fun addLoaded(success: Boolean?) {
+                        if (isDetached) {
+                            return
+                        }
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding?.adsContainer?.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
+    }
+
+    private fun showNativeAd() {
+        try {
+            if (isDetached) {
+                return
+            }
+            val isAdsRemoved =
+                (requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+            if (!isAdsRemoved) {
+                if (canShowNativeAd)
+                {
+                    (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                        requireActivity(),
+                        Constants.BIG_NATIVE,
+                        binding?.adsContainer!!, true, true
+                    )
+                }
+                else
+                {
+                    binding?.adsContainer?.visibility = View.GONE
+                }
+            } else {
+                binding?.adsContainer?.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

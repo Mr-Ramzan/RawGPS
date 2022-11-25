@@ -58,13 +58,28 @@ class PremiumActivity : AppCompatActivity() {
 
 
     private fun setupView() {
+
+
+
         try{
+
+
             FROM = intent.getStringExtra(PREMIUM_FROM).toString()
 
             if(FROM.equals(Constants.FROM_NAVIGATION))
             {
                 binding.freeTriesOverTitle.visibility = View.VISIBLE
             }
+            if((application as RawGpsApp).appContainer. prefs.areAdsRemoved()){
+
+                binding.premiumUserLayout.visibility = View.VISIBLE
+
+
+            }else{
+                binding.premiumUserLayout.visibility = View.GONE
+
+            }
+
         }catch (e:Exception){e.printStackTrace()}
     }
 
@@ -122,6 +137,12 @@ class PremiumActivity : AppCompatActivity() {
 
 
     private fun subScribed() {
+
+        binding.closeButton.performClick()
+        restart()
+
+    }
+    private fun unSubScribed() {
 
         binding.closeButton.performClick()
         restart()
@@ -196,9 +217,15 @@ class PremiumActivity : AppCompatActivity() {
                 /*Provides a list with fetched purchased products*/
 
                 if (purchases.isNullOrEmpty()) {
-                    (application as RawGpsApp).appContainer!!. prefs!!.resetAdsPurchase()
+                    (application as RawGpsApp).appContainer. prefs.resetAdsPurchase()
+                     binding.premiumUserLayout.visibility = View.GONE
+                    binding.unsubscribeNow.setOnClickListener {
+                        billingConnector.unsubscribe(this@PremiumActivity, subscriptionIds.get(0))
+                    }
                 } else {
-                    (application as RawGpsApp).appContainer!!. prefs!!.removeAds()
+                    (application as RawGpsApp).appContainer. prefs.removeAds()
+                    binding.premiumUserLayout.visibility = View.VISIBLE
+
                 }
             }
 

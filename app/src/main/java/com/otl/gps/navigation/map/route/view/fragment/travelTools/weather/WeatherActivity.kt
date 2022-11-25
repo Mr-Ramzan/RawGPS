@@ -20,6 +20,7 @@ import com.otl.gps.navigation.map.route.R
 import com.google.android.gms.ads.AdSize
 import com.otl.gps.navigation.map.route.databinding.ActivityWeatherBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
+import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.LATITUDE_FROM_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.LONGITUDE_FROM_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Helper
@@ -83,8 +84,9 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         setCurrentWeather()
         getWeatherForecast()
         getCitiesWeather()
-
-        loadBanner()
+        loadInter()
+//        loadBanner()
+        loadNativeBanner()
         clickEvents()
         getDateTime()
 
@@ -125,19 +127,25 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         }
     }
 
+
     private fun getDateTime() {
         val currentTime = SimpleDateFormat("HH : mm", Locale.getDefault()).format(Date())
         val simpleDateFormat = SimpleDateFormat("EEEE , dd MMMM yyyy ", Locale.getDefault())
         val date = Date()
-        binding.time.text = simpleDateFormat.format(date).replace(",","\n")
+        binding.time.text = simpleDateFormat.format(date).replace(",", "\n")
+    }
+
+
+    override fun onBackPressed() {
+        showInterAds {
+            super.onBackPressed()
+        }
     }
 
     private fun setCurrentWeather() {
         currWViewModel.WeatherService.observe(this, androidx.lifecycle.Observer {
-
             //set data
             _binding!!.homeCity.text = currWViewModel.city
-
             Glide.with(this)
                 .load(IconManager().getIcon(currWViewModel.icon))
                 .into(_binding!!.weatherIcon)
@@ -172,43 +180,139 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
                 Glide.with(this)
                     .load(R.drawable.morning_bg)
                     .into(binding.weatherBackgroundImage)
-            }else{
+            } else {
 
                 Glide.with(this)
                     .load(R.drawable.morning_bg)
                     .into(binding.weatherBackgroundImage)
             }
 
-            _binding!!.temperature.text = currWViewModel.temperature+"℃"
+            _binding!!.temperature.text = currWViewModel.temperature + "℃"
             _binding!!.feelLikeValue.text = currWViewModel.temperature
-
             _binding!!.waterDrop.text = currWViewModel.water_drop
-
             _binding!!.windSpeed.text = currWViewModel.wind_speed
-
-            _binding!!.weatherBackgroundImage.setBackgroundResource(
-                BackgroundManager().getHomeBackground(
-                    currWViewModel.description
-                )
-            )
+            _binding!!.weatherBackgroundImage.setBackgroundResource(BackgroundManager().getHomeBackground(currWViewModel.description))
 
         })
     }
 
-    private fun loadBanner() {
-        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+//    private fun loadBanner() {
+//        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+//
+//            this,
+//            binding.bannerAd,
+//
+//            AdSize.LARGE_BANNER,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {
+//
+//                    // Toast.makeText(this@WeatherActivity, "Banner shown", Toast.LENGTH_SHORT).show()
+//                }
+//            })
+//    }
 
-            this,
-            binding.bannerAd,
+    var canShowNativeAd = false
+    var adsReloadTry = 0
 
-            AdSize.LARGE_BANNER,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
 
-                   // Toast.makeText(this@WeatherActivity, "Banner shown", Toast.LENGTH_SHORT).show()
+        if (!(application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (application as RawGpsApp).appContainer.myAdsUtill?.loadSmallNativeAd(
+            this@WeatherActivity,
+                true,
+                object : AdLoadedCallback {
+
+                    override fun addLoaded(success: Boolean?) {
+
+
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding.bannerAd.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
                 }
-            })
+            )
+        }
+
     }
+
+    private fun showNativeAd() {
+        try {
+
+            val isAdsRemoved =
+                (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+            if (!isAdsRemoved) {
+
+                if (canShowNativeAd)
+                {
+                    (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                        this@WeatherActivity,
+                        Constants.START_NATIVE_SMALL,
+                        binding.bannerAd, true, false
+                    )
+                }
+                else
+                {
+                    binding.bannerAd.visibility = View.GONE
+                }
+
+
+            } else {
+                binding.bannerAd.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------/////
+    /**
+     *     Logic Related To Interstitial in main activity
+     */
+    var canShowInter = false
+    private fun loadInter() {
+        if ((application as RawGpsApp).appContainer.myAdsUtill.mInterstitialAd == null) {
+            (application as RawGpsApp).appContainer.myAdsUtill.loadInterestitial(this) {
+                canShowInter = it
+            }
+        } else {
+            canShowInter = true
+        }
+    }
+
+    private fun showInterAds(shown: (success: Boolean) -> Unit) {
+        if (canShowInter) {
+            (application as RawGpsApp).appContainer.myAdsUtill.showInterestitial(this) {
+                shown(it)
+            }
+        } else {
+            shown(false)
+        }
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //get weather forecast
     private fun getWeatherForecast() {
@@ -338,4 +442,6 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
             adapter.upDateList(arrayList)
         }
     }
+
+
 }

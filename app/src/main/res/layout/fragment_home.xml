@@ -19,7 +19,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/pro_button"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_55sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:elevation="2dp"
@@ -56,10 +56,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/pro_button_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/poppins"
                 android:text="Buy Premium"
                 android:textColor="@color/pro"
@@ -70,37 +71,46 @@
                 app:layout_constraintHorizontal_bias="0.22"
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/unsubscribe_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/cancel_subscription"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pro_button_text"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:maxWidth="800dp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pro_button"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintWidth_max="500dp">
+        app:layout_constraintTop_toBottomOf="@+id/pro_button">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/route_finder_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/my_location"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -125,12 +135,11 @@
                     android:id="@+id/textView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="@string/navigation"
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -139,16 +148,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/my_location"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/satellite_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/route_finder_button"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -172,12 +180,11 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="@string/my_location"
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -186,16 +193,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/satellite_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="24dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/my_location"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -219,12 +225,11 @@
                     android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Satellite Map"
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -233,17 +238,16 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/weather"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/traffic_view"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline7">
+            app:layout_constraintTop_toBottomOf="@+id/my_location">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -266,13 +270,12 @@
                     android:id="@+id/textView5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Weather"
 
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
 
 
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -283,17 +286,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/traffic_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="@+id/guideline7">
+            app:layout_constraintEnd_toStartOf="@+id/nearby_places"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/weather"
+            app:layout_constraintTop_toTopOf="@+id/weather">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -316,13 +317,12 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Traffic Updates"
                     android:textColor="@color/black_text_color"
 
-                    android:textSize="12dp"
+                    android:textSize="12sp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -332,17 +332,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/nearby_places"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="24dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/guideline7">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/traffic_view"
+            app:layout_constraintTop_toTopOf="@+id/weather">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -365,13 +363,12 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Explore Places"
                     android:textColor="@color/black_text_color"
 
-                    android:textSize="12dp"
+                    android:textSize="12sp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -381,17 +378,19 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/compass"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/qibla_compass"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline9">
+            app:layout_constraintTop_toBottomOf="@+id/weather"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -414,13 +413,12 @@
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Compass"
 
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -429,17 +427,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/qibla_compass"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="@+id/guideline9">
+            app:layout_constraintEnd_toStartOf="@+id/speedometer_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/compass"
+            app:layout_constraintTop_toTopOf="@+id/compass">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -462,13 +458,12 @@
                     android:id="@+id/textView9"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
 
                     android:text="Qibla Compass"
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -478,17 +473,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/speedometer_button"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_55sdp"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="24dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/guideline9">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/qibla_compass"
+            app:layout_constraintTop_toTopOf="@+id/compass">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -511,46 +504,17 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:text="Speedometer"
                     android:textColor="@color/black_text_color"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.33" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.66" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.33" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.66" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -591,7 +555,8 @@
         android:src="@drawable/share_black"
         app:layout_constraintEnd_toStartOf="@+id/info_button"
         app:layout_constraintTop_toTopOf="@+id/menu_button"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/info_button"
@@ -604,24 +569,23 @@
         android:src="@drawable/info_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/menu_button"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.63" />
 
     <FrameLayout
         android:id="@+id/ads_parent"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/bg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
     </FrameLayout>
 

@@ -39,16 +39,9 @@ object Constants {
     const val NAVIGATE_TRAFFIC = "traffic_frag"
     const val NAVIGATE_COMPASS = "compass"
     const val NAVIGATE_WEATHER = "weather"
-
-
-
     const val NAVIGATE_QIBLA_COMPASS = "qibla_compass"
-
     const val NAVIGATE_COMING_SOON = "coming_soon_"
     const val BACK_AND_EXIT = "exit"
-
-
-
     const val NAVIGATE_TRAVEL_TOOLS = "travel_tools"
     const val NAVIGATE_EXPLORE_PLACES = "explore_places"
     const val NAVIGATE_PREVIEW_SAVED_PLACES = "preview_saved_PLACES_fragment"
@@ -56,7 +49,6 @@ object Constants {
     const val NAVIGATE_SPEEDOMETER = "speedometer"
     const val NAVIGATE_SAVED_PLACES = "Saved_Places_list"
     const val NAVIGATE_PLACES_LIST = "nearby_list"
-
     const val ACTION_SHARE = "share"
     const val ACTION_CANCEL_SUB = "cancel_sub"
     const val ACTION_SUBSCCRIBED = "subscribed"

@@ -18,8 +18,8 @@ android {
         applicationId "com.otl.gps.navigation.map.route"
         minSdk 23
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 
@@ -45,6 +45,9 @@ android {
     buildTypes {
 
         release {
+//            ndk {
+//                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
+//            }
 //        liv
             resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
             resValue 'string', 'gps_inter_id', '"ca-app-pub-8804904864147916/6388970608"'
@@ -63,6 +66,9 @@ android {
 
 
         debug {
+            ndk {
+                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
+            }
             resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
             resValue 'string', 'gps_inter_id', '"ca-app-pub-3940256099942544/1033173712"'
             resValue 'string', 'gps_appopen_id', '"ca-app-pub-3940256099942544/3419835294"'
@@ -195,12 +201,12 @@ dependencies {
     // volley
     implementation 'com.android.volley:volley:1.2.1'
 
-    implementation 'com.google.ads.mediation:facebook:6.11.0.1'
-    implementation 'com.unity3d.ads:unity-ads:4.4.1'
-    implementation 'com.google.ads.mediation:unity:4.4.1.0'
-
-    implementation 'com.google.android.gms:play-services-ads:21.3.0'
-    implementation 'com.google.ads.mediation:applovin:11.5.3.1'
+//    implementation 'com.google.ads.mediation:facebook:6.11.0.1'
+//    implementation 'com.unity3d.ads:unity-ads:4.4.1'
+//    implementation 'com.google.ads.mediation:unity:4.4.1.0'
+//
+//    implementation 'com.google.android.gms:play-services-ads:21.3.0'
+//    implementation 'com.google.ads.mediation:applovin:11.5.3.1'
 }
 
 secrets {

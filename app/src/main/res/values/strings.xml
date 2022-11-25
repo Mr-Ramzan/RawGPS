@@ -15,8 +15,8 @@
     <string name="navigation">Navigation</string>
     <string name="my_location">My Location</string>
     <string name="tittle_home">GPS Navigation</string>
-    <string name="cancel_subscription">Cancel Subscription</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="cancel_subscription"><u>Cancel Subscription</u></string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="rate_application">Rate Us</string>
     <string name="more_apps">More Apps</string>
     <string name="share_application">Share This App</string>
@@ -67,6 +67,7 @@
     <string name="privacy_link"><u>Privacy Policy</u></string>
     <string name="positive_text_consent">Agree</string>
     <string name="negative_consent_text">Deny</string>
+    <string name="renew_instructions"> Your subscription will be renewed at the end of your weekly payment cycle. You can cancel anytime.</string>
 
 
 </resources>

@@ -653,15 +653,15 @@ GoogleMap.OnMyLocationClickListener {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    private fun loadBanner() {
-        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-            this,
-            binding.adsParent,
-            AdSize.LARGE_BANNER,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {}
-            })
-    }
+//    private fun loadBanner() {
+//        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+//            this,
+//            binding.adsParent,
+//            AdSize.LARGE_BANNER,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {}
+//            })
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

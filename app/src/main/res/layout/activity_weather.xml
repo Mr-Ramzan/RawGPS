@@ -21,9 +21,10 @@
         android:padding="6dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back_arrow"
-        app:tint="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -322,11 +323,9 @@
         android:paddingEnd="@dimen/_6sdp"
         app:cardBackgroundColor="@color/black_text_color"
         app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bannerAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentLayout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/currentLayout">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detailedCityRecyclerview"
@@ -338,11 +337,15 @@
     <FrameLayout
         android:id="@+id/bannerAd"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forcastCard"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardMain"

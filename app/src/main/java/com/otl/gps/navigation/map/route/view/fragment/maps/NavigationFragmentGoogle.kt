@@ -294,6 +294,9 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             override fun onLocationChanged(location: Location) {
                 try {
                     locationByNetwork = location
+                    if(locationByNetwork==null){
+                        return
+                    }
                     latSrcLocation = locationByNetwork!!.latitude.toString()
                     longSrcLocation = locationByNetwork!!.longitude.toString()
                     GeoCoderAddress(requireContext()).getCompleteAddress(
@@ -861,6 +864,9 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
+        if (latSrcLocation.isNullOrEmpty() || longSrcLocation.isNullOrEmpty()) {
+            return
+        }
         val cameraPos: CameraPosition = CameraPosition.Builder()
             .target(LatLng(latSrcLocation.toDouble(), longSrcLocation.toDouble()))
             .zoom(15.5f)
@@ -882,17 +888,17 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         }
     }
 
-    private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-            requireActivity(),
-            binding.adsParent,
-            AdSize.LARGE_BANNER,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {
-                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-                }
-            })
-    }
+//    private fun loadBanner() {
+//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+//            requireActivity(),
+//            binding.adsParent,
+//            AdSize.LARGE_BANNER,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {
+//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+//                }
+//            })
+//    }
 
 
 

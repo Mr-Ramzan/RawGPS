@@ -36,6 +36,7 @@ import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySpeedometerBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.interfaces.locationCallback
+import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.view.activity.spedometer.*
 import java.lang.Exception
 import java.text.DateFormat
@@ -102,20 +103,87 @@ class SpeedoMeterActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun  loadBanner(){
-        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
-            this,
-            binding.adViewBanner,
-            AdSize.MEDIUM_RECTANGLE,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {
+//    private fun  loadBanner(){
+//        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+//            this,
+//            binding.adViewBanner,
+//            AdSize.MEDIUM_RECTANGLE,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {
+//
+//                    Log.d("Add Load Callback","is ad loaded========>"+success)
+//
+//                }
+//            })
+//    }
 
-                    Log.d("Add Load Callback","is ad loaded========>"+success)
+    var canShowNativeAd = false
+    var adsReloadTry = 0
 
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
+
+        if (!(application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (application as RawGpsApp).appContainer.myAdsUtill?.loadSmallNativeAd(
+             this,
+                true,
+                object : AdLoadedCallback {
+                    override fun addLoaded(success: Boolean?) {
+
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding.adViewBanner.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
                 }
-            })
+            )
+        }
+
     }
 
+    private fun showNativeAd() {
+        try {
+
+            val isAdsRemoved =
+                (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+            if (!isAdsRemoved) {
+                if (canShowNativeAd)
+                {
+                    (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                       this,
+                        Constants.BIG_NATIVE,
+                        binding.adViewBanner, true, true
+                    )
+                }
+                else
+                {
+                    binding.adViewBanner.visibility = View.GONE
+                }
+            } else {
+                binding.adViewBanner.visibility = View.GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 
     private fun setupBg() {
@@ -135,7 +203,8 @@ class SpeedoMeterActivity : AppCompatActivity() {
         binding = ActivitySpeedometerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 //        setupBg()
-        loadBanner()
+//        loadBanner()
+        loadNativeBanner()
         setupViewPager(binding.viewPager)
         binding.dotsIndicator.attachTo(binding.viewPager)
         setListeners()

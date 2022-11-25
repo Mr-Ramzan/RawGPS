@@ -41,7 +41,7 @@ class ExplorePlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
         initListeners()
-        loadBanner()
+        loadNativeBanner()
         loadInter()
     }
     private fun setupBg() {
@@ -53,17 +53,17 @@ class ExplorePlacesFragment : Fragment() {
         }
 
     }
-    private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
-            requireActivity(),
-            binding.adsParent,
-            AdSize.MEDIUM_RECTANGLE,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {
-                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-                }
-            })
-    }
+//    private fun loadBanner() {
+//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
+//            requireActivity(),
+//            binding.adsParent,
+//            AdSize.MEDIUM_RECTANGLE,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {
+//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+//                }
+//            })
+//    }
 
     private fun initListeners() {
 
@@ -115,68 +115,68 @@ class ExplorePlacesFragment : Fragment() {
 
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-//    var canShowNativeAd = false
-//    var adsReloadTry = 0
-//
-//    /**
-//     * Loading ads once if not loaded
-//     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
-//     */
-//    private fun loadNativeBanner() {
-//
-//        if (!GpsTrackerApp.prefs?.areAdsRemoved()!!) {
-//            (requireActivity().application as GpsTrackerApp).appContainer?.myAdsUtill?.loadSmallNativeAd(
-//                requireActivity(),
-//                true,
-//                object : AdLoadedCallback {
-//                    override fun addLoaded(success: Boolean?) {
-//                        if (success != null && success) {
-//                            adsReloadTry += 1
-//                            canShowNativeAd = success
-//                            showNativeAd()
-//                        } else {
-//
-//                            /////////////////////////////
-//                            if (success == null || !success) {
-//                                canShowNativeAd = false
-//                                binding.adsParent.visibility = View.GONE
-//
-//                            } else {
-//                                canShowNativeAd = success
-//                            }
-//                            /////////////////////////////
-//                            adsReloadTry += 1
-//                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
-//                                loadNativeBanner()
-//                            }
-//                        }
-//                    }
-//                }
-//            )
-//        }
-//
-//    }
-//
-//    private fun showNativeAd() {
-//        val preferences =
-//            requireActivity().getSharedPreferences("PREF_NAME", AppCompatActivity.MODE_PRIVATE)
-//        val isAdsRemoved = preferences.getBoolean(Constants.PREF_REMOVE_ADS, false)
-//        if (!isAdsRemoved) {
-//            if (canShowNativeAd) {
-//                (requireActivity().application as GpsTrackerApp).appContainer?.myAdsUtill?.showSmallNativeAd(
-//                    requireActivity(),
-//                    Constants.START_NATIVE_SMALL,
-//                    binding.adsParent,
-//                    true,
-//                    false
-//                )
-//            } else {
-//                binding.adsParent.visibility = View.GONE
-//            }
-//        } else {
-//            binding.adsParent.visibility = View.GONE
-//        }
-//    }
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    var canShowNativeAd = false
+    var adsReloadTry = 0
 
+    /**
+     * Loading ads once if not loaded
+     * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
+     */
+    private fun loadNativeBanner() {
+
+        if (!(requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.loadSmallNativeAd(
+                requireActivity(),
+                true,
+                object : AdLoadedCallback {
+                    override fun addLoaded(success: Boolean?) {
+                        if (success != null && success) {
+                            adsReloadTry += 1
+                            canShowNativeAd = success
+                            showNativeAd()
+                        } else {
+
+                            /////////////////////////////
+                            if (success == null || !success) {
+                                canShowNativeAd = false
+                                binding.adsParent.visibility = View.GONE
+
+                            } else {
+                                canShowNativeAd = success
+                            }
+                            /////////////////////////////
+                            adsReloadTry += 1
+                            if (adsReloadTry < Constants.ADS_RELOAD_MAX_TRIES) {
+                                loadNativeBanner()
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
+    }
+
+    private fun showNativeAd() {
+
+        try{
+        if (!(requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            if (canShowNativeAd) {
+                (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                    requireActivity(),
+                    Constants.BIG_NATIVE,
+                    binding.adsParent,
+                    true,
+                    true
+                )
+            } else {
+                binding.adsParent.visibility = View.GONE
+            }
+        } else {
+            binding.adsParent.visibility = View.GONE
+        }
+    }catch (e:Exception){e.printStackTrace()}
+
+}
 }

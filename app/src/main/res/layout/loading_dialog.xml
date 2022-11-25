@@ -10,7 +10,7 @@
         android:id="@+id/loading_view"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/transparent"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

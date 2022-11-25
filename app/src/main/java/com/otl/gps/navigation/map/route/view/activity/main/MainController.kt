@@ -248,7 +248,9 @@ class MainController : AppCompatActivity() {
             }
 
             NAVIGATE_PLACES_LIST -> {
-                navigatePlaces()
+                showInterAds {
+                    navigatePlaces()
+                }
             }
 
             NAVIGATE_COMPASS -> {
@@ -266,7 +268,9 @@ class MainController : AppCompatActivity() {
                 navigateQiblaCompass()
             }
             NAVIGATE_SAVED_PLACES -> {
-                navigateSavedPlaces()
+                showInterAds {
+                    navigateSavedPlaces()
+                }
             }
             NAVIGATE_SPEEDOMETER -> {
                 navigateSpeedoMeter()
@@ -558,7 +562,13 @@ class MainController : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        if (navController.currentDestination?.id != R.id.nav_home) {
+
+        if (navController.currentDestination?.id == R.id.navigation_places_list || navController.currentDestination?.id == R.id.navigation_saved_places) {
+
+
+            navController.navigateUp()
+
+        } else if (navController.currentDestination?.id != R.id.nav_home) {
 
             showInterAds {
                 navController.navigateUp()
@@ -673,7 +683,7 @@ class MainController : AppCompatActivity() {
         }.build()
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Location Related Stuf Dirty One
      */
@@ -734,9 +744,9 @@ class MainController : AppCompatActivity() {
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //            LOCATION CODE
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+//            LOCATION CODE
+////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Provides access to the Fused Location Provider API.
      */
@@ -862,7 +872,7 @@ class MainController : AppCompatActivity() {
         mLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
-                if(gotLocationOnce){
+                if (gotLocationOnce) {
                     return
                 }
                 mCurrentLocation = locationResult.lastLocation
@@ -913,7 +923,6 @@ class MainController : AppCompatActivity() {
     }
 
 
-
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
 
@@ -949,10 +958,10 @@ class MainController : AppCompatActivity() {
             val dialog: AlertDialog? = BatteryOptimizationUtil.getBatteryOptimizationDialog(
                 this,
                 {
-                    Toast.makeText(this,"User Accepted",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "User Accepted", Toast.LENGTH_SHORT).show()
                 }
             ) {
-                Toast.makeText(this,"User Denied",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "User Denied", Toast.LENGTH_SHORT).show()
 
             }
             dialog?.show()
@@ -962,9 +971,6 @@ class MainController : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-
-
-
 
 
     /**
@@ -1188,14 +1194,11 @@ class MainController : AppCompatActivity() {
                 this,
                 true,
                 false,
-              R.drawable.app_logo
+                R.drawable.app_logo
             )
         }
 
     }
-
-
-
 
 
 }

@@ -560,15 +560,15 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             )
         }
 
-    private fun loadBanner() {
-        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-            requireActivity(),
-            binding.adViewBanner,
-            AdSize.LARGE_BANNER,
-            object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {}
-            })
-    }
+//    private fun loadBanner() {
+//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+//            requireActivity(),
+//            binding.adViewBanner,
+//            AdSize.LARGE_BANNER,
+//            object : AdLoadedCallback {
+//                override fun addLoaded(success: Boolean?) {}
+//            })
+//    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
