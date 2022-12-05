@@ -35,7 +35,6 @@
             android:layout_marginTop="16dp"
             android:autoSizeStepGranularity="2sp"
             android:autoSizeTextType="uniform"
-            android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="GPS Maps Navigation"
             android:textColor="#262626"
@@ -88,7 +87,7 @@
             android:text="@string/description1"
             android:textColor="#004FA5"
             android:textSize="15sp"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
             app:layout_constraintStart_toStartOf="@+id/guideline18"
             app:layout_constraintTop_toBottomOf="@+id/app_name" />

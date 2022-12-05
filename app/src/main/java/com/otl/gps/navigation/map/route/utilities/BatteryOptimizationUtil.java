@@ -108,9 +108,11 @@ public class BatteryOptimizationUtil {
                     public void onClick(DialogInterface dialog, int which) {
                         if (positiveCallback != null)
                             positiveCallback.onBatteryOptimizationAccepted();
-                        final Intent intent = new Intent();
-                        intent.setComponent(componentName);
-                        context.startActivity(intent);
+                        try {
+                            final Intent intent = new Intent();
+                            intent.setComponent(componentName);
+                            context.startActivity(intent);
+                        }catch (Exception e){e.printStackTrace();}
                     }
                 }).create();
     }
@@ -150,8 +152,7 @@ public class BatteryOptimizationUtil {
         names.add(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity"));
         names.add(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.optimize.process.ProtectActivity"));
         names.add(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity"));
-        names.add(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.permission.startup.StartupAppListActivity"));
-        names.add(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.startupapp.StartupAppListActivity"));
+        names.add(new ComponentName("com.coloros.safecenter", "com.coloros.privacypermissionsentry.PermissionTopActivity"));
         names.add(new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity"));
         names.add(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
         names.add(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager"));
@@ -161,6 +162,7 @@ public class BatteryOptimizationUtil {
         names.add(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.MainActivity"));
         return names;
     }
+
 
     public interface OnBatteryOptimizationAccepted {
 

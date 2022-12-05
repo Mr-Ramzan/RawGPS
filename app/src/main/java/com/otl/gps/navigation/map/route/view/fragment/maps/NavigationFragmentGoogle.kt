@@ -103,7 +103,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         loadInter()
 
 
-
     }
 
 
@@ -294,7 +293,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             override fun onLocationChanged(location: Location) {
                 try {
                     locationByNetwork = location
-                    if(locationByNetwork==null){
+                    if (locationByNetwork == null) {
                         return
                     }
                     latSrcLocation = locationByNetwork!!.latitude.toString()
@@ -347,6 +346,11 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
     private fun updateMarkers() {
+
+        if(!::map.isInitialized){
+            return
+        }
+
         val builder: LatLngBounds.Builder = LatLngBounds.Builder()
 
         try {
@@ -409,13 +413,13 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         }
         if (!latDestLocation.isEmpty() && !longDestLocation.isEmpty()) {
 
-            builder.include(LatLng(locationByNetwork!!.latitude,locationByNetwork!!.longitude))
-            builder.include(LatLng(latDestLocation.toDouble(),longDestLocation.toDouble()))
+            builder.include(LatLng(locationByNetwork!!.latitude, locationByNetwork!!.longitude))
+            builder.include(LatLng(latDestLocation.toDouble(), longDestLocation.toDouble()))
             val bounds = builder.build()
             val width = resources.displayMetrics.widthPixels
             val height = resources.displayMetrics.heightPixels
             val padding = (width * 0.20).toInt() // offset from edges of the map 10% of screen
-            val cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height/2, padding)
+            val cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height / 2, padding)
             map.animateCamera(cu)
 
         } else {
@@ -701,19 +705,23 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 //        Toast.makeText(context,"miles"+road.mDuration,Toast.LENGTH_SHORT).show()
 //        Toast.makeText(context,"miles"+ addressFromMyLocation,Toast.LENGTH_SHORT).show()
 //        binding.myLocationText.text = addressFromLocationSharedPref
-        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.ADDRESS_FROM_LOCATION,
-            addressFromMyLocation
-        )
-        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.LATITUDE_FROM_LOCATION,
-            latSrcLocation
-        )
-        (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
-            Constants.LONGITUDE_FROM_LOCATION,
-            longSrcLocation
-        )
-        getLocationFromPref()
+        try {
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.ADDRESS_FROM_LOCATION,
+                addressFromMyLocation
+            )
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.LATITUDE_FROM_LOCATION,
+                latSrcLocation
+            )
+            (requireActivity().application as RawGpsApp).appContainer.prefs.setString(
+                Constants.LONGITUDE_FROM_LOCATION,
+                longSrcLocation
+            )
+            getLocationFromPref()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     var canShowNativeAd = false
@@ -833,9 +841,9 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
     private fun setUpLayersControl() {
         binding.layersSelectionButton.setOnClickListener {
-            LayersDialog.showMapsLayersDialog(requireActivity(),map,{
+            LayersDialog.showMapsLayersDialog(requireActivity(), map, {
                 toggle2D3D()
-            },{ })
+            }, { })
         }
     }
 
@@ -901,7 +909,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 //    }
 
 
-
     // [START_EXCLUDE silent]
     /**
      * When the map is not ready the CameraUpdateFactory cannot be used. This should be used to wrap
@@ -918,7 +925,6 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
 
-
     /**
      * Change the camera position by moving or animating the camera depending on the state of the
      * animate toggle button.
@@ -927,6 +933,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         // The duration must be strictly positive so we make it at least 1.
         map.animateCamera(update, 1000, callback)
     }
+
     /**
      * Loading ads once if not loaded
      * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
@@ -981,16 +988,13 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
                 (requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()
             if (!isAdsRemoved) {
 
-                if (canShowNativeAd)
-                {
+                if (canShowNativeAd) {
                     (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
                         requireActivity(),
                         Constants.START_NATIVE_SMALL,
                         binding.adsParent, true, false
                     )
-                }
-                else
-                {
+                } else {
                     binding.adsParent.visibility = View.GONE
                 }
 

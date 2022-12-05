@@ -794,26 +794,29 @@ GoogleMap.OnMyLocationClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
-        val cameraPos: CameraPosition = CameraPosition.Builder()
-            .target(LatLng(latitude.toDouble(), longitude.toDouble()))
-            .zoom(15.5f)
-            .bearing(0f)
-            .tilt(25f)
-            .build()
-        checkReadyThen {
-            changeCamera(
-                CameraUpdateFactory.newCameraPosition(cameraPos),
-                object : GoogleMap.CancelableCallback {
-                    override fun onFinish() {
+        if(latitude.isNullOrEmpty() ||longitude.isNullOrEmpty()){return}
+        try {
+            val cameraPos: CameraPosition = CameraPosition.Builder()
+                .target(LatLng(latitude.toDouble(), longitude.toDouble()))
+                .zoom(15.5f)
+                .bearing(0f)
+                .tilt(25f)
+                .build()
+            checkReadyThen {
+                changeCamera(
+                    CameraUpdateFactory.newCameraPosition(cameraPos),
+                    object : GoogleMap.CancelableCallback {
+                        override fun onFinish() {
 
 
-                    }
+                        }
 
-                    override fun onCancel() {
+                        override fun onCancel() {
 
-                    }
-                })
-        }
+                        }
+                    })
+            }
+        }catch (e:Exception){e.printStackTrace()}
         DialogUtils.dismissLoading()
 
     }

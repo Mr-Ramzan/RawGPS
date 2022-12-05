@@ -19,7 +19,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/pro_button"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:elevation="2dp"
@@ -35,7 +35,7 @@
             <ImageView
                 android:id="@+id/imageView13"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:scaleType="fitXY"
                 android:src="@drawable/pro_banner"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +47,7 @@
 
             <ImageView
                 android:id="@+id/imageView12"
-                android:layout_width="@dimen/_55sdp"
+                android:layout_width="@dimen/_65sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/crown"
@@ -98,13 +98,14 @@
         android:layout_marginEnd="8dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pro_button">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/route_finder_button"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
@@ -148,8 +149,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/my_location"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
@@ -193,8 +194,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/satellite_button"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="24dp"
@@ -238,8 +239,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/weather"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="4dp"
@@ -286,8 +287,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/traffic_view"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             app:cardCornerRadius="8dp"
@@ -332,8 +333,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/nearby_places"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="24dp"
             app:cardCornerRadius="8dp"
@@ -378,8 +379,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/compass"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="4dp"
@@ -427,8 +428,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/qibla_compass"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             app:cardCornerRadius="8dp"
@@ -473,8 +474,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/speedometer_button"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_65sdp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="24dp"
             app:cardCornerRadius="8dp"
@@ -553,6 +554,7 @@
         android:padding="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/share_black"
+        app:layout_constraintBottom_toBottomOf="@+id/tittle"
         app:layout_constraintEnd_toStartOf="@+id/info_button"
         app:layout_constraintTop_toTopOf="@+id/menu_button"
         app:tint="@color/black"
@@ -578,7 +580,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/bg"

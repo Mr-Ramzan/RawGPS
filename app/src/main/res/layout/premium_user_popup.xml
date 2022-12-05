@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:text="Navigation on the Go
 "
 
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:text="Ads free version"
 
         android:textSize="16sp"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:text="Access to unlimited places
 "
 
@@ -122,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:text="Voice Navigation"
 
         android:textSize="16sp"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:text="@string/continue_with_ads"
 
         android:textSize="20sp"
@@ -154,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
 
         android:text="3 Days' Free Trial"
         android:textSize="16sp"
@@ -169,7 +169,7 @@
         android:layout_height="50dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/button_background_white"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:gravity="center"
         android:text="Subscribe Now"
         android:textColor="@color/black"
@@ -208,7 +208,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="2dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/poppins"
             android:text="$ 1.49"
 
             android:textSize="34sp"
@@ -224,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/poppins"
             android:text="/"
 
 
@@ -237,7 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/poppins"
             android:text="week"
 
             android:textSize="16sp"
@@ -253,7 +253,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:gravity="center"
         android:text="@string/renew_instructions"
         android:visibility="visible"
@@ -284,7 +284,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -299,7 +299,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/poppins"
         android:gravity="center"
         
         android:textSize="20sp"
@@ -386,7 +386,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginBottom="60dp"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="@string/cancel_subscription"
             android:textColor="@color/black_text_color"

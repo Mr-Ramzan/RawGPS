@@ -10,7 +10,7 @@ class Convert {
 
     @SuppressLint("SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.N)
-    fun convertDate(input: String) : String {
+    fun convertDate(input: String): String {
 
         val inFormat = SimpleDateFormat("dd.MM.yyyy")
 
@@ -23,13 +23,19 @@ class Convert {
         return day
     }
 
-    fun convertTemp(temperature: String) : String {
+    fun convertTemp(temperature: String?): String {
+        try {
+            if (temperature.isNullOrEmpty()) {
+                return ""
+            }
+            val temp = ((((temperature)?.toFloat()!! - 273.15)).toInt()).toString()
 
-        val temp =((((temperature).toFloat()-273.15)).toInt()).toString()
-
-        return temp
+            return temp
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return ""
+        }
     }
-
 
 
 }
