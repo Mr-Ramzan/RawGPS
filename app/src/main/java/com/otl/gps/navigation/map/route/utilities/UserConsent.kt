@@ -47,7 +47,7 @@ object UserConsent {
             val app_name = consentDialog.findViewById<View>(R.id.app_name) as TextView
             val icon = consentDialog.findViewById<View>(R.id.app_icon_image) as ImageView
             icon.setImageResource(img_res)
-            app_name.text = AppName
+//            app_name.text = AppName
 
 
             val yes_Button = consentDialog.findViewById<TextView>(R.id.yes_button)

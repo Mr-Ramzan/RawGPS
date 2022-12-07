@@ -63,12 +63,11 @@
             android:layout_height="34dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="36dp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/poppins"
             android:gravity="center"
             android:text="&amp; Traffic"
             android:textColor="#262626"
-            android:textSize="14sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
+
+            android:fontFamily="@font/poppins"
+
             android:gravity="center"
             android:text="@string/description1"
             android:textColor="#004FA5"
@@ -100,8 +100,9 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:autoSizeStepGranularity="2sp"
-            android:autoSizeTextType="uniform"
             android:gravity="center"
+            android:fontFamily="@font/poppins"
+
             android:text="@string/description2"
 
             android:textColor="#2C2C2C "

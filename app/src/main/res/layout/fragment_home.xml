@@ -569,6 +569,7 @@
         android:padding="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/info_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tittle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/menu_button"
         app:tint="@color/black"
