@@ -41,7 +41,7 @@ class ExplorePlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
         initListeners()
-        loadNativeBanner()
+        loadBanner()
         loadInter()
     }
     private fun setupBg() {
@@ -53,17 +53,17 @@ class ExplorePlacesFragment : Fragment() {
         }
 
     }
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-//                }
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
 
     private fun initListeners() {
 

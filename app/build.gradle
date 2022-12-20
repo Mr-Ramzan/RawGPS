@@ -18,8 +18,8 @@ android {
         applicationId "com.otl.gps.navigation.map.route"
         minSdk 23
         targetSdk 32
-        versionCode 7
-        versionName "1.7"
+        versionCode 8
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 
@@ -28,14 +28,14 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'
         }
 
         release {
-            storeFile file('C:\\AndroidProjects\\RawGPS\\RawGPS\\rawgps.jks')
+            storeFile file('D:\\GitSamples\\RawGPS\\rawgps.jks')
             storePassword 'rawgps1234'
             keyPassword 'rawgps1234'
             keyAlias 'rawgps'

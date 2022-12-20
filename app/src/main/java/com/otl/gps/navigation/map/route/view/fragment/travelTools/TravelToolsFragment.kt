@@ -40,22 +40,22 @@ class TravelToolsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
         initListeners()
-        //loadBanner()
-        loadNativeBanner()
+        loadBanner()
+        //loadNativeBanner()
         loadInter()
     }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-//                }
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
     var canShowNativeAd = false
     var adsReloadTry = 0
     /**

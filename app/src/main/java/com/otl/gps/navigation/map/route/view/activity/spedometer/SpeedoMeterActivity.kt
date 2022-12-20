@@ -103,19 +103,19 @@ class SpeedoMeterActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-//    private fun  loadBanner(){
-//        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
-//            this,
-//            binding.adViewBanner,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//
-//                    Log.d("Add Load Callback","is ad loaded========>"+success)
-//
-//                }
-//            })
-//    }
+    private fun  loadBanner(){
+        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+            this,
+            binding.adViewBanner,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+
+                    Log.d("Add Load Callback","is ad loaded========>"+success)
+
+                }
+            })
+    }
 
     var canShowNativeAd = false
     var adsReloadTry = 0
@@ -203,8 +203,8 @@ class SpeedoMeterActivity : AppCompatActivity() {
         binding = ActivitySpeedometerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 //        setupBg()
-//        loadBanner()
-        loadNativeBanner()
+        loadBanner()
+//        loadNativeBanner()
         setupViewPager(binding.viewPager)
         binding.dotsIndicator.attachTo(binding.viewPager)
         setListeners()

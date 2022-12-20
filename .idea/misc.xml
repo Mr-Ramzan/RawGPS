@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-anydpi/info_icon.xml" value="0.1425" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-mdpi/customborder.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_background_drawable.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_background_hollow.xml" value="0.1" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/drawable-xxhdpi/button_transparent_background.xml" value="0.1" />
@@ -46,6 +47,8 @@
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/input_border.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/layers_dialog.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/loading_dialog.xml" value="0.1453125" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/native_ad_unified_small.xml" value="0.1" />
+        <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/native_ad_unified_small_no_media.xml" value="0.4" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/nav_header_main.xml" value="0.1453125" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/places_item.xml" value="0.25" />
         <entry key="..\:/GitSamples/RawGPS/app/src/main/res/layout/saved_places_item.xml" value="0.25" />
