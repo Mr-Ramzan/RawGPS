@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-base:18.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6be57f8ff020320a612c83dfd79e7a96/transformed/play-services-base-18.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6be57f8ff020320a612c83dfd79e7a96/transformed/play-services-base-18.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6be57f8ff020320a612c83dfd79e7a96/transformed/play-services-base-18.0.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5856446aa789b0d32158796b04cd4a2b/transformed/play-services-base-18.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5856446aa789b0d32158796b04cd4a2b/transformed/play-services-base-18.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5856446aa789b0d32158796b04cd4a2b/transformed/play-services-base-18.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-base/18.0.1/5c3b2e3ce7819eeff73b937ae37741ad2bd88172/play-services-base-18.0.1-javadoc.jar!/" />

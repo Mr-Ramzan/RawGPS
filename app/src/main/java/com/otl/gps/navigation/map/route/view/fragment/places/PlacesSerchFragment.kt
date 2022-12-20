@@ -104,7 +104,6 @@ class PlacesSerchFragment : Fragment() , OnMapReadyCallback,
         updateValuesFromBundle(savedInstanceState)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         mSettingsClient = LocationServices.getSettingsClient(requireActivity())
-
         // Kick off the process of building the LocationCallback, LocationRequest, and
         // LocationSettingsRequest objects.
         createLocationCallback()

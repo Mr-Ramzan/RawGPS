@@ -1,3 +1,1 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="fab_margin" tools:ignore="MissingDefaultResource">48dp</dimen>
-</resources>
+<resources xmlns:tools="http://schemas.android.com/tools"></resources>

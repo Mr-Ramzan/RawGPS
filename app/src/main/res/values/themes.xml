@@ -21,19 +21,11 @@
 
     <style name="Theme.RawGPS.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.RawGPS.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="Theme.RawGPS.AppBarOverlay_" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
         <item name="android:background">@color/white</item>
 
     </style>
 
-
-
-    <style name="Widget.Theme.MenClothingPhotoEditor.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
-    </style>
 
     <style name="MyTransparentBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light">
         <!--        <item name="android:background">@color/dialog_bg</item>-->

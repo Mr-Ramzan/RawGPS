@@ -1,16 +1,8 @@
 <resources>
     <string name="app_name">GPS Maps Navigation &amp; Traffic</string>
     <string name="app_name_plash">GPS Maps\n Navigation &amp; Traffic</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="next">Next</string>
     <string name="navigation">Navigation</string>
     <string name="my_location">My Location</string>
@@ -29,11 +21,8 @@
     <string name="loading_map_data">loading...</string>
     <string name="routes_fragment">Navigation Fragment</string>
     <string name="select">Select</string>
-    <string name="search">Search</string>
     <string name="search_here">Search here</string>
-    <string name="select_on_map">Select Location On Map</string>
     <string name="my_location_hint">Current Location</string>
-    <string name="start">Start</string>
     <string name="show_route">Show Route</string>
     <string name="destination_hint">Select Destination Location</string>
     <string name="travel_tool">Travel Tools</string>
@@ -42,12 +31,9 @@
     <string name="nairobi_city">Nirobi</string>
     <string name="compas_fragment">Compass Fragment</string>
     <string name="go">Done</string>
-    <string name="done">DONE</string>
     <string name="save">SAVE</string>
-    <string name="places_search_fragment">Places Fragment</string>
     <string name="explore_places">Explore Places</string>
     <string name="places_list">saved_places</string>
-    <string name="saved_places_fragment">Saved Places Fragment</string>
     <string name="saved_places">Saved Places</string>
     <string name="qibla_compass">Qibla Compass</string>
     <string name="continue_with_ads">Continue With Ads</string>

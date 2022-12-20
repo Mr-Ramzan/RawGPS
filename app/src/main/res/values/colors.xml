@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -15,15 +14,10 @@
     <color name="transparent">#00000000</color>
 
     //cloud clear and detailed view colors
-    <color name="cloud_sunny_wind_accent">#96f5f5</color>
     <color name="cloud_sunny_wind">#6efae6</color>
-    <color name="cloud_sunny_wind1">#70f3e9</color>
-    <color name="cloud_sunny_wind2">#72efed</color>
     <color name="dialog_bg">#44000000</color>
 
     <color name="green">#28E0AE</color>
-    <color name="green1">#13C696</color>
-    <color name="green2">#0FA87E</color>
 
     <color name="clouds">#4798EF</color>
     <color name="clouds1">#2774C6</color>
@@ -40,8 +34,6 @@
 
     // color accent used for ripples
     <color name="colorAccentRipple">#4D7D5593</color>
-    <color name="colorAccentLight">#397D5593</color>
-    <color name="gray1">#63FFFFFF</color>
 
     //home background color
     //home sunny / clouds
@@ -50,9 +42,6 @@
     <color name="home_sunny2">#8dd4ff</color>
 
     //home clear
-    <color name="home_clear">#27367c</color>
-    <color name="home_clear1">#0d1551</color>
-    <color name="home_clear2">#04053f</color>
 
     //home rainy / thunderstorm / drizzle
     <color name="home_rainy">#f2f2f2</color>

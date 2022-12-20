@@ -12,10 +12,16 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.util.*
+import kotlin.collections.ArrayList
 
 class GeoCoderAddress(var context: Context) {
     var TAG = "GeoCoderAddress"
-    fun getCompleteAddress(Lat: Double, Long: Double, tvAddress: TextView,result: (address: String?) -> Unit) {
+    fun getCompleteAddress(
+        Lat: Double,
+        Long: Double,
+        tvAddress: TextView,
+        result: (address: String?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
 
             var strAdd = ""
@@ -155,6 +161,20 @@ class GeoCoderAddress(var context: Context) {
             Log.w(TAG, "Canont get LatLng!")
         }
         return p1
+    }
+
+
+    fun getAddressFromName(placename: String): ArrayList<Address>? {
+        var addresses:ArrayList<Address>? = ArrayList<Address>()
+        val geocoder = Geocoder(context, Locale.getDefault())
+        try {
+            addresses?.addAll(geocoder.getFromLocationName(placename, 2))
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return addresses
+        }
+        return addresses
     }
 
 

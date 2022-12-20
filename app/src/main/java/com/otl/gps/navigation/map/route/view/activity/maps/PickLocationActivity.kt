@@ -3,32 +3,33 @@ package com.otl.gps.navigation.map.route.view.activity.maps
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import application.RawGpsApp
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
 import com.abl.gpstracker.navigation.maps.routefinder.app.view.maps.PlacesViewModel
-import com.bumptech.glide.Glide
-import com.otl.gps.navigation.map.route.R
-import com.google.android.gms.ads.AdSize
+import com.airbnb.lottie.L
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.karumi.dexter.Dexter
@@ -36,29 +37,22 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.mapbox.geojson.Point
-import com.mapbox.search.ResponseInfo
-import com.mapbox.search.record.HistoryRecord
-import com.mapbox.search.result.SearchAddress
-import com.mapbox.search.result.SearchResult
-import com.mapbox.search.result.SearchSuggestion
-import com.mapbox.search.ui.view.CommonSearchViewConfiguration
-import com.mapbox.search.ui.view.DistanceUnitType
-import com.mapbox.search.ui.view.SearchResultsView
+
+import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySerchPlacesBinding
+import com.otl.gps.navigation.map.route.databinding.AddressItemBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.interfaces.PlacesAdapterListener
 import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.utilities.DialogUtils
 import com.otl.gps.navigation.map.route.utilities.retrofitApi.ApiHelper
 import com.otl.gps.navigation.map.route.utilities.retrofitApi.RetrofitBuilder
-import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete
-import com.otl.gps.navigation.map.route.databinding.ActivityLocationFromGoogleMapBinding
-import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import okhttp3.internal.assertThreadDoesntHoldLock
 
 
 class PickLocationActivity : AppCompatActivity(), PlacesAdapterListener, OnMapReadyCallback,
-GoogleMap.OnMyLocationButtonClickListener,
-GoogleMap.OnMyLocationClickListener {
+    GoogleMap.OnMyLocationButtonClickListener,
+    GoogleMap.OnMyLocationClickListener {
 
     lateinit var locationManager: LocationManager
     private var locationByNetwork: Location? = null
@@ -82,18 +76,15 @@ GoogleMap.OnMyLocationClickListener {
     private var searchLongitude: String? = null
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySerchPlacesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.searchResultsView.apply {
-            initialize(CommonSearchViewConfiguration(DistanceUnitType.IMPERIAL))
-            isVisible = true
-        }
+//        binding.searchResultsView.apply {
+//            initialize(CommonSearchViewConfiguration(DistanceUnitType.IMPERIAL))
+//            isVisible = true
+//        }
         binding.searchBox.performClick()
         geocoAddress = GeoCoderAddress(this)
         clickEvent()
@@ -305,7 +296,6 @@ GoogleMap.OnMyLocationClickListener {
 
     }
 
-
     fun Context.hideKeyboard(view: View) {
 
         val inputMethodManager =
@@ -313,7 +303,6 @@ GoogleMap.OnMyLocationClickListener {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
     }
-
 
     private fun clickEvent() {
         fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
@@ -347,36 +336,48 @@ GoogleMap.OnMyLocationClickListener {
 //        }
 
 
-
-
-        binding.closeResultsBtn.setOnClickListener {
-            binding.llSelect.visibility = View.GONE
-        }
-
         binding.SelectLocationButton
             .setOnClickListener {
                 if (isMapLoaded) {
 
                     if (fromLocation) {
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_FROM_LOCATION, address)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_FROM_LOCATION, latitude)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_FROM_LOCATION, longitude)
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.ADDRESS_FROM_LOCATION,
+                            address
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LATITUDE_FROM_LOCATION,
+                            latitude
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LONGITUDE_FROM_LOCATION,
+                            longitude
+                        )
                     }
 
                     if (toLocation) {
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_TO_LOCATION, address)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_TO_LOCATION, latitude)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_TO_LOCATION, longitude)
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.ADDRESS_TO_LOCATION,
+                            address
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LATITUDE_TO_LOCATION,
+                            latitude
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LONGITUDE_TO_LOCATION,
+                            longitude
+                        )
                     }
 
 
-                        val intent = Intent()
-                        intent.putExtra("address", address)
-                        intent.putExtra("isFromLocationClick", fromLocation)
-                        intent.putExtra("isToLocationClick", toLocation)
-                        intent.putExtra("isSelectOnMapClick", true)
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
+                    val intent = Intent()
+                    intent.putExtra("address", address)
+                    intent.putExtra("isFromLocationClick", fromLocation)
+                    intent.putExtra("isToLocationClick", toLocation)
+                    intent.putExtra("isSelectOnMapClick", true)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
 
                 }
             }
@@ -385,14 +386,18 @@ GoogleMap.OnMyLocationClickListener {
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         binding.searchButton.setOnClickListener {
-            binding.llSelect.visibility=View.VISIBLE
+            binding.searchButton.isEnabled = false
+
+            binding.llSelect.visibility = View.VISIBLE
 
             if (binding.searchBox.text.toString().isNotEmpty()) {
-                binding.searchResultsView.search(binding.searchBox.text.toString())
+                openAddressDropdown(fetchAddressesByName(binding.searchBox.text.toString()))
+                binding.searchButton.isEnabled = true
 
             } else {
                 Toast.makeText(this, "No search terms found", Toast.LENGTH_SHORT).show()
                 binding.searchBox.requestFocus()
+                binding.searchButton.isEnabled = true
 
             }
         }
@@ -400,11 +405,18 @@ GoogleMap.OnMyLocationClickListener {
 
         binding.searchBox.onFocusChangeListener =
             View.OnFocusChangeListener { _, hasFocus ->
-                binding.searchResultsView.isVisible = hasFocus
-                if(!hasFocus){
+                if (hasFocus) {
+                    binding.llSelect.visibility = View.VISIBLE
+                } else {
+                    binding.llSelect.visibility = View.GONE
+                }
+                if (!hasFocus) {
 
-                   val imm = ContextCompat.getSystemService(this, InputMethodManager::class.java) as InputMethodManager
-                   imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+                    val imm = ContextCompat.getSystemService(
+                        this,
+                        InputMethodManager::class.java
+                    ) as InputMethodManager
+                    imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
 
                 }
             }
@@ -419,73 +431,91 @@ GoogleMap.OnMyLocationClickListener {
         }
 
 
-        binding.searchResultsView.addSearchListener(object : SearchResultsView.SearchListener {
-
-//            override fun onCategoryResult(suggestion: SearchSuggestion, results: List<SearchResult>, responseInfo: ResponseInfo)
-//            {
-//                Toast.makeText(applicationContext, "Category search results shown", Toast.LENGTH_SHORT).show()
+//        binding.searchResultsView.addSearchListener(object : SearchResultsView.SearchListener {
+//
+////            override fun onCategoryResult(suggestion: SearchSuggestion, results: List<SearchResult>, responseInfo: ResponseInfo)
+////            {
+////                Toast.makeText(applicationContext, "Category search results shown", Toast.LENGTH_SHORT).show()
+////            }
+//
+////            override fun onSuggestions(suggestions: List<SearchSuggestion>, responseInfo: ResponseInfo) {
+////                Toast.makeText(applicationContext, "Search suggestions shown", Toast.LENGTH_SHORT).show()
+////            }
+//
+//
+//            override fun onSearchResult(
+//                searchResult: SearchResult,
+//                responseInfo: ResponseInfo
+//            ) {
+//
+//                Log.d("SearchResults", "=====>$searchResult")
+//                //----------------------------------------------------------------------------------
+//                address = formattedAddress(searchResult.name, searchResult.address!!)
+//                searchLatitude = searchResult.coordinate?.latitude().toString()
+//                searchLongitude = searchResult.coordinate?.longitude().toString()
+//                fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
+//                toLocation = intent.getBooleanExtra("isToLocationClick", false)
+//                isFindAddressClick = intent.getBooleanExtra("isFindAddressClick", false)
+//
+//                //save search latitude and longitude in sharedpreferences
+//                if (fromLocation) {
+//                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.ADDRESS_FROM_LOCATION,
+//                        address
+//                    )
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.LATITUDE_FROM_LOCATION,
+//                        searchLatitude
+//                    )
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.LONGITUDE_FROM_LOCATION,
+//                        searchLongitude
+//                    )
+//                }
+//                if (toLocation) {
+//                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
+//
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.ADDRESS_TO_LOCATION,
+//                        address
+//                    )
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.LATITUDE_TO_LOCATION,
+//                        searchLatitude
+//                    )
+//                    (application as RawGpsApp).appContainer.prefs.setString(
+//                        Constants.LONGITUDE_TO_LOCATION,
+//                        searchLongitude
+//                    )
+//                }
+//
+//
+//                val intent = Intent()
+//                intent.putExtra("searchResultLat", searchResult.coordinate?.latitude().toString())
+//                intent.putExtra("searchResultLong", searchResult.coordinate?.longitude().toString())
+//                setResult(RESULT_OK, intent)
+//                finish()
+//                //----------------------------------------------------------------------------------
 //            }
-
-//            override fun onSuggestions(suggestions: List<SearchSuggestion>, responseInfo: ResponseInfo) {
-//                Toast.makeText(applicationContext, "Search suggestions shown", Toast.LENGTH_SHORT).show()
+//
+//            override fun onHistoryItemClicked(historyRecord: HistoryRecord) {
+////                binding.simpleSearchView.setQuery(historyRecord.name, true)
+//                binding.searchResultsView.search(historyRecord.name)
 //            }
-
-
-            override fun onSearchResult(
-                searchResult: SearchResult,
-                responseInfo: ResponseInfo
-            ) {
-
-                Log.d("SearchResults", "=====>$searchResult")
-                //----------------------------------------------------------------------------------
-                address = formattedAddress(searchResult.name, searchResult.address!!)
-                searchLatitude = searchResult.coordinate?.latitude().toString()
-                searchLongitude = searchResult.coordinate?.longitude().toString()
-                fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
-                toLocation = intent.getBooleanExtra("isToLocationClick", false)
-                isFindAddressClick = intent.getBooleanExtra("isFindAddressClick", false)
-
-                //save search latitude and longitude in sharedpreferences
-                if (fromLocation) {
-                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_FROM_LOCATION, address)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_FROM_LOCATION, searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_FROM_LOCATION, searchLongitude)
-                }
-                if (toLocation) {
-                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
-
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_TO_LOCATION, address)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_TO_LOCATION, searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_TO_LOCATION, searchLongitude)
-                }
-
-
-                val intent = Intent()
-                intent.putExtra("searchResultLat", searchResult.coordinate?.latitude().toString())
-                intent.putExtra("searchResultLong", searchResult.coordinate?.longitude().toString())
-                setResult(RESULT_OK, intent)
-                finish()
-                //----------------------------------------------------------------------------------
-            }
-
-            override fun onHistoryItemClicked(historyRecord: HistoryRecord) {
-//                binding.simpleSearchView.setQuery(historyRecord.name, true)
-                binding.searchResultsView.search(historyRecord.name)
-            }
-
-            override fun onPopulateQueryClicked(
-                suggestion: SearchSuggestion,
-                responseInfo: ResponseInfo
-            ) {
-//                binding.simpleSearchView.setQuery(suggestion.name, true)
-                binding.searchResultsView.search(suggestion.name)
-            }
-
-            override fun onFeedbackClicked(responseInfo: ResponseInfo) {
-            }
-        })
-
+//
+//            override fun onPopulateQueryClicked(
+//                suggestion: SearchSuggestion,
+//                responseInfo: ResponseInfo
+//            ) {
+////                binding.simpleSearchView.setQuery(suggestion.name, true)
+//                binding.searchResultsView.search(suggestion.name)
+//            }
+//
+//            override fun onFeedbackClicked(responseInfo: ResponseInfo) {
+//            }
+//        })
+//
 
         //------------------------------------------------------------------------------------//
         binding.ivBack.setOnClickListener {
@@ -495,46 +525,101 @@ GoogleMap.OnMyLocationClickListener {
 
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    private fun fetchAddressesByName(name: String): ArrayList<Address>? {
+
+        return GeoCoderAddress(this).getAddressFromName(name)
+
+    }
+
+    private fun openAddressDropdown(addresses: ArrayList<Address>?) {
+
+        if (!addresses.isNullOrEmpty()) {
+
+            binding.addressContainer.removeAllViews()
+            for (item in addresses!!) {
+
+                addAddressToLayout(item, binding.addressContainer)
+
+
+            }
+
+        } else {
+            Toast.makeText(this, "Address Not Found!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun addAddressToLayout(address: Address, parent: LinearLayout) {
+        var addressItemBinding: AddressItemBinding = AddressItemBinding.inflate(layoutInflater)
+        addressItemBinding.placeNameText.text = address.featureName.toString()
+        addressItemBinding.addressText.text = address.getAddressLine(0).toString()
+        addressItemBinding.coordinatesText.text =
+            address.latitude.toString() + "," + address.longitude.toString()
+        addressItemBinding.root.setOnClickListener {
+            Log.d("SearchResults", "=====>$address")
+            //----------------------------------------------------------------------------------
+            this.address = address.getAddressLine(0).toString()
+            searchLatitude = address.latitude.toString()
+            searchLongitude = address.longitude.toString()
+            fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
+            toLocation = intent.getBooleanExtra("isToLocationClick", false)
+            isFindAddressClick = intent.getBooleanExtra("isFindAddressClick", false)
+
+            //save search latitude and longitude in sharedpreferences
+            if (fromLocation) {
+                Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.ADDRESS_FROM_LOCATION,
+                    this.address
+                )
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LATITUDE_FROM_LOCATION,
+                    searchLatitude
+                )
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LONGITUDE_FROM_LOCATION,
+                    searchLongitude
+                )
+            }
+            if (toLocation) {
+                Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
+
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.ADDRESS_TO_LOCATION,
+                    this.address
+                )
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LATITUDE_TO_LOCATION,
+                    searchLatitude
+                )
+                (application as RawGpsApp).appContainer.prefs.setString(
+                    Constants.LONGITUDE_TO_LOCATION,
+                    searchLongitude
+                )
+            }
+
+
+            val intent = Intent()
+            intent.putExtra("searchResultLat", searchLatitude.toString())
+            intent.putExtra("searchResultLong", searchLongitude.toString())
+            setResult(RESULT_OK, intent)
+            finish()
+            //----------------------------------------------------------------------------------
+        }
+        parent.addView(addressItemBinding.root)
+    }
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     fun View.hideKeyboard() {
-        val imm = ContextCompat.getSystemService(context, InputMethodManager::class.java) as InputMethodManager
+        val imm = ContextCompat.getSystemService(
+            context,
+            InputMethodManager::class.java
+        ) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    fun formattedAddress(name: String, address: SearchAddress): String {
-
-        var sddressString = ""
-
-        if (!name.isNullOrEmpty()) {
-            sddressString += name
-        }
-        if (!address.houseNumber.isNullOrEmpty()) {
-            sddressString += address.houseNumber
-        }
-
-        if (!address.street.isNullOrEmpty()) {
-            sddressString += address.street
-        }
-
-        if (!address.place.isNullOrEmpty()) {
-            sddressString += address.place
-        }
-
-        if (!address.locality.isNullOrEmpty()) {
-            sddressString += address.locality
-        }
-
-        if (!address.district.isNullOrEmpty()) {
-            sddressString += address.district
-        }
-        if (!address.country.isNullOrEmpty()) {
-            sddressString += address.country
-        }
-        return sddressString
-
-    }
 
 
     override fun clickItem(address: String) {
@@ -599,57 +684,6 @@ GoogleMap.OnMyLocationClickListener {
             }
         }
 
-    private var sutoCompleteResultsLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // There are no request codes
-                val data: Intent? = result.data
-
-                //----------------------------------------------------------------------------------
-                val feature = PlaceAutocomplete.getPlace(data)
-                address = feature.text()
-                searchLatitude = (feature.geometry() as Point).latitude().toString()
-                searchLongitude = (feature.geometry() as Point).longitude().toString()
-
-
-                fromLocation = intent.getBooleanExtra("isFromLocationClick", false)
-                toLocation = intent.getBooleanExtra("isToLocationClick", false)
-                isFindAddressClick = intent.getBooleanExtra("isFindAddressClick", false)
-
-                //save search latitude and longitude in sharedpreferences
-                if (fromLocation) {
-                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_FROM_LOCATION, address)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_FROM_LOCATION, searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_FROM_LOCATION, searchLongitude)
-                }
-                if (toLocation) {
-                    Log.e("TAG", ">>>FETCh" + address + searchLongitude + searchLatitude)
-
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_TO_LOCATION, address)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_TO_LOCATION, searchLatitude)
-                    (application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_TO_LOCATION, searchLongitude)
-                }
-
-
-                val intent = Intent()
-                intent.putExtra(
-                    "searchResultLat",
-                    (feature.geometry() as Point).latitude().toString()
-                )
-                intent.putExtra(
-                    "searchResultLong",
-                    (feature.geometry() as Point).longitude().toString()
-                )
-                setResult(RESULT_OK, intent)
-                finish()
-                //----------------------------------------------------------------------------------
-
-
-            }
-        }
-
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -666,18 +700,24 @@ GoogleMap.OnMyLocationClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun getLocationFromPref() {
-        latitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LATITUDE_FROM_LOCATION, "").toString()
-        longitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
-        var origin: Point? = null
+        latitude = (application as RawGpsApp).appContainer.prefs.getString(
+            Constants.LATITUDE_FROM_LOCATION,
+            ""
+        ).toString()
+        longitude = (application as RawGpsApp).appContainer.prefs.getString(
+            Constants.LONGITUDE_FROM_LOCATION,
+            ""
+        ).toString()
+        var origin: LatLng? = null
 
         if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
-            origin = Point.fromLngLat(longitude.toDouble(), latitude.toDouble())
+            origin = LatLng( latitude.toDouble(),longitude.toDouble())
         }
 
         if (locationByNetwork == null && longitude.isNotEmpty() && latitude.isNotEmpty()) {
             locationByNetwork = Location("")//provider name is unnecessary
-            locationByNetwork?.latitude = origin!!.latitude()//your coords of course
-            locationByNetwork?.longitude = origin.longitude()
+            locationByNetwork?.latitude = origin!!.latitude//your coords of course
+            locationByNetwork?.longitude = origin.longitude
             recenterCamera()
         } else {
             recenterCamera()
@@ -748,8 +788,6 @@ GoogleMap.OnMyLocationClickListener {
                 }
 
 
-
-
                 //  map.addMarker(MarkerOptions().position(it))
             }
 
@@ -794,7 +832,9 @@ GoogleMap.OnMyLocationClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
-        if(latitude.isNullOrEmpty() ||longitude.isNullOrEmpty()){return}
+        if (latitude.isNullOrEmpty() || longitude.isNullOrEmpty()) {
+            return
+        }
         try {
             val cameraPos: CameraPosition = CameraPosition.Builder()
                 .target(LatLng(latitude.toDouble(), longitude.toDouble()))
@@ -816,7 +856,9 @@ GoogleMap.OnMyLocationClickListener {
                         }
                     })
             }
-        }catch (e:Exception){e.printStackTrace()}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         DialogUtils.dismissLoading()
 
     }
@@ -853,9 +895,9 @@ GoogleMap.OnMyLocationClickListener {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
     var canShowNativeAd = false
     var adsReloadTry = 0
+
     /**
      * Loading ads once if not loaded
      * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask
@@ -910,16 +952,13 @@ GoogleMap.OnMyLocationClickListener {
                 (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
             if (!isAdsRemoved) {
 
-                if (canShowNativeAd)
-                {
+                if (canShowNativeAd) {
                     (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
                         this,
                         Constants.START_NATIVE_SMALL,
                         binding.adsParent, true, false
                     )
-                }
-                else
-                {
+                } else {
                     binding.adsParent.visibility = View.GONE
                 }
 

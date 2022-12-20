@@ -113,7 +113,6 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_background"
 
-            android:backgroundTint="@color/blue"
             android:gravity="center"
             android:text="text"
             android:textAllCaps="true"

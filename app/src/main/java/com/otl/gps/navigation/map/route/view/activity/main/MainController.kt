@@ -73,6 +73,9 @@ import com.otl.gps.navigation.map.route.view.activity.spedometer.SpeedoMeterActi
 import com.otl.gps.navigation.map.route.view.fragment.dialogs.ExitDialogFragment
 import com.otl.gps.navigation.map.route.view.fragment.places.PreviewSavedPlacesActivity
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity
+import com.prongbang.appupdate.AppUpdateInstallerListener
+import com.prongbang.appupdate.AppUpdateInstallerManager
+import com.prongbang.appupdate.InAppUpdateInstallerManager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.imaginativeworld.oopsnointernet.callbacks.ConnectionCallback
@@ -109,6 +112,8 @@ class MainController : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        appUpdateInstallerManager.addAppUpdateListener(appUpdateInstallerListener)
+        appUpdateInstallerManager.startCheckUpdate()
         ////////////////////////////////////////////////////////////////////////////
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""
@@ -681,6 +686,66 @@ class MainController : AppCompatActivity() {
                 showAirplaneModeOffButtons = true // Optional
             }
         }.build()
+    }
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Inapp Updates
+    private val appUpdateInstallerManager: AppUpdateInstallerManager by lazy {
+        InAppUpdateInstallerManager(this)
+    }
+
+    private val appUpdateInstallerListener by lazy {
+        object : AppUpdateInstallerListener() {
+            // On downloaded but not installed.
+            override fun onDownloadedButNotInstalled() {
+                updateConsentDialog()
+            }
+
+            // On failure
+            override fun onFailure(e: Exception) {
+
+            }
+
+            // On not update
+            override fun onNotUpdate() {
+
+            }
+
+            // On cancelled update
+            override fun onCancelled() {
+
+            }
+        }
+    }
+
+    public fun updateConsentDialog() {
+        var alertDialogBuilder = AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("An update has just been downloaded")
+        alertDialogBuilder.setPositiveButton(
+            "Install"
+        ) { dialog, which ->
+            try {
+                appUpdateInstallerManager.completeUpdate()
+                dialog.dismiss()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        alertDialogBuilder.setNegativeButton("Cancel")
+        { dialog, which ->
+            try {
+                dialog.dismiss()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        var alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

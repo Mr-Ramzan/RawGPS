@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Point
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -31,7 +32,6 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.mapbox.geojson.Point
 import com.otl.gps.navigation.map.route.databinding.ActivityLocationFromGoogleMapBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.utilities.Constants
@@ -354,16 +354,16 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
     private fun getLocationFromPref() {
         latitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LATITUDE_FROM_LOCATION, "").toString()
         longitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
-        var origin: Point? = null
+        var origin: LatLng? = null
 
         if (latitude!!.isNotEmpty() && longitude!!.isNotEmpty()) {
-            origin = Point.fromLngLat(longitude!!.toDouble(), latitude!!.toDouble())
+            origin = LatLng(longitude!!.toDouble(), latitude!!.toDouble())
         }
 
         if (locationByNetwork == null && longitude!!.isNotEmpty() && latitude!!.isNotEmpty()) {
             locationByNetwork = Location("")//provider name is unnecessary
-            locationByNetwork?.latitude = origin!!.latitude()//your coords of course
-            locationByNetwork?.longitude = origin.longitude()
+            locationByNetwork?.latitude = origin!!.latitude//your coords of course
+            locationByNetwork?.longitude = origin.longitude
             recenterCamera()
         } else {
             recenterCamera()

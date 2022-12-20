@@ -1,9 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.prongbang:inapp-update:1.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/206d30b4f4ebb02c25f94207fcc18e4f/transformed/inapp-update-1.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c7cc8903c06d5a35edca9427e933ae51/transformed/inapp-update-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c7cc8903c06d5a35edca9427e933ae51/transformed/inapp-update-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b8dc89210aba3c7c13105a81bb4220a7/transformed/inapp-update-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b8dc89210aba3c7c13105a81bb4220a7/transformed/inapp-update-1.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.tbuonomo:dotsindicator:4.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/905f5f47b5a05ddf02fb369a0c6312ba/transformed/dotsindicator-4.3-debug/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/905f5f47b5a05ddf02fb369a0c6312ba/transformed/dotsindicator-4.3-debug/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/905f5f47b5a05ddf02fb369a0c6312ba/transformed/dotsindicator-4.3-debug/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2d3af5dcbbb60ccc82342931137e5a80/transformed/dotsindicator-4.3-debug/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2d3af5dcbbb60ccc82342931137e5a80/transformed/dotsindicator-4.3-debug/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2d3af5dcbbb60ccc82342931137e5a80/transformed/dotsindicator-4.3-debug/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

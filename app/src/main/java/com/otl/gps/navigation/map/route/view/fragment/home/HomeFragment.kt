@@ -117,7 +117,6 @@ class HomeFragment : Fragment() {
     private fun hideShowInappsButton() {
         try {
             if ((requireActivity().application as RawGpsApp).appContainer!!.prefs!!.areAdsRemoved()!!) {
-                binding.proButtonText.text = "Premium Version"
 //                binding.unsubscribeText.visibility=View.VISIBLE
                 EventBus.getDefault().post(NavEvent(UPDATE_CANCEL_BUTTON))
             }else{

@@ -18,6 +18,8 @@ import application.RawGpsApp
 import com.bumptech.glide.Glide
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySplashBinding
+import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.view.activity.goPro.PremiumActivity
 import com.otl.gps.navigation.map.route.view.activity.main.MainController
 import com.otl.gps.navigation.map.route.view.activity.onboarding.OnboardingSplash
 import kotlin.Exception
@@ -120,6 +122,16 @@ class Splash : AppCompatActivity() {
 
 
     }
+    private fun goToPremium() {
+        try {
+            var intent: Intent = Intent(this, PremiumActivity::class.java)
+            intent.putExtra(Constants.PREMIUM_FROM, Constants.FROM_SPLASH)
+            startActivity(intent)
+            Handler(Looper.getMainLooper()).postDelayed({ finish() }, 700)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
 
     /**
@@ -146,8 +158,8 @@ class Splash : AppCompatActivity() {
                         .showAdIfAvailable(
                             this@Splash, object : RawGpsApp.OnShowAdCompleteListener {
                                 override fun onShowAdComplete() {
-                                    if (application.appContainer.prefs.getFirstLaunch()) {
-                                        goToHome()
+                                    if ((application as RawGpsApp).appContainer. prefs.getAppLaunchCount() >= 3) {
+                                        goToPremium()
                                     } else {
                                         goToHome()
                                     }

@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
-    id 'com.mapbox.maps.token'
+//    id 'com.mapbox.maps.token'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 }
@@ -18,8 +18,8 @@ android {
         applicationId "com.otl.gps.navigation.map.route"
         minSdk 23
         targetSdk 32
-        versionCode 5
-        versionName "1.5"
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 
@@ -58,6 +58,7 @@ android {
 
 
 
+            shrinkResources true
             minifyEnabled true
             signingConfig signingConfigs.release
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'test-proguard-rules.pro'
@@ -66,16 +67,16 @@ android {
 
 
         debug {
-            ndk {
-                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
-            }
+//            ndk {
+//                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
+//            }
             resValue 'string', 'gps_app_id', '"ca-app-pub-8804904864147916~1192484244"'
             resValue 'string', 'gps_inter_id', '"ca-app-pub-3940256099942544/1033173712"'
             resValue 'string', 'gps_appopen_id', '"ca-app-pub-3940256099942544/3419835294"'
             resValue 'string', 'gps_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
             resValue 'string', 'gps_square_banner_id', '"ca-app-pub-3940256099942544/6300978111"'
             resValue 'string', 'gps_native_id', '"ca-app-pub-3940256099942544/2247696110"'
-
+            shrinkResources true
             ext.enableCrashlytics = false
             minifyEnabled true
             signingConfig signingConfigs.debug
@@ -116,6 +117,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -164,6 +166,7 @@ dependencies {
     implementation 'io.github.florent37:shapeofview:1.4.7'
     // For apps targeting Android S+, add the following
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
     //lottie animations sdk
     implementation 'com.airbnb.android:lottie:5.1.1'
     //billing library
@@ -186,9 +189,9 @@ dependencies {
 
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
-    implementation 'com.mapbox.navigation:android:2.6.0'
-    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
-    implementation 'com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.26'
+//    implementation 'com.mapbox.navigation:android:2.6.0'
+//    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-places-v9:0.12.0'
+//    implementation 'com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.26'
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.9.0'
@@ -197,8 +200,14 @@ dependencies {
     implementation 'com.squareup.okhttp3:mockwebserver:4.9.2'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
 
+    // Add the dependencies for the Remote Config and Analytics libraries
+    // When NOT using the BoM, you must specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-config:21.2.0'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
+
     // volley
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.github.prongbang:inapp-update:1.0.1'
 
 //    implementation 'com.google.ads.mediation:facebook:6.11.0.1'
 //    implementation 'com.unity3d.ads:unity-ads:4.4.1'

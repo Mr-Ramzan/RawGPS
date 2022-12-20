@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import application.RawGpsApp
 import application.RawGpsApp.Companion.isSDKInitialized
 import com.otl.gps.navigation.map.route.R
@@ -24,6 +25,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils.getRemoteConfig
 import java.util.*
 
 class AdmobAdsHelper (mContext: Context) {
@@ -692,6 +694,16 @@ class AdmobAdsHelper (mContext: Context) {
                     adView.advertiserView = adView.findViewById(R.id.small_ad_advertiser)
                     adView.bodyView = adView.findViewById(R.id.small_ad_body)
                     adView.callToActionView = adView.findViewById(R.id.small_ad_call_to_action)
+                    if(getRemoteConfig()?.getBoolean("native_ad_cta")!!) {
+                        adView.callToActionView?.background =
+                            ContextCompat.getDrawable(mActivity, R.drawable.button_background)
+                    }
+                    else{
+
+                        adView.callToActionView?.background =
+                            ContextCompat.getDrawable(mActivity, R.drawable.button_background_orange)
+                    }
+
                     (Objects.requireNonNull(adView.bodyView) as TextView).text = "AD -"+mNativeAds?.body
                     (Objects.requireNonNull(adView.headlineView) as TextView).text =
                         mNativeAds?.headline

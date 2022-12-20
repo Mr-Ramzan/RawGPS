@@ -1,5 +1,6 @@
 package application
 
+import android.R
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -11,12 +12,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
-import com.mapbox.android.core.location.LocationEngineProvider
-import com.mapbox.search.MapboxSearchSdk
-import com.mapbox.search.SearchSdkSettings
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.otl.gps.navigation.map.route.di.AppDIs
 import com.otl.gps.navigation.map.route.manager.adManagers.AppOpenAdHelper
-import com.otl.gps.navigation.map.route.utilities.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,7 +36,7 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         instance = this
-        initializeSearchSDK()
+
         setupAdsSdks()
         setUpData()
     }
@@ -49,18 +48,7 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
     }
 
-    fun initializeSearchSDK(){
 
-        MapboxSearchSdk.initialize(
-            application = this@RawGpsApp,
-            accessToken = Constants.MAP_BOX_ACCESS_TOKEN,
-            locationEngine = LocationEngineProvider.getBestLocationEngine(appContext.applicationContext),
-            searchSdkSettings = SearchSdkSettings(maxHistoryRecordsAmount = 5),
-//            offlineSearchEngineSettings = OfflineSearchEngineSettings(tileStore = TileStore.create()),
-        )
-
-
-    }
 
 
     private fun setupAdsSdks() {
@@ -155,6 +143,9 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
 
         }
     }
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -165,9 +156,8 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         var isConsentGiven = false
         lateinit var appContext: Context
         // Remote Config keys
-        const val TRIES_KEY = "gps_free_navigations"
-        const val SHOULD_SHOW_PREMIUM = "gps_show_subscription_at_start"
-        const val ACCESS_TOKEN_KEY = "gps_mapbox_id"
+
+
 
     }
 }
