@@ -2,16 +2,17 @@
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
 
         <LinearLayout
+            android:background="@drawable/customborder"
             android:id="@+id/children_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@android:color/transparent"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:paddingTop="3dp">

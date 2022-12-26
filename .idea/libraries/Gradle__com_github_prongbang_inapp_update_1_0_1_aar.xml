@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b8dc89210aba3c7c13105a81bb4220a7/transformed/inapp-update-1.0.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b8dc89210aba3c7c13105a81bb4220a7/transformed/inapp-update-1.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b8dc89210aba3c7c13105a81bb4220a7/transformed/inapp-update-1.0.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

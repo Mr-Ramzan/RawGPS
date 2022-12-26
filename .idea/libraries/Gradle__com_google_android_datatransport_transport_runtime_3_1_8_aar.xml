@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6ac0aadf1f2e1ffb1b21080b9c3e03ad/transformed/transport-runtime-3.1.8/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ac0aadf1f2e1ffb1b21080b9c3e03ad/transformed/transport-runtime-3.1.8/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ac0aadf1f2e1ffb1b21080b9c3e03ad/transformed/transport-runtime-3.1.8/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/3.1.8/448df02831bf02af4fece264a7b96a3889f4f594/transport-runtime-3.1.8-javadoc.jar!/" />
