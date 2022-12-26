@@ -40,22 +40,23 @@ class TravelToolsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
         initListeners()
-        //loadBanner()
-        loadNativeBanner()
+        loadBanner()
+//        loadNativeBanner()
         loadInter()
     }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-//                }
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
+
     var canShowNativeAd = false
     var adsReloadTry = 0
     /**
@@ -144,12 +145,12 @@ class TravelToolsFragment : Fragment() {
         binding.backButton.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
-
         binding.weather.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SPEEDOMETER))
         }
-
-
+        binding.compass.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_COMPASS))
+        }
         binding.qiblaCompass.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
         }

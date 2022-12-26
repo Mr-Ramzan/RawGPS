@@ -29,6 +29,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SPEEDOMETER
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAFFIC
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
 import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
@@ -68,7 +69,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBiling()
-        loadNativeBanner()
+        loadBanner()
         setListeners()
     }
 
@@ -156,24 +157,14 @@ class HomeFragment : Fragment() {
             EventBus.getDefault().post(NavEvent(NAVIGATE_LOCATION))
         }
 
-        binding.satelliteButton.setOnClickListener {
+        binding.travelTools.setOnClickListener {
             it.isEnabled = false
 
             Handler(Looper.getMainLooper()).postDelayed({
 
                 it.isEnabled = true
             }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_SATELLITE))
-        }
-
-        binding.trafficView.setOnClickListener {
-            it.isEnabled = false
-
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                it.isEnabled = true
-            }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAFFIC))
+            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
         }
 
 
@@ -188,15 +179,6 @@ class HomeFragment : Fragment() {
         }
 
 
-//        binding.travelToolsButton.setOnClickListener {
-//            it.isEnabled = false
-//            Handler(Looper.getMainLooper()).postDelayed({
-//                it.isEnabled = true
-//            }, 700)
-//            EventBus.getDefault().post(NavEvent(NAVIGATE_TRAVEL_TOOLS))
-//        }
-
-
         binding.proButton.setOnClickListener {
             it.isEnabled = false
 
@@ -206,15 +188,7 @@ class HomeFragment : Fragment() {
             }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_PREMIUM))
         }
-        binding.compass.setOnClickListener {
-            it.isEnabled = false
 
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                it.isEnabled = true
-            }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_COMPASS))
-        }
 
         binding.weather.setOnClickListener {
             it.isEnabled = false
@@ -227,24 +201,6 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.qiblaCompass.setOnClickListener {
-            it.isEnabled = false
-
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                it.isEnabled = true
-            }, 700)
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
-        }
-//        binding.currencyConverterButton.setOnClickListener {
-//            it.isEnabled = false
-//
-//            Handler(Looper.getMainLooper()).postDelayed({
-//
-//                it.isEnabled = true
-//            }, 700)
-//            EventBus.getDefault().post(NavEvent(NAVIGATE_COMING_SOON))
-//        }
         binding.infoButton.setOnClickListener {
             it.isEnabled = false
 
@@ -265,17 +221,6 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.speedometerButton.setOnClickListener {
-            it.isEnabled = false
-
-            Handler(Looper.getMainLooper()).postDelayed({
-
-                it.isEnabled = true
-            }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_SPEEDOMETER))
-        }
-
-
         binding.menuButton.setOnClickListener {
             it.isEnabled = false
 
@@ -289,17 +234,19 @@ class HomeFragment : Fragment() {
 
     }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-//                }
-//            })
-//    }
+
+
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
 
     var canShowNativeAd = false
     var adsReloadTry = 0

@@ -778,11 +778,11 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             map.uiSettings.isMyLocationButtonEnabled = false
             if (mapStyle == "Satellite") {
                 map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+            }
 
-            }
-            if (mapStyle == "Traffic") {
+//            if (mapStyle == "Traffic") {
                 map.isTrafficEnabled = true
-            }
+//            }
 
             binding.recenterLocationButton.setOnClickListener {
                 recenterCamera()

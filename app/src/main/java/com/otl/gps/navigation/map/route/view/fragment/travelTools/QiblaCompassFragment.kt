@@ -82,8 +82,8 @@ class QiblaCompassFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //loadBanner()
-        loadNativeBanner()
+        loadBanner()
+//        loadNativeBanner()
         setupBg()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
 
@@ -161,17 +161,17 @@ class QiblaCompassFragment : Fragment() {
 
 
 //================================================================================================//
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddSquareBannerToLayout(
-//            requireActivity(),
-//            binding.adsContainer,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//
-//                override fun addLoaded(success: Boolean?) {}
-//
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddSquareBannerToLayout(
+            requireActivity(),
+            binding.adsContainer,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+
+                override fun addLoaded(success: Boolean?) {}
+
+            })
+    }
     //============================================================================================//
 
     var canShowNativeAd = false

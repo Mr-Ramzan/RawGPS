@@ -18,8 +18,8 @@ android {
         applicationId "com.otl.gps.navigation.map.route"
         minSdk 23
         targetSdk 32
-        versionCode 7
-        versionName "1.7"
+        versionCode 8
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 

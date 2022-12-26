@@ -58,8 +58,8 @@ class CompassFragment : Fragment(), SensorEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBg()
-//        loadBanner()
-        loadNativeBanner()
+        loadBanner()
+//        loadNativeBanner()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
         setListeners()
     }
@@ -96,17 +96,15 @@ class CompassFragment : Fragment(), SensorEventListener {
         binding!!.backButton.setOnClickListener { requireActivity().onBackPressed() }
     }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
-//            requireActivity(),
-//            binding!!.adsContainer,
-//            AdSize.MEDIUM_RECTANGLE,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {}
-//            })
-//    }
-
-
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddSquareBannerToLayout(
+            requireActivity(),
+            binding!!.adsContainer,
+            AdSize.MEDIUM_RECTANGLE,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {}
+            })
+    }
 
     var canShowNativeAd = false
     var adsReloadTry = 0
