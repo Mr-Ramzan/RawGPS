@@ -39,6 +39,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -87,11 +88,19 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
         // SHow Banner Ad
         // Else Show
         if (mapStyle == "default") {
-            loadNativeBanner()
+            if (FirebaseUtils.isNativeUnderMaps) {
+                loadNativeBanner()
+            } else {
+                loadBanner()
+            }
         } else {
             binding.layoutBottom.visibility = View.GONE
             binding.sourceContainer.visibility = View.GONE
-           loadNativeBanner()
+            if (FirebaseUtils.isNativeUnderMaps) {
+                loadNativeBanner()
+            } else {
+                loadBanner()
+            }
         }
         //========================================================================================//
         statusBarColor()
@@ -560,15 +569,15 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
             )
         }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            requireActivity(),
-//            binding.adViewBanner,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {}
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adViewBanner,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {}
+            })
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -64,6 +64,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f7fcb2734dbffd7296347181d9b05136/transformed/viewpager2-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/39aff777e4251750497e090ba7e01d10/transformed/play-services-location-20.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/392b1665836466eefa9a97e324bde55f/transformed/firebase-ads-21.3.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ded30e25b991ea0a294e42425ade9cfb/transformed/facebook-6.11.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7cd52fae740a92a44e01afc534df56f4/transformed/play-services-ads-21.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/f7d1d69fb774d682203e40cc11361434/transformed/play-services-appset-16.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/62275118107a32e5ca6d08d91b922120/transformed/play-services-base-18.0.1-api.jar</arg>
@@ -78,6 +79,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/48b3dd495c337b7a2c189c4d78e1041b/transformed/play-services-tasks-18.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/03d4c248291b9f428d1b52698dc55b1a/transformed/play-services-measurement-21.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/98f0c49f3ba70d829bc36cd9cfec6a99/transformed/play-services-measurement-sdk-21.2.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/1378e79da7ab66c6e323c155566c6b27/transformed/audience-network-sdk-6.11.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/70fc403bbef9805546981c36b27b99c4/transformed/play-services-ads-lite-21.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d219ffdad618c3e0f0b2756e0d5f3418/transformed/play-services-ads-base-21.3.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/62e0431c10b5ebe726c526a51414868b/transformed/play-services-measurement-impl-21.2.0-api.jar</arg>
@@ -407,6 +409,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-config:21.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-abt:21.0.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.volley:volley:1.2.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.ads.mediation:facebook:6.11.0.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:audience-network-sdk:6.11.0@aar" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="RawGPS.app.main" />
 </module>

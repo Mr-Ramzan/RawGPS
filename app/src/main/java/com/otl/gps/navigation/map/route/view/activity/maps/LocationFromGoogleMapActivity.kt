@@ -36,6 +36,7 @@ import com.otl.gps.navigation.map.route.databinding.ActivityLocationFromGoogleMa
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 
 
 class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
@@ -70,8 +71,11 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         val view = binding.root
         setContentView(view)
         loadMap()
-        loadNativeBanner()
-//        loadBanner()
+        if (FirebaseUtils.isNativeUnderMaps) {
+            loadNativeBanner()
+        } else {
+            loadBanner()
+        }
         binding.layoutHeader.tvTitle.text = "Select Location"
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -79,7 +83,6 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         clickEvent()
 
     }
-
 
 
     private fun loadMap() {
@@ -273,18 +276,36 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
 
                     if (fromLocation) {
 
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_FROM_LOCATION, address)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_FROM_LOCATION, latitude)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_FROM_LOCATION, longitude)
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.ADDRESS_FROM_LOCATION,
+                            address
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LATITUDE_FROM_LOCATION,
+                            latitude
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LONGITUDE_FROM_LOCATION,
+                            longitude
+                        )
 
 
                     }
 
                     if (toLocation) {
 
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.ADDRESS_TO_LOCATION, address)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LATITUDE_TO_LOCATION, latitude)
-                        ( application as RawGpsApp).appContainer.prefs.setString(Constants.LONGITUDE_TO_LOCATION, longitude)
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.ADDRESS_TO_LOCATION,
+                            address
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LATITUDE_TO_LOCATION,
+                            latitude
+                        )
+                        (application as RawGpsApp).appContainer.prefs.setString(
+                            Constants.LONGITUDE_TO_LOCATION,
+                            longitude
+                        )
 
 
                     }
@@ -318,7 +339,6 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
     }
 
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //get ad size
     private val adSize: AdSize
@@ -339,21 +359,27 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-//    private fun loadBanner() {
-//        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            this,
-//            binding.adsParent,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {}
-//            })
-//    }
+    private fun loadBanner() {
+        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            this,
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {}
+            })
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private fun getLocationFromPref() {
-        latitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LATITUDE_FROM_LOCATION, "").toString()
-        longitude =  (application as RawGpsApp).appContainer.prefs.getString(Constants.LONGITUDE_FROM_LOCATION, "").toString()
+        latitude = (application as RawGpsApp).appContainer.prefs.getString(
+            Constants.LATITUDE_FROM_LOCATION,
+            ""
+        ).toString()
+        longitude = (application as RawGpsApp).appContainer.prefs.getString(
+            Constants.LONGITUDE_FROM_LOCATION,
+            ""
+        ).toString()
         var origin: LatLng? = null
 
         if (latitude!!.isNotEmpty() && longitude!!.isNotEmpty()) {
@@ -434,9 +460,7 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 }
 
 
-
-
-              //  map.addMarker(MarkerOptions().position(it))
+                //  map.addMarker(MarkerOptions().position(it))
             }
 
 
@@ -590,16 +614,13 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
                 (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
             if (!isAdsRemoved) {
 
-                if (canShowNativeAd)
-                {
+                if (canShowNativeAd) {
                     (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
                         this,
                         Constants.START_NATIVE_SMALL,
                         binding.adsParent, true, false
                     )
-                }
-                else
-                {
+                } else {
                     binding.adsParent.visibility = View.GONE
                 }
 

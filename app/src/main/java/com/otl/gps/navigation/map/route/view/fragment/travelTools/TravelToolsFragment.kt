@@ -146,13 +146,16 @@ class TravelToolsFragment : Fragment() {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
         binding.weather.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SPEEDOMETER))
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
         }
         binding.compass.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_COMPASS))
         }
         binding.qiblaCompass.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
+        }
+        binding.speedometer.setOnClickListener {
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SPEEDOMETER))
         }
     }
 

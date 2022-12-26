@@ -24,6 +24,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SUBSCCRIBED
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
+import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREMIUM
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
@@ -175,7 +176,7 @@ class HomeFragment : Fragment() {
 
                 it.isEnabled = true
             }, 700)
-            EventBus.getDefault().post(NavEvent(NAVIGATE_EXPLORE_PLACES))
+            EventBus.getDefault().post(NavEvent(NAVIGATE_PLACES_LIST))
         }
 
 
@@ -197,11 +198,11 @@ class HomeFragment : Fragment() {
 
                 it.isEnabled = true
             }, 700)
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
+            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SAVED_PLACES))
         }
 
 
-        binding.infoButton.setOnClickListener {
+        binding.policyButton.setOnClickListener {
             it.isEnabled = false
 
             Handler(Looper.getMainLooper()).postDelayed({

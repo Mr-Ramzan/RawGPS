@@ -3,6 +3,9 @@
     <entry>
         <key>native_ad_cta</key>
         <value>true</value>
+
+        <key>native_under_maps</key>
+        <value>true</value>
     </entry>
 
 

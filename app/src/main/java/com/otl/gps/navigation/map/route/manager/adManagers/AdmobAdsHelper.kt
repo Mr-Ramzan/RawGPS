@@ -25,6 +25,7 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import com.otl.gps.navigation.map.route.utilities.FirebaseUtils.getRemoteConfig
 import java.util.*
 
@@ -381,7 +382,7 @@ class AdmobAdsHelper (mContext: Context) {
             try {
                 var bannerInstace = AdView(context)
                 bannerInstace.setAdSize(size)
-                bannerInstace.adUnitId = context.getString(R.string.gps_banner_id)
+                bannerInstace.adUnitId = if(size== AdSize.LARGE_BANNER){ context.getString(R.string.gps_banner_id)}else if(size== AdSize.MEDIUM_RECTANGLE){ context.getString(R.string.gps_square_banner_id)}else{ context.getString(R.string.gps_banner_id)}
                 layout.addView(bannerInstace)
                 if (consentForAds) {
                     bannerAdRequest = AdRequest.Builder().build()
@@ -694,7 +695,7 @@ class AdmobAdsHelper (mContext: Context) {
                     adView.advertiserView = adView.findViewById(R.id.small_ad_advertiser)
                     adView.bodyView = adView.findViewById(R.id.small_ad_body)
                     adView.callToActionView = adView.findViewById(R.id.small_ad_call_to_action)
-                    if(getRemoteConfig()?.getBoolean("native_ad_cta")!!) {
+                    if(FirebaseUtils.nativeCTAColorBlue) {
                         adView.callToActionView?.background =
                             ContextCompat.getDrawable(mActivity, R.drawable.button_background)
                     }
@@ -708,8 +709,8 @@ class AdmobAdsHelper (mContext: Context) {
                     (Objects.requireNonNull(adView.headlineView) as TextView).text =
                         mNativeAds?.headline
                     (adView.headlineView as TextView).text = mNativeAds?.headline
-                    (Objects.requireNonNull(adView.callToActionView) as TextView).text =
-                        mNativeAds?.callToAction
+                    (Objects.requireNonNull(adView.callToActionView) as TextView).text = "OPEN"
+//                        mNativeAds?.callToAction
 
                     if (mNativeAds?.icon == null) {
                         try {

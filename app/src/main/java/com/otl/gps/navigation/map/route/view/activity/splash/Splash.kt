@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.otl.gps.navigation.map.route.R
 import com.otl.gps.navigation.map.route.databinding.ActivitySplashBinding
 import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils.getRemoteConfig
 import com.otl.gps.navigation.map.route.view.activity.goPro.PremiumActivity
 import com.otl.gps.navigation.map.route.view.activity.main.MainController
 import com.otl.gps.navigation.map.route.view.activity.onboarding.OnboardingSplash
@@ -41,6 +42,7 @@ class Splash : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
         setContentView(binding.root)
+        getRemoteConfig()
         setupBg()
         hideSystemBars()
         (application as RawGpsApp).appContainer.prefs.setAppLaunchCount((application as RawGpsApp).appContainer.prefs.getAppLaunchCount() + 1)

@@ -41,6 +41,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import com.otl.gps.navigation.map.route.view.activity.maps.PickLocationActivity
 import org.greenrobot.eventbus.EventBus
 
@@ -95,8 +96,11 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         DialogUtils.showLoadingDialog(requireActivity())
         loadMap()
-//        loadBanner()
-        loadNativeBanner()
+        if (FirebaseUtils.isNativeUnderMaps) {
+            loadNativeBanner()
+        } else {
+            loadBanner()
+        }
         initObjects()
         getLocationAndPermission()
         clickEvent()
@@ -896,17 +900,17 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
         }
     }
 
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//                    Log.d("Add Load Callback", "is ad loaded========>" + success)
-//                }
-//            })
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+                    Log.d("Add Load Callback", "is ad loaded========>" + success)
+                }
+            })
+    }
 
 
     // [START_EXCLUDE silent]
