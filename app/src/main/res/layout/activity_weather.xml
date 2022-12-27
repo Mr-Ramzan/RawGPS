@@ -13,17 +13,17 @@
 
     <ImageButton
         android:id="@+id/back"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/round_white_buttton"
-        android:padding="6dp"
+        android:padding="8dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/blue"
+        app:tint="@color/black"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 

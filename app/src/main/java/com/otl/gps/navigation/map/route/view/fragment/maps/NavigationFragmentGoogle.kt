@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
@@ -780,36 +781,75 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             enableMyLocation()
             map.uiSettings.isCompassEnabled = false
             map.uiSettings.isMyLocationButtonEnabled = false
-            if (mapStyle == "Satellite") {
-                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
-            }
+            map.isTrafficEnabled = true
 
+
+                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                binding.trafficToggleButton.visibility = View.VISIBLE
+                binding.trafficToggleButton.setOnClickListener {
+                    if (map.isTrafficEnabled) {
+                        Glide.with(requireActivity()).load(R.drawable.trafficview_off)
+                            .into(binding.trafficIv)
+                        map.isTrafficEnabled = false
+                    } else {
+                        Glide.with(requireActivity()).load(R.drawable.trafficview_on)
+                            .into(binding.trafficIv)
+                        map.isTrafficEnabled = true
+                    }
+                }
+
+
+//            }
 //            if (mapStyle == "Traffic") {
-                map.isTrafficEnabled = true
+//                map.isTrafficEnabled = true
+                ////////////////////////////////////////////////////////////////////////////////////
+                binding.layersSelectionButton.visibility = View.VISIBLE
+                binding.layersSelectionButton.setOnClickListener {
+
+                    if (map.mapType == GoogleMap.MAP_TYPE_SATELLITE) {
+
+                        Glide.with(requireActivity()).load(R.drawable.earthview_off)
+                            .into(binding.layerSelectionIv)
+                        map.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+                    } else {
+
+                        Glide.with(requireActivity()).load(R.drawable.earthview_on)
+                            .into(binding.layerSelectionIv)
+                        map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+
+                    }
+
+                }
+                ////////////////////////////////////////////////////////////////////////////////////
 //            }
 
             binding.recenterLocationButton.setOnClickListener {
                 recenterCamera()
             }
+            binding.angleButton.setOnClickListener {
+                if (initialTilt == 25f) {
+                    Glide.with(requireActivity()).load(R.drawable.three_dimen).into(binding.angleIv)
+                } else {
+                    Glide.with(requireActivity()).load(R.drawable.two_dimen).into(binding.angleIv)
+                }
+                toggle2D3D()
+            }
+            toggleDayNight()
 
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
-//        googleMap.setOnCameraIdleListener {
-//            // Cleaning all the markers.
-//            if (googleMap != null) {
-//                googleMap.clear()
-//            }
-//        }
-        setUpLayersControl()
+
+//        setUpLayersControl()
         DialogUtils.dismissLoading()
     }
 
     private var initialTilt = 25f
     private fun toggle2D3D() {
         try {
-            if (latSrcLocation.isNullOrEmpty() || longSrcLocation.isNullOrEmpty()) {
+            if (latSrcLocation.isEmpty() || longSrcLocation.isEmpty()) {
                 return
             }
             val cameraPos: CameraPosition = CameraPosition.Builder()
@@ -873,6 +913,39 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
     }
 
+    private var isDay = true
+    private fun toggleDayNight(){
+        ////////////////////////////////////////////////////////////////////////////////////
+//        if (mapStyle != "Satellite")
+//        {
+            binding.dayNightMode.visibility = View.VISIBLE
+            binding.dayNightMode.setOnClickListener {
+                if (isDay) {
+                    Glide.with(requireActivity()).load(R.drawable.night_mode)
+                        .into(binding.dayNightIv)
+                    //Custom Theme
+                    val style = MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.night_map)
+                    map.setMapStyle(style)
+                    isDay = false
+
+
+                }
+                else {
+
+                    Glide.with(requireActivity()).load(R.drawable.day_mode)
+                        .into(binding.dayNightIv)
+                    //Custom Theme
+                    val style = MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.normal_map)
+                    map.setMapStyle(style)
+                    isDay = true
+
+                }
+            }
+//  }
+        ////////////////////////////////////////////////////////////////////////////////////
+    }
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @Suppress("UNUSED_PARAMETER")
     fun recenterCamera() {
@@ -901,6 +974,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
     }
 
     private fun loadBanner() {
+
+
         (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
             requireActivity(),
             binding.adsParent,
@@ -910,6 +985,8 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
                     Log.d("Add Load Callback", "is ad loaded========>" + success)
                 }
             })
+
+
     }
 
 

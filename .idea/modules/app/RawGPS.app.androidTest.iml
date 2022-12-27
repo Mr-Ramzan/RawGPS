@@ -197,7 +197,7 @@
             </stringArg>
             <stringArg name="destination" arg="$MODULE_DIR$/../../../app/build/tmp/kotlin-classes/debugAndroidTest" />
             <stringArg name="jvmTarget" arg="1.8" />
-            <stringArg name="moduleName" arg="GPS Maps Navigation &amp; Traffic_8_vn_1.8_debug" />
+            <stringArg name="moduleName" arg="GPS Maps Navigation &amp; Traffic_9_vn_1.9_debug" />
             <stringArg name="apiVersion" arg="1.7" />
             <stringArg name="languageVersion" arg="1.7" />
           </stringArguments>

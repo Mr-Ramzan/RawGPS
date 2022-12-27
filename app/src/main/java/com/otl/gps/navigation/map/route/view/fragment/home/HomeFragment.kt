@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
 import application.RawGpsApp
 import com.bumptech.glide.Glide
@@ -21,15 +23,10 @@ import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_CANCEL_SUB
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_POLICY
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SHARE
 import com.otl.gps.navigation.map.route.utilities.Constants.ACTION_SUBSCCRIBED
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_COMPASS
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_EXPLORE_PLACES
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PLACES_LIST
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREMIUM
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SATELLITE
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_SPEEDOMETER
-import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAFFIC
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
 import games.moisoni.google_iab.BillingConnector
@@ -41,6 +38,7 @@ import games.moisoni.google_iab.models.ProductInfo
 import games.moisoni.google_iab.models.PurchaseInfo
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+
 
 class HomeFragment : Fragment() {
 
@@ -189,6 +187,15 @@ class HomeFragment : Fragment() {
             }, 700)
             EventBus.getDefault().post(NavEvent(NAVIGATE_PREMIUM))
         }
+
+        var ROTATE_FROM = 0.0f;
+        var ROTATE_TO = -10.0f * 360.0f;// 3.141592654f * 32.0f;
+        val r: RotateAnimation
+        r = RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        r.duration = 2L * 1500
+        r.repeatCount = Animation.INFINITE
+        r.repeatMode = Animation.INFINITE
+        binding.proButton.startAnimation(r)
 
 
         binding.weather.setOnClickListener {

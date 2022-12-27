@@ -36,6 +36,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -84,8 +85,11 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         val view = binding.root
         setContentView(view)
         loadMap()
-//        loadBanner()
-        loadNativeBanner()
+        if (FirebaseUtils.isNativeUnderMaps) {
+            loadNativeBanner()
+        } else {
+            loadBanner()
+        }
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         geoCoderAddress = GeoCoderAddress(this)
@@ -415,15 +419,15 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-//    private fun loadBanner() {
-//        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
-//            this,
-//            binding.adsParent,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {}
-//            })
-//    }
+    private fun loadBanner() {
+        (application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+            this,
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {}
+            })
+    }
 
     /**
      * Loading ads once if not loaded

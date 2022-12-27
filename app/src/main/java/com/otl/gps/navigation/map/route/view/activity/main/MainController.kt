@@ -253,9 +253,9 @@ class MainController : AppCompatActivity() {
             }
 
             NAVIGATE_PLACES_LIST -> {
-                showInterAds {
+//                showInterAds {
                     navigatePlaces()
-                }
+//                }
             }
 
             NAVIGATE_COMPASS -> {
@@ -273,9 +273,9 @@ class MainController : AppCompatActivity() {
                 navigateQiblaCompass()
             }
             NAVIGATE_SAVED_PLACES -> {
-                showInterAds {
+//                showInterAds {
                     navigateSavedPlaces()
-                }
+//                }
             }
             NAVIGATE_SPEEDOMETER -> {
                 navigateSpeedoMeter()
@@ -566,22 +566,14 @@ class MainController : AppCompatActivity() {
 //    private lateinit var adsUtill: MyAdsUtill
 
     override fun onBackPressed() {
-
-
-        if (navController.currentDestination?.id == R.id.navigation_places_list || navController.currentDestination?.id == R.id.navigation_saved_places) {
-
-
+        if (navController.currentDestination?.id == R.id.navigation_travel_tool) {
             navController.navigateUp()
-
         } else if (navController.currentDestination?.id != R.id.nav_home) {
-
             showInterAds {
                 navController.navigateUp()
             }
         } else {
-
             try {
-
                 val addPhotoBottomDialogFragment: ExitDialogFragment =
                     ExitDialogFragment.newInstance()
                 addPhotoBottomDialogFragment.show(

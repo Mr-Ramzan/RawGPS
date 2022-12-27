@@ -63,7 +63,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:padding="8dp"
+                        android:padding="12dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/navigation_icon"
                         app:layout_constraintBottom_toTopOf="@+id/textView2"
@@ -75,11 +75,12 @@
                         android:id="@+id/textView2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
                         android:text="@string/navigation"
                         android:textColor="@color/black_text_color"
-                        android:textSize="12sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -108,7 +109,7 @@
 
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:padding="8dp"
+                        android:padding="12dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/myloc_icon"
                         app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -120,11 +121,12 @@
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
                         android:text="@string/my_location"
                         android:textColor="@color/black_text_color"
-                        android:textSize="12sp"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -151,7 +153,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:padding="8dp"
+                        android:padding="12dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/saved_places"
                         app:layout_constraintBottom_toTopOf="@+id/textView5"
@@ -197,10 +199,9 @@
                     android:orientation="vertical">
 
                     <ImageView
-
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:padding="8dp"
+                        android:padding="12dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/explore_place_icons"
                         app:layout_constraintBottom_toTopOf="@+id/textView6"
@@ -246,7 +247,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:padding="8dp"
+                        android:padding="12dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_travel_tools"
                         app:layout_constraintBottom_toTopOf="@+id/textView7"

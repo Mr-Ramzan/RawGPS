@@ -315,8 +315,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/start_navigation_button"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="16dp"
@@ -326,7 +326,6 @@
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/adsParent"
         app:layout_constraintEnd_toEndOf="@+id/recenter_location_button"
         app:layout_constraintStart_toStartOf="@+id/recenter_location_button">
@@ -335,7 +334,6 @@
             android:id="@+id/imageView4"
             android:layout_width="26dp"
             android:layout_height="26dp"
-            android:layout_marginTop="14dp"
             android:padding="@dimen/_4sdp"
             android:rotationY="180"
             android:scaleType="centerInside"
@@ -344,25 +342,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:tint="@color/white" />
 
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="Go!"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -380,6 +361,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/google_map" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -394,15 +376,14 @@
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"
+        app:layout_constraintBottom_toTopOf="@+id/layers_selection_button"
         app:layout_constraintEnd_toEndOf="@+id/recenter_location_button">
 
         <ImageView
             android:id="@+id/day_night_iv"
             android:layout_width="26dp"
             android:layout_height="26dp"
-            android:src="@drawable/layers_button"
+            android:src="@drawable/day_mode"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -423,14 +404,14 @@
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"
+        app:layout_constraintBottom_toTopOf="@+id/traffic_toggle_button"
         app:layout_constraintEnd_toEndOf="@+id/recenter_location_button">
 
         <ImageView
             android:id="@+id/layer_selection_iv"
             android:layout_width="26dp"
             android:layout_height="26dp"
-            android:src="@drawable/layers_button"
+            android:src="@drawable/earthview_on"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -452,8 +433,7 @@
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"
+        app:layout_constraintBottom_toTopOf="@+id/angle_button"
         app:layout_constraintEnd_toEndOf="@+id/recenter_location_button">
 
         <ImageView
@@ -476,12 +456,12 @@
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="8dp"
+        android:visibility="gone"
         android:background="@drawable/round_white_buttton"
         android:elevation="6dp"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"
         app:layout_constraintEnd_toEndOf="@+id/recenter_location_button">
 
@@ -523,7 +503,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/blue" />
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

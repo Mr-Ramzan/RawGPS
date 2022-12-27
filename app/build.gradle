@@ -18,8 +18,8 @@ android {
         applicationId "com.otl.gps.navigation.map.route"
         minSdk 23
         targetSdk 32
-        versionCode 8
-        versionName "1.8"
+        versionCode 9
+        versionName "1.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "GPS Maps Navigation & Traffic_${versionCode}_vn_${versionName}")
 
@@ -56,9 +56,6 @@ android {
             resValue 'string', 'gps_banner_id', '"ca-app-pub-8804904864147916/8719620470"'
             resValue 'string', 'gps_square_banner_id', '"ca-app-pub-8804904864147916/3377018552"'
             resValue 'string', 'gps_native_id', '" ca-app-pub-8804904864147916/6143600936"'
-
-
-
             shrinkResources true
             minifyEnabled true
             signingConfig signingConfigs.release

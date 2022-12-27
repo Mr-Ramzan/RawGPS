@@ -45,7 +45,7 @@
                 android:layout_height="24dp"
                 android:layout_marginVertical="4dp"
                 android:src="@drawable/a01d_svg"
-                app:tint="@color/black_text_color" />
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/temperature"
