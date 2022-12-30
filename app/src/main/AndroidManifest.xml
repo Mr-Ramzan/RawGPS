@@ -78,11 +78,11 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
 
-        <activity android:name="com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+<!--        <activity android:name="com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity"-->
+<!--            android:configChanges="orientation|keyboardHidden|screenSize"-->
+<!--            android:exported="false"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            tools:ignore="LockedOrientationActivity"/>-->
 
         <activity android:name=".view.fragment.places.PreviewSavedPlacesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

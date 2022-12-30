@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +23,11 @@ import com.otl.gps.navigation.map.route.R
 import com.google.android.gms.ads.AdSize
 import com.otl.gps.navigation.map.route.databinding.ActivityWeatherBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
+import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.LATITUDE_FROM_LOCATION
 import com.otl.gps.navigation.map.route.utilities.Constants.LONGITUDE_FROM_LOCATION
+import com.otl.gps.navigation.map.route.utilities.Constants.NAV_BACK
 import com.otl.gps.navigation.map.route.utilities.Helper
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.citiesWeather.CityAdapter
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.citiesWeather.cityDetailInterface
@@ -36,10 +41,11 @@ import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.foreca
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.model.citiesModel
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.utils.BackgroundManager
 import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.utils.IconManager
+import org.greenrobot.eventbus.EventBus
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherActivity : AppCompatActivity(), cityDetailInterface {
+class WeatherActivity : Fragment(), cityDetailInterface {
     private var _binding: ActivityWeatherBinding? = null
 
 
@@ -55,46 +61,64 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
     var adapter: CityAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWeatherBinding.inflate(layoutInflater)
-        setContentView(_binding!!.root)
 
-        currWViewModel = ViewModelProvider(this).get(CurrentWeatherViewModel::class.java)
-        forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
-        viewModel = ViewModelProvider(this).get(cityWeatherViewModel::class.java)
-        latitude = (application as RawGpsApp).appContainer.prefs.getString(
+        latitude = (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
 
             LATITUDE_FROM_LOCATION,
             ""
         )
-        longitude = (application as RawGpsApp).appContainer.prefs.getString(
+        longitude = (requireActivity().application as RawGpsApp).appContainer.prefs.getString(
             LONGITUDE_FROM_LOCATION,
             ""
         )
+
+
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = ActivityWeatherBinding.inflate(layoutInflater)
+        return (_binding!!.root)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        currWViewModel = ViewModelProvider(this).get(CurrentWeatherViewModel::class.java)
+        forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(cityWeatherViewModel::class.java)
+
+
         CurrentWeather(
             currWViewModel,
             binding.currentLayout
-        ).showCurrentLocationData(this@WeatherActivity, latitude!!, longitude!!)
-        cityWeather(viewModel).showCitiesWeather(applicationContext)
+        ).showCurrentLocationData(requireActivity(), latitude!!, longitude!!)
+        cityWeather(viewModel).showCitiesWeather(requireActivity().applicationContext)
 
         //request data from api
-        forecastWeather(forecastViewModel, this@WeatherActivity).getForecast(
+        forecastWeather(forecastViewModel, requireActivity()).getForecast(
             latitude!!,
             longitude!!
         )
         setCurrentWeather()
         getWeatherForecast()
         getCitiesWeather()
-        loadInter()
-//        loadBanner()
-        loadNativeBanner()
+        //loadInter()
+        //loadBanner()
+        //loadNativeBanner()
         clickEvents()
         getDateTime()
-
     }
+
 
     private fun clickEvents() {
         _binding!!.back.setOnClickListener {
-            onBackPressed()
+            EventBus.getDefault().post(NavEvent(NAV_BACK))
         }
         binding.searchCityED.clearFocus()
 
@@ -136,14 +160,8 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
     }
 
 
-    override fun onBackPressed() {
-        showInterAds {
-            super.onBackPressed()
-        }
-    }
-
     private fun setCurrentWeather() {
-        currWViewModel.WeatherService.observe(this, androidx.lifecycle.Observer {
+        currWViewModel.WeatherService.observe(requireActivity(), androidx.lifecycle.Observer {
             //set data
             _binding!!.homeCity.text = currWViewModel.city
             Glide.with(this)
@@ -191,7 +209,11 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
             _binding!!.feelLikeValue.text = currWViewModel.temperature
             _binding!!.waterDrop.text = currWViewModel.water_drop
             _binding!!.windSpeed.text = currWViewModel.wind_speed
-            _binding!!.weatherBackgroundImage.setBackgroundResource(BackgroundManager().getHomeBackground(currWViewModel.description))
+            _binding!!.weatherBackgroundImage.setBackgroundResource(
+                BackgroundManager().getHomeBackground(
+                    currWViewModel.description
+                )
+            )
 
         })
     }
@@ -221,9 +243,9 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
      */
     private fun loadNativeBanner() {
 
-        if (!(application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
-            (application as RawGpsApp).appContainer.myAdsUtill?.loadSmallNativeAd(
-            this@WeatherActivity,
+        if (!(requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.loadSmallNativeAd(
+                requireActivity(),
                 true,
                 object : AdLoadedCallback {
 
@@ -261,19 +283,16 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         try {
 
             val isAdsRemoved =
-                (application as RawGpsApp).appContainer.prefs.areAdsRemoved()
+                (requireActivity().application as RawGpsApp).appContainer.prefs.areAdsRemoved()
             if (!isAdsRemoved) {
 
-                if (canShowNativeAd)
-                {
-                    (application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
-                        this@WeatherActivity,
+                if (canShowNativeAd) {
+                    (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showSmallNativeAd(
+                        requireActivity(),
                         Constants.START_NATIVE_SMALL,
                         binding.bannerAd, true, false
                     )
-                }
-                else
-                {
+                } else {
                     binding.bannerAd.visibility = View.GONE
                 }
 
@@ -292,8 +311,10 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
      */
     var canShowInter = false
     private fun loadInter() {
-        if ((application as RawGpsApp).appContainer.myAdsUtill.mInterstitialAd == null) {
-            (application as RawGpsApp).appContainer.myAdsUtill.loadInterestitial(this) {
+        if ((requireActivity().application as RawGpsApp).appContainer.myAdsUtill.mInterstitialAd == null) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.loadInterestitial(
+                requireActivity()
+            ) {
                 canShowInter = it
             }
         } else {
@@ -303,7 +324,9 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
 
     private fun showInterAds(shown: (success: Boolean) -> Unit) {
         if (canShowInter) {
-            (application as RawGpsApp).appContainer.myAdsUtill.showInterestitial(this) {
+            (requireActivity().application as RawGpsApp).appContainer.myAdsUtill.showInterestitial(
+                requireActivity()
+            ) {
                 shown(it)
             }
         } else {
@@ -316,20 +339,25 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
 
     //get weather forecast
     private fun getWeatherForecast() {
-        forecastViewModel.liveData.observe(this, androidx.lifecycle.Observer {
+        forecastViewModel.liveData.observe(requireActivity(), androidx.lifecycle.Observer {
             binding.forcastCard.visibility = View.VISIBLE
             //recyclerView
             binding.detailedCityRecyclerview.layoutManager = LinearLayoutManager(
-                this,
+                requireActivity(),
                 LinearLayoutManager.HORIZONTAL, false
             )
 
-            val adapter = applicationContext?.let { ForecastAdapter(forecastViewModel.newlist, it) }
+            val adapter = requireActivity().applicationContext?.let {
+                ForecastAdapter(
+                    forecastViewModel.newlist,
+                    it
+                )
+            }
             binding.detailedCityRecyclerview.adapter = adapter
 
             binding.detailedCityRecyclerview.startAnimation(
                 AnimationUtils.loadAnimation(
-                    this,
+                    requireActivity(),
                     R.anim.recycler_view_anim
                 )
             )
@@ -340,10 +368,10 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
     //get cities weather
     private fun getCitiesWeather() {
 
-        viewModel.liveData.observe(this, androidx.lifecycle.Observer {
+        viewModel.liveData.observe(requireActivity(), androidx.lifecycle.Observer {
 
             binding.citiesRecylerView.layoutManager = LinearLayoutManager(
-                this,
+                requireActivity(),
                 LinearLayoutManager.VERTICAL, false
             )
             //refresh View
@@ -356,7 +384,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
                     }, 3000)
                 }
             }
-            adapter = CityAdapter(this, viewModel.newlist, viewModel, this)
+            adapter = CityAdapter(this, viewModel.newlist, viewModel, requireActivity())
             binding.citiesRecylerView.adapter = adapter
 
 
@@ -402,7 +430,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         lat: String,
         long: String
     ) {
-        val intent = Intent(this, WeatherDetailActivity::class.java)
+        val intent = Intent(requireActivity(), WeatherDetailActivity::class.java)
         intent.putExtra("city", city)
         intent.putExtra("description", description)
         intent.putExtra("temperature", temperature)
@@ -412,7 +440,7 @@ class WeatherActivity : AppCompatActivity(), cityDetailInterface {
         intent.putExtra("max_temp", max_temp)
         intent.putExtra("lat", lat)
         intent.putExtra("long", long)
-        Helper.startActivity(this, intent, false)
+        Helper.startActivity(requireActivity(), intent, false)
 
     }
 

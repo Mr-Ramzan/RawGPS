@@ -1,4 +1,4 @@
-package com.otl.gps.navigation.map.route.di
+package com.otl.gps.navigation.map.route.interfaces.di
 
 import android.app.Application
 import com.otl.gps.navigation.map.route.manager.SharedPreferencesManager

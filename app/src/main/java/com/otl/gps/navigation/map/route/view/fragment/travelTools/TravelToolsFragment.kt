@@ -9,7 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import application.RawGpsApp
+import com.abl.gpstracker.navigation.maps.routefinder.app.view.activities.splash.slideFragments.SlideTwoFragment
 import com.bumptech.glide.Glide
 
 import com.google.android.gms.ads.AdSize
@@ -18,6 +24,11 @@ import com.otl.gps.navigation.map.route.databinding.TravelToolsBinding
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.utilities.Constants
+import com.otl.gps.navigation.map.route.view.activity.onboarding.slideFragments.SlideOneFragment
+import com.otl.gps.navigation.map.route.view.activity.onboarding.slideFragments.SlideThreeFragment
+import com.otl.gps.navigation.map.route.view.activity.spedometer.AnalogSpeedFragment
+import com.otl.gps.navigation.map.route.view.fragment.compass.CompassFragment
+import com.otl.gps.navigation.map.route.view.fragment.travelTools.weather.WeatherActivity
 import org.greenrobot.eventbus.EventBus
 
 
@@ -42,6 +53,8 @@ class TravelToolsFragment : Fragment() {
         initListeners()
         loadBanner()
 //        loadNativeBanner()
+        initSliding()
+
         loadInter()
     }
 
@@ -142,20 +155,28 @@ class TravelToolsFragment : Fragment() {
     }
     private fun initListeners() {
 
+
+
         binding.backButton.setOnClickListener {
             EventBus.getDefault().post(NavEvent(Constants.NAV_BACK))
         }
         binding.weather.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
+            binding.viewPager.currentItem = 0
+//            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_WEATHER))
         }
         binding.compass.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_COMPASS))
+            binding.viewPager.currentItem = 1
+
+//            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_COMPASS))
         }
         binding.qiblaCompass.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
+            binding.viewPager.currentItem = 2
+
+//            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_QIBLA_COMPASS))
         }
         binding.speedometer.setOnClickListener {
-            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SPEEDOMETER))
+            binding.viewPager.currentItem = 3
+//            EventBus.getDefault().post(NavEvent(Constants.NAVIGATE_SPEEDOMETER))
         }
     }
 
@@ -255,5 +276,112 @@ class TravelToolsFragment : Fragment() {
 //            binding.adsParent.visibility = View.GONE
 //        }
 //    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //                   Slider Related Work
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun initSliding() {
+        setUpdata()
+        setupfragments()
+        setUpViewPager()
+    }
+
+    lateinit var fragmentsList: ArrayList<Fragment>
+    lateinit var indecatorRecord: ArrayList<Int>
+
+    //    private val sliderHandler: Handler = Handler(Looper.getMainLooper())
+    private var pagerCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            try {
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+    /**
+     */
+    private fun setUpViewPager() {
+        var compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+
+            var r: Float = 1F - Math.abs(position)
+            page.scaleY = 0.85f + r * 0.15f
+
+
+        }
+
+        binding.viewPager.apply {
+            adapter = object : FragmentStateAdapter(requireActivity()) {
+                override fun getItemCount(): Int {
+                    return fragmentsList.size
+                }
+
+                override fun createFragment(position: Int): Fragment {
+                    return fragmentsList[position]
+                }
+            }
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+//                    Toast.makeText(this@SplashOnboardActivity,"position is "+position,Toast.LENGTH_SHORT).show()
+
+                }
+
+            })
+            offscreenPageLimit = 2
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            registerOnPageChangeCallback(pagerCallback)
+            adapter?.notifyDataSetChanged()
+
+        }
+
+
+    }
+
+    private fun setUpdata() {
+
+
+
+    }
+
+    private fun setupfragments() {
+        if (!::fragmentsList.isInitialized) {
+            try {
+                fragmentsList = ArrayList()
+                fragmentsList.add(WeatherActivity())
+                fragmentsList.add(CompassFragment())
+                fragmentsList.add(QiblaCompassFragment())
+                fragmentsList.add(AnalogSpeedFragment())
+
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

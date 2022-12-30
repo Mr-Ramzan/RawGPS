@@ -82,11 +82,10 @@ class QiblaCompassFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadBanner()
-//        loadNativeBanner()
-        setupBg()
+        //loadBanner()
+        //loadNativeBanner()
+        //setupBg()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
-
         ////////////////////////////////////////////////////////////////////////////
         mRequestingLocationUpdates = false
         mLastUpdateTime = ""

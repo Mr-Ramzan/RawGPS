@@ -57,8 +57,8 @@ class CompassFragment : Fragment(), SensorEventListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupBg()
-        loadBanner()
+        //setupBg()
+        //loadBanner()
 //        loadNativeBanner()
         sensorManager = requireActivity().getSystemService(Activity.SENSOR_SERVICE) as SensorManager
         setListeners()

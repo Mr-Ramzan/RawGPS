@@ -14,7 +14,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.otl.gps.navigation.map.route.di.AppDIs
+import com.otl.gps.navigation.map.route.interfaces.di.AppDIs
 import com.otl.gps.navigation.map.route.manager.adManagers.AppOpenAdHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
