@@ -30,6 +30,7 @@ import application.RawGpsApp
 import com.abl.gpstracker.navigation.maps.routefinder.app.utils.GeoCoderAddress
 import com.abl.gpstracker.navigation.maps.routefinder.app.view.maps.PlacesViewModel
 import com.airbnb.lottie.L
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.karumi.dexter.Dexter
@@ -45,6 +46,7 @@ import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.interfaces.PlacesAdapterListener
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.DialogUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import com.otl.gps.navigation.map.route.utilities.retrofitApi.ApiHelper
 import com.otl.gps.navigation.map.route.utilities.retrofitApi.RetrofitBuilder
 import okhttp3.internal.assertThreadDoesntHoldLock
@@ -81,19 +83,22 @@ class PickLocationActivity : AppCompatActivity(), PlacesAdapterListener, OnMapRe
 
         binding = ActivitySerchPlacesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        binding.searchResultsView.apply {
-//            initialize(CommonSearchViewConfiguration(DistanceUnitType.IMPERIAL))
-//            isVisible = true
-//        }
+        //        binding.searchResultsView.apply {
+        //            initialize(CommonSearchViewConfiguration(DistanceUnitType.IMPERIAL))
+        //            isVisible = true
+        //        }
         binding.searchBox.performClick()
         geocoAddress = GeoCoderAddress(this)
         clickEvent()
         setupViewModel()
-//        loadBanner()
-//        ==================================================
+        //==================================================
         loadMap()
-        loadNativeBanner()
-//        loadBanner()
+
+        if (FirebaseUtils.isNativeUnderMaps) {
+            loadNativeBanner()
+        } else {
+            loadBanner()
+        }
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         geoCoderAddress = GeoCoderAddress(this)
@@ -687,15 +692,17 @@ class PickLocationActivity : AppCompatActivity(), PlacesAdapterListener, OnMapRe
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-//    private fun loadBanner() {
-//        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
-//            this,
-//            binding.adsParent,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {}
-//            })
-//    }
+    private fun loadBanner() {
+
+        (application as RawGpsApp).appContainer.myAdsUtill.AddBannerToLayout(
+            this,
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {}
+            })
+
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

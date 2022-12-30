@@ -50,6 +50,7 @@
             android:background="@drawable/round_white_buttton"
             android:elevation="6dp"
             android:gravity="center"
+            android:visibility="gone"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             app:layout_constraintBottom_toTopOf="@+id/recenter_location_button"

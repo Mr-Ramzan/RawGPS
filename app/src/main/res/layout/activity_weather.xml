@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbarSize="0dp"
+    android:layout_gravity="center"
     android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@color/transparent">
 
         <ImageView
@@ -37,11 +40,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/currentLayout"
-            android:layout_width="@dimen/_220sdp"
-            android:layout_height="@dimen/_170sdp"
-            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
 
 
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/weather_card_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,18 +57,18 @@
                 android:id="@+id/homeCity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins"
-                android:gravity="center"
+                android:gravity="start|center_vertical"
                 android:maxLines="2"
                 android:text="Today"
                 android:textColor="@color/black_text_color"
-                android:textSize="28sp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline10"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/time"
+                app:layout_constraintEnd_toStartOf="@+id/temperature"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,15 +88,15 @@
                 android:id="@+id/temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="40dp"
                 android:fontFamily="@font/poppins"
                 android:text="25℃"
                 android:textColor="@color/black_text_color"
                 android:textSize="48sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeCity" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -111,9 +116,8 @@
                 android:id="@+id/time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="54dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:minLines="2"
@@ -122,9 +126,10 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/temperature"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/temperature"
+                app:layout_constraintTop_toBottomOf="@+id/homeCity"
                 app:layout_constraintVertical_bias="0.0" />
 
             <View

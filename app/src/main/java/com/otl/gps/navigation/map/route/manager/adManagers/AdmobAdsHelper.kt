@@ -306,6 +306,7 @@ class AdmobAdsHelper (mContext: Context) {
             }
         }
     }
+
     fun AddSquareBannerToLayout(context: Activity, layout: FrameLayout, size: AdSize, loadCallback: AdLoadedCallback?)
     {
 

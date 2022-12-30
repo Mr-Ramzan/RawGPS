@@ -633,9 +633,9 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 map.mapType = GoogleMap.MAP_TYPE_SATELLITE
             }
 
-            if (mapStyle == "Traffic") {
+//            if (mapStyle == "Traffic") {
                 map.isTrafficEnabled = true
-            }
+//            }
 
             binding.recenterLocationButton.setOnClickListener {
                 recenterCamera()

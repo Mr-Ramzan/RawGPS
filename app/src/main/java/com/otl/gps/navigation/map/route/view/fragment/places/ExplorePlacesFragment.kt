@@ -111,14 +111,10 @@ class ExplorePlacesFragment : Fragment() {
             shown(false)
         }
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     var canShowNativeAd = false
     var adsReloadTry = 0
-
     /**
      * Loading ads once if not loaded
      * there will be max three tries if once ad loaded it will not be loaded again but if not code will ask

@@ -784,7 +784,7 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
             map.isTrafficEnabled = true
 
 
-                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+//                map.mapType = GoogleMap.MAP_TYPE_SATELLITE
                 binding.trafficToggleButton.visibility = View.VISIBLE
                 binding.trafficToggleButton.setOnClickListener {
                     if (map.isTrafficEnabled) {

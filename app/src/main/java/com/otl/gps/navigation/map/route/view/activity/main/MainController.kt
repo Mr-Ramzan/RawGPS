@@ -567,7 +567,9 @@ class MainController : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.navigation_travel_tool) {
-            navController.navigateUp()
+            showInterAds {
+                navController.navigateUp()
+            }
         } else if (navController.currentDestination?.id != R.id.nav_home) {
             showInterAds {
                 navController.navigateUp()

@@ -61,9 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_arrow"
-
-        app:tint="@color/blue" />
-
+        app:tint="@color/black" />
 
     <FrameLayout
         android:id="@+id/ads_parent"
@@ -95,6 +93,7 @@
         android:background="@color/transparent"
         android:elevation="@dimen/_4sdp"
         android:scaleType="fitXY"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/back_button"
         app:srcCompat="@drawable/add_place_icon" />

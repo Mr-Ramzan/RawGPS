@@ -43,6 +43,7 @@ import com.otl.gps.navigation.map.route.model.NavEvent
 import com.otl.gps.navigation.map.route.model.SavedPlace
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
 import org.greenrobot.eventbus.EventBus
 import java.lang.Exception
 import java.text.DateFormat
@@ -76,10 +77,11 @@ class SavedPlacesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //load Native Ads once
-        loadNativeBanner()
-        //Loading Banner Ads
-        //  loadBanner()
+//        if (FirebaseUtils.isNativeUnderMaps) {
+//            loadNativeBanner()
+//        } else {
+//            loadBanner()
+//        }
         loadInter()
         setListeners()
         setupRv()
@@ -248,18 +250,18 @@ class SavedPlacesListFragment : Fragment() {
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-//    private fun loadBanner() {
-//        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
-//            requireActivity(),
-//            binding.adsParent,
-//            AdSize.LARGE_BANNER,
-//            object : AdLoadedCallback {
-//                override fun addLoaded(success: Boolean?) {
-//
-//                }
-//            }
-//        )
-//    }
+    private fun loadBanner() {
+        (requireActivity().application as RawGpsApp).appContainer.myAdsUtill?.AddBannerToLayout(
+            requireActivity(),
+            binding.adsParent,
+            AdSize.LARGE_BANNER,
+            object : AdLoadedCallback {
+                override fun addLoaded(success: Boolean?) {
+
+                }
+            }
+        )
+    }
 
 
 

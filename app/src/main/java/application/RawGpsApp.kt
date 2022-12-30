@@ -132,16 +132,17 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         fun onShowAdComplete()
     }
     /////////////////////////////////////////////////////////////////////////////////////////////
+    //    /**
+    //     * LifecycleObserver method that shows the app open ad when the app moves to foreground.
+    //     */
+    //    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    //    protected void onMoveToForeground() {
+    //        // Show the ad (if available) when the app moves to foreground.
+    //        appOpenAdManager.showAdIfAvailable(currentActivity);
+    //    }
     override fun onStart(owner: LifecycleOwner) {
-        super.onStart(owner)
-        // super<DefaultLifecycleObserver>.onCreate(owner)
         // Show the ad (if available) when the app moves to foreground.
-        if (appContainer.appOpenAdManager.isAdAvailable)
-        {
-
-            appOpenAdManager!!.showAdIfAvailable(currentActivity!!)
-
-        }
+          appOpenAdManager!!.showAdIfAvailable(currentActivity!!)
     }
 
 

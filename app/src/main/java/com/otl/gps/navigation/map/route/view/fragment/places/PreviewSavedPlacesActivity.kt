@@ -425,7 +425,10 @@ class PreviewSavedPlacesActivity : AppCompatActivity(), OnMapReadyCallback,
             binding.adsParent,
             AdSize.LARGE_BANNER,
             object : AdLoadedCallback {
-                override fun addLoaded(success: Boolean?) {}
+                override fun addLoaded(success: Boolean?)
+                {
+
+                }
             })
     }
 

@@ -29,6 +29,7 @@ import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_PREMIUM
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_ROUTE
 import com.otl.gps.navigation.map.route.utilities.Constants.NAVIGATE_TRAVEL_TOOLS
 import com.otl.gps.navigation.map.route.utilities.Constants.UPDATE_CANCEL_BUTTON
+import com.otl.gps.navigation.map.route.utilities.FlipAnimation
 import games.moisoni.google_iab.BillingConnector
 import games.moisoni.google_iab.BillingEventListener
 import games.moisoni.google_iab.enums.ErrorType
@@ -188,15 +189,22 @@ class HomeFragment : Fragment() {
             EventBus.getDefault().post(NavEvent(NAVIGATE_PREMIUM))
         }
 
-        var ROTATE_FROM = 0.0f;
-        var ROTATE_TO = -10.0f * 360.0f;// 3.141592654f * 32.0f;
-        val r: RotateAnimation
-        r = RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        r.duration = 2L * 1500
-        r.repeatCount = Animation.INFINITE
-        r.repeatMode = Animation.INFINITE
-        binding.proButton.startAnimation(r)
-
+//        var ROTATE_FROM = 0.0f;
+//        var ROTATE_TO = -10.0f * 360.0f;// 3.141592654f * 32.0f;
+//        val r: RotateAnimation
+//        r = RotateAnimation(ROTATE_FROM, ROTATE_TO, 0, 0F, 40, 0F)
+//        r.setRepeatCount(0)
+//        r.duration = 2L * 1500
+//        r.repeatCount = Animation.INFINITE
+//        r.repeatMode = Animation.INFINITE
+//        binding.proButton.startAnimation(r)
+//        val flipAnimation = FlipAnimation(view1, view2)
+//        if (view1.getVisibility() === View.GONE) {
+//            flipAnimation.reverse()
+//            view2.startAnimation(flipAnimation)
+//        } else {
+//            view1.startAnimation(flipAnimation)
+//        }
 
         binding.weather.setOnClickListener {
             it.isEnabled = false
