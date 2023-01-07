@@ -2,6 +2,8 @@ package com.otl.gps.navigation.map.route.manager.adManagers
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +28,7 @@ import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.otl.gps.navigation.map.route.interfaces.AdLoadedCallback
 import com.otl.gps.navigation.map.route.utilities.Constants
 import com.otl.gps.navigation.map.route.utilities.FirebaseUtils
+import com.otl.gps.navigation.map.route.utilities.FirebaseUtils.REMOTE_CTA_COLOR
 import com.otl.gps.navigation.map.route.utilities.FirebaseUtils.getRemoteConfig
 import java.util.*
 
@@ -586,8 +589,11 @@ class AdmobAdsHelper (mContext: Context) {
                 }
 
                 val adLoader = builder.withAdListener(object : AdListener() {
-                    fun onAdFailedToLoad(errorCode: Int) {
-                        log("Failed to load native ad: $errorCode")
+
+                    override fun onAdFailedToLoad(err: LoadAdError) {
+                        super.onAdFailedToLoad(err)
+
+                        log("Failed to load native ad: ${err.message}")
                         loadCallback?.addLoaded(false)
                     }
                 }).build()
@@ -696,15 +702,20 @@ class AdmobAdsHelper (mContext: Context) {
                     adView.advertiserView = adView.findViewById(R.id.small_ad_advertiser)
                     adView.bodyView = adView.findViewById(R.id.small_ad_body)
                     adView.callToActionView = adView.findViewById(R.id.small_ad_call_to_action)
-                    if(FirebaseUtils.nativeCTAColorBlue) {
-                        adView.callToActionView?.background =
-                            ContextCompat.getDrawable(mActivity, R.drawable.button_background)
-                    }
-                    else{
+//                    if(FirebaseUtils.nativeCTAColorBlue) {
+//                        adView.callToActionView?.background =
+//                            ContextCompat.getDrawable(mActivity, R.drawable.button_background)
+//                    }
+//                    else{
+//                        adView.callToActionView?.background =
+//                            ContextCompat.getDrawable(mActivity, R.drawable.button_background_orange)
+//                    }
 
-                        adView.callToActionView?.background =
-                            ContextCompat.getDrawable(mActivity, R.drawable.button_background_orange)
-                    }
+                    adView.callToActionView?.backgroundTintList = ColorStateList.valueOf(Color.parseColor(REMOTE_CTA_COLOR));
+
+
+
+
 
                     (Objects.requireNonNull(adView.bodyView) as TextView).text = "AD -"+mNativeAds?.body
                     (Objects.requireNonNull(adView.headlineView) as TextView).text =
@@ -793,6 +804,7 @@ class AdmobAdsHelper (mContext: Context) {
                         })
                 }
             } catch (var5: Exception) {
+                var5.printStackTrace()
                 log("Unable to showSmallNative with Error:$var5")
             }
         }

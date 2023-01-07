@@ -94,11 +94,11 @@ class PickLocationActivity : AppCompatActivity(), PlacesAdapterListener, OnMapRe
         //==================================================
         loadMap()
 
-        if (FirebaseUtils.isNativeUnderMaps) {
+//        if (FirebaseUtils.isNativeUnderMaps) {
             loadNativeBanner()
-        } else {
-            loadBanner()
-        }
+//        } else {
+//            loadBanner()
+//        }
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         geoCoderAddress = GeoCoderAddress(this)
@@ -556,10 +556,9 @@ class PickLocationActivity : AppCompatActivity(), PlacesAdapterListener, OnMapRe
 
     private fun addAddressToLayout(address: Address, parent: LinearLayout) {
         var addressItemBinding: AddressItemBinding = AddressItemBinding.inflate(layoutInflater)
-        addressItemBinding.placeNameText.text = address.featureName.toString()
-        addressItemBinding.addressText.text = address.getAddressLine(0).toString()
-        addressItemBinding.coordinatesText.text =
-            address.latitude.toString() + "," + address.longitude.toString()
+        addressItemBinding.placeNameText.text = address.featureName
+        addressItemBinding.addressText.text = address.getAddressLine(0)
+        addressItemBinding.coordinatesText.text = address.latitude.toString() + "," + address.longitude.toString()
         addressItemBinding.root.setOnClickListener {
             Log.d("SearchResults", "=====>$address")
             //----------------------------------------------------------------------------------

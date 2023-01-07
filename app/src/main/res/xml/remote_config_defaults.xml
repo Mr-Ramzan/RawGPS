@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>native_ad_cta</key>
-        <value>true</value>
+        <key>native_cta_color_code</key>
+        <value>#2685EB</value>
 
-        <key>native_under_maps</key>
-        <value>true</value>
     </entry>
 
 

@@ -9,36 +9,38 @@ import com.otl.gps.navigation.map.route.databinding.LoadingDialogBinding
 
 object DialogUtils {
 
-    lateinit var  loadingDialog: Dialog
+    lateinit var loadingDialog: Dialog
 
     fun showLoadingDialog(activity: Activity?) {
-
-        if(::loadingDialog.isInitialized && loadingDialog.isShowing){
-             return
+        try {
+            if (::loadingDialog.isInitialized && loadingDialog.isShowing) {
+                return
+            }
+            var loadingDialogBinding = LoadingDialogBinding.inflate(activity?.layoutInflater!!)
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            loadingDialog = Dialog(activity)
+            loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            loadingDialog.setCancelable(false)
+            ////////////////////////////////////////////////////////////////////////////////////////////
+            loadingDialog.setContentView(loadingDialogBinding.root)
+            loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            loadingDialog.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        var loadingDialogBinding = LoadingDialogBinding.inflate(activity?.layoutInflater!!)
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        loadingDialog = Dialog(activity)
-        loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        loadingDialog.setCancelable(false)
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        loadingDialog.setContentView(loadingDialogBinding.root)
-        loadingDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loadingDialog.show()
     }
 
 
+    fun dismissLoading() {
 
-    fun dismissLoading(){
-
-        if(::loadingDialog.isInitialized && loadingDialog.isShowing){
-            loadingDialog.dismiss()
+        try {
+            if (::loadingDialog.isInitialized && loadingDialog.isShowing) {
+                loadingDialog.dismiss()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
     }
-
-
-
 
 
 }

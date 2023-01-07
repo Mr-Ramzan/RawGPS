@@ -97,11 +97,11 @@ class NavigationFragmentGoogle : Fragment(), OnMapReadyCallback,
 
         DialogUtils.showLoadingDialog(requireActivity())
         loadMap()
-        if (FirebaseUtils.isNativeUnderMaps) {
+//        if (FirebaseUtils.isNativeUnderMaps) {
             loadNativeBanner()
-        } else {
-            loadBanner()
-        }
+//        } else {
+//            loadBanner()
+//        }
         initObjects()
         getLocationAndPermission()
         clickEvent()

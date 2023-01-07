@@ -88,19 +88,20 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
         // SHow Banner Ad
         // Else Show
         if (mapStyle == "default") {
-            if (FirebaseUtils.isNativeUnderMaps) {
-                loadNativeBanner()
-            } else {
-                loadBanner()
-            }
+//            if (FirebaseUtils.isNativeUnderMaps) {
+         loadNativeBanner()
+//            } else {
+//                loadBanner()
+//            }
         } else {
             binding.layoutBottom.visibility = View.GONE
             binding.sourceContainer.visibility = View.GONE
-            if (FirebaseUtils.isNativeUnderMaps) {
-                loadNativeBanner()
-            } else {
-                loadBanner()
-            }
+
+//            if (FirebaseUtils.isNativeUnderMaps) {
+            loadNativeBanner()
+//            } else {
+//                loadBanner()
+//            }
         }
         //========================================================================================//
         statusBarColor()
@@ -815,6 +816,10 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
      */
     private fun loadNativeBanner() {
 
+        if (isDetached) {
+            return
+        }
+        try{
         if (!(requireActivity().application as RawGpsApp).appContainer!!.prefs!!.areAdsRemoved()) {
             (requireActivity().application as RawGpsApp).appContainer?.myAdsUtill?.loadSmallNativeAd(
                 requireActivity(),
@@ -851,7 +856,7 @@ class GoogleMapsMyLocFragment : Fragment(), OnMapReadyCallback,
                 }
             )
         }
-
+        }catch (e:Exception){e.printStackTrace()}
     }
 
     private fun showNativeAd() {

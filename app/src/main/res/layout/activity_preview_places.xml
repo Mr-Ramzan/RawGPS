@@ -108,7 +108,6 @@
         android:id="@+id/ads_parent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -163,9 +162,8 @@
             android:id="@+id/llShareLocation"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="40dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/button_background_extra_round"
             android:clickable="true"
             android:elevation="4dp"
             android:focusable="true"
@@ -175,7 +173,6 @@
             android:paddingEnd="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toBottomOf="@+id/tvAddress">
 
 

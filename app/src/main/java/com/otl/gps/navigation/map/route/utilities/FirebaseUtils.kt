@@ -6,8 +6,9 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 
 object FirebaseUtils {
-    const val REMOTE_CTA_COLOR_IS_BLUE = "native_ad_cta"
-    const val IS_NATIVE_UNDER_MAPS = "native_under_maps"
+    const val REMOTE_CTA_COLOR_KEY = "native_cta_color_code"
+    public var REMOTE_CTA_COLOR = "#2685EB"
+
      var nativeCTAColorBlue = true
      var isNativeUnderMaps = true
 
@@ -20,8 +21,7 @@ object FirebaseUtils {
         mFireBaseRemoteConfig?.let {
             it.fetchAndActivate().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    nativeCTAColorBlue = it.getBoolean(REMOTE_CTA_COLOR_IS_BLUE)
-                    isNativeUnderMaps = it.getBoolean(IS_NATIVE_UNDER_MAPS)
+                    REMOTE_CTA_COLOR = it.getString(REMOTE_CTA_COLOR_KEY)
                     val result = task.result
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                         it.all.forEach { (t, _) ->

@@ -238,8 +238,9 @@ class MainController : AppCompatActivity() {
             }
 
             NAVIGATE_PREVIEW_SAVED_PLACES -> {
+                previewSavedPlaces()
                 showInterAds {
-                    previewSavedPlaces()
+
                 }
             }
             NAVIGATE_TRAVEL_TOOLS -> {
@@ -567,12 +568,15 @@ class MainController : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.navigation_travel_tool) {
+            navController.navigateUp()
             showInterAds {
-                navController.navigateUp()
+
             }
         } else if (navController.currentDestination?.id != R.id.nav_home) {
+
+            navController.navigateUp()
             showInterAds {
-                navController.navigateUp()
+
             }
         } else {
             try {

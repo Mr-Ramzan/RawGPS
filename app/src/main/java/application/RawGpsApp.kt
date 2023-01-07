@@ -38,7 +38,9 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
         instance = this
 
         setupAdsSdks()
+
         setUpData()
+
     }
     private fun setUpData(){
 
@@ -60,7 +62,8 @@ class RawGpsApp : Application(), Application.ActivityLifecycleCallbacks,
                     "D7EF04558C5B8D0CF1FB26F41EC46227",
                     "5905EC31C4E2C9A46477531EE9F8F145",
                     "1499CBADF62E0EDDD4E7F473B22BADC3",
-                    "68A6859490620B2FD12EF92967109EE7"
+                    "68A6859490620B2FD12EF92967109EE7",
+                    "3D309D176F044E6107C595AAC3688F64"
                 )
             ).build()
         )

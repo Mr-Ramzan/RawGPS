@@ -71,11 +71,11 @@ class LocationFromGoogleMapActivity : AppCompatActivity(), OnMapReadyCallback,
         val view = binding.root
         setContentView(view)
         loadMap()
-        if (FirebaseUtils.isNativeUnderMaps) {
+//        if (FirebaseUtils.isNativeUnderMaps) {
             loadNativeBanner()
-        } else {
-            loadBanner()
-        }
+//        } else {
+//            loadBanner()
+//        }
         binding.layoutHeader.tvTitle.text = "Select Location"
         checkPermissionBeforeLocation()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
